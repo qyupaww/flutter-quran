@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quran/routing/route.gr.dart';
 import 'package:flutter_quran/theme/theme.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
+import 'package:flutter_quran/config/app_config.dart';
 
 @RoutePage()
 class HomeScreen extends StatelessWidget {
@@ -61,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                   isActive: tabsRouter.activeIndex == 1,
                   onTap: () => tabsRouter.setActiveIndex(1),
                 ),
-                const SizedBox(width: 40), // Gap for FAB
+                Space.w(40), // Gap for FAB
                 _BottomNavItem(
                   icon: FlutterIslamicIcons.qibla2,
                   label: "Kiblat",
@@ -108,7 +109,7 @@ class _BottomNavItem extends StatelessWidget {
             icon,
             color: isActive ? MyTheme.color.primary : Colors.grey,
           ),
-          const SizedBox(height: 4),
+          Space.h(4),
           Text(
             label,
             style: MyTheme.style.subtitle.copyWith(
