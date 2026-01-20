@@ -4,6 +4,9 @@ import 'package:flutter_quran/utils/flavor/flavor_utils.dart';
 import 'package:flutter_quran/infrastructure/datasource/auth/auth_local_datasource.dart';
 import 'package:flutter_quran/infrastructure/datasource/auth/auth_remote_datasource.dart';
 import 'package:flutter_quran/infrastructure/repositories/auth/auth_repository_impl.dart';
+import 'package:flutter_quran/infrastructure/datasource/quran/quran_datasource.dart';
+import 'package:flutter_quran/domain/repositories/quran/quran_repository.dart';
+import 'package:flutter_quran/infrastructure/repositories/quran/quran_repository_impl.dart';
 import 'package:flutter_quran/routing/route.dart';
 
 GetIt inject = GetIt.instance;
@@ -38,5 +41,13 @@ Future<void> setupInjector() async {
       remoteDataSource: inject<AuthRemoteDataSource>(),
       localDataSource: inject<AuthLocalDataSource>(),
     ),
+  );
+
+  /// Quran Feature
+  inject.registerLazySingleton<QuranDatasource>(
+    () => QuranDatasource(inject<ApiClient>()),
+  );
+  inject.registerLazySingleton<QuranRepository>(
+    () => QuranRepositoryImpl(inject<QuranDatasource>()),
   );
 }
