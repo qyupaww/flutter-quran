@@ -7,6 +7,7 @@ import 'package:flutter_quran/infrastructure/repositories/auth/auth_repository_i
 import 'package:flutter_quran/infrastructure/datasource/quran/quran_datasource.dart';
 import 'package:flutter_quran/domain/repositories/quran/quran_repository.dart';
 import 'package:flutter_quran/infrastructure/repositories/quran/quran_repository_impl.dart';
+import 'package:flutter_quran/bloc/quran/quran_bloc.dart';
 import 'package:flutter_quran/routing/route.dart';
 
 GetIt inject = GetIt.instance;
@@ -50,4 +51,6 @@ Future<void> setupInjector() async {
   inject.registerLazySingleton<QuranRepository>(
     () => QuranRepositoryImpl(inject<QuranDatasource>()),
   );
+
+  inject.registerFactory(() => QuranBloc(inject<QuranRepository>()));
 }
