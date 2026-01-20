@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'surah_entity.freezed.dart';
-part 'surah_entity.g.dart';
 
 @freezed
 class SurahEntity with _$SurahEntity {
