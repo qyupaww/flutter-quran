@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quran/routing/route.gr.dart';
 import 'package:flutter_quran/theme/theme.dart';
+import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 
 @RoutePage()
 class HomeScreen extends StatelessWidget {
@@ -19,17 +20,20 @@ class HomeScreen extends StatelessWidget {
       ],
       floatingActionButton: Builder(builder: (context) {
         final tabsRouter = AutoTabsRouter.of(context);
-        return SizedBox(
-          width: 70,
-          height: 70,
-          child: FloatingActionButton(
-            shape: const CircleBorder(),
-            backgroundColor: MyTheme.color.primary,
-            onPressed: () => tabsRouter.setActiveIndex(2),
-            child: Icon(
-              Icons.mosque,
-              color: MyTheme.color.white,
-              size: 30,
+        return Transform.translate(
+          offset: const Offset(0, 25),
+          child: SizedBox(
+            width: 60,
+            height: 60,
+            child: FloatingActionButton(
+              shape: const CircleBorder(),
+              backgroundColor: MyTheme.color.primary,
+              onPressed: () => tabsRouter.setActiveIndex(2),
+              child: Icon(
+                Icons.mosque,
+                color: MyTheme.color.white,
+                size: 28,
+              ),
             ),
           ),
         );
@@ -46,27 +50,27 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _BottomNavItem(
-                  icon: Icons.home,
+                  icon: FlutterIslamicIcons.islam,
                   label: "Home",
                   isActive: tabsRouter.activeIndex == 0,
                   onTap: () => tabsRouter.setActiveIndex(0),
                 ),
                 _BottomNavItem(
-                  icon: Icons.menu_book,
+                  icon: FlutterIslamicIcons.quran2,
                   label: "Quran",
                   isActive: tabsRouter.activeIndex == 1,
                   onTap: () => tabsRouter.setActiveIndex(1),
                 ),
                 const SizedBox(width: 40), // Gap for FAB
                 _BottomNavItem(
-                  icon: Icons.explore,
-                  label: "Qibla",
+                  icon: FlutterIslamicIcons.qibla2,
+                  label: "Kiblat",
                   isActive: tabsRouter.activeIndex == 3,
                   onTap: () => tabsRouter.setActiveIndex(3),
                 ),
                 _BottomNavItem(
-                  icon: Icons.calendar_today,
-                  label: "Calendar",
+                  icon: FlutterIslamicIcons.calendar,
+                  label: "Kalender",
                   isActive: tabsRouter.activeIndex == 4,
                   onTap: () => tabsRouter.setActiveIndex(4),
                 ),
