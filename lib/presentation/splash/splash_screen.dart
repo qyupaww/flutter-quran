@@ -34,7 +34,6 @@ class SplashScreen extends StatelessWidget {
   }
 }
 
-
 class SplashBody extends StatefulWidget {
   const SplashBody({super.key});
 
@@ -49,6 +48,7 @@ class _SplashBodyState extends State<SplashBody> {
       listener: (context, state) {
         if (state is AuthSessionsLoadedState) {
           Future.delayed(const Duration(seconds: 2)).then((value) {
+            if (!context.mounted) return;
             if (state.sessions) {
               context.router.replaceAll([const HomeRoute()]);
             } else {
@@ -108,5 +108,4 @@ class _SplashBodyState extends State<SplashBody> {
       ),
     );
   }
-
 }

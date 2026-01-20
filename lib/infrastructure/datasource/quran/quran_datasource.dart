@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter_quran/core/models/base_response_list.dart';
 import 'package:flutter_quran/core/networks/api_client.dart';
 import 'package:flutter_quran/core/networks/error_handler.dart';
@@ -10,8 +11,12 @@ class QuranDatasource {
 
   Future<BaseResponseList<SurahDto>> getSurahs() async {
     final response = await _client.get('/surah');
+    dynamic data = response.data;
+    if (data is String) {
+      data = jsonDecode(data);
+    }
     return BaseResponseList.fromJson(
-      response.data,
+      data,
       ResponseCode.fromCode(response.statusCode ?? 0),
       (data) => data.map((e) => SurahDto.fromJson(e)).toList(),
     );
