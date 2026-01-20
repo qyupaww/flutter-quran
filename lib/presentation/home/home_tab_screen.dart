@@ -1,10 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_quran/bloc/theme/theme_bloc.dart';
 import 'package:flutter_quran/config/app_config.dart';
-import 'package:flutter_quran/extension/extensions.dart';
+import 'package:flutter_quran/presentation/home/widgets/daily_prayer_section.dart';
+import 'package:flutter_quran/presentation/home/widgets/home_app_bar.dart';
+import 'package:flutter_quran/presentation/home/widgets/prayer_time_card.dart';
+import 'package:flutter_quran/presentation/home/widgets/prayer_tracker_card.dart';
 import 'package:flutter_quran/theme/theme.dart';
+
+import 'package:flutter_quran/extension/extensions.dart';
 
 @RoutePage()
 class HomeTabScreen extends StatelessWidget {
@@ -13,65 +16,59 @@ class HomeTabScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Muslim App',
-          style: MyTheme.style.title.copyWith(
-            color: MyTheme.color.white,
-            fontSize: AppSetting.setFontSize(45),
+      backgroundColor: context.isDark
+          ? context.backgroundColor
+          : const Color(0xFFF5F6F8), // Light grey background like design
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Space.h(20),
+              const HomeAppBar(),
+              Space.h(20),
+              Padding(
+                padding:
+                    EdgeInsets.symmetric(horizontal: AppSetting.setWidth(20)),
+                child: Container(
+                  padding: EdgeInsets.all(AppSetting.setWidth(16)),
+                  decoration: BoxDecoration(
+                    color: MyTheme.color.white,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(Icons.wb_sunny_outlined,
+                              color: Colors.orange,
+                              size: 20), // Placeholder sun/lamp icon
+                          Space.w(8),
+                          Text(
+                            "Start your day with these prayers",
+                            style: MyTheme.style.subtitle.copyWith(
+                              fontWeight: FontWeight.bold,
+                              fontSize: AppSetting.setFontSize(14),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Icon(Icons.chevron_right, color: Colors.grey),
+                    ],
+                  ),
+                ),
+              ),
+              Space.h(20),
+              const PrayerTimeCard(),
+              Space.h(20),
+              const PrayerTrackerCard(),
+              Space.h(30),
+              const DailyPrayerSection(),
+              Space.h(100), // Bottom padding for FAB
+            ],
           ),
         ),
-        automaticallyImplyLeading: false,
-        backgroundColor:
-            context.isDark ? context.containerColor : MyTheme.color.primary,
-        actions: [
-          /// Icon button choose popup menu button theme from Light, Dark or System
-          PopupMenuButton<ThemeMode>(
-            icon: Icon(
-              Icons.more_vert,
-              color: MyTheme.color.white,
-            ),
-            onSelected: (ThemeMode mode) {
-              context.read<ThemeBloc>().setTheme(mode);
-            },
-            itemBuilder: (BuildContext context) {
-              return <PopupMenuEntry<ThemeMode>>[
-                const PopupMenuItem<ThemeMode>(
-                  value: ThemeMode.light,
-                  child: Text('Light'),
-                ),
-                const PopupMenuItem<ThemeMode>(
-                  value: ThemeMode.dark,
-                  child: Text('Dark'),
-                ),
-                const PopupMenuItem<ThemeMode>(
-                  value: ThemeMode.system,
-                  child: Text('System'),
-                ),
-              ];
-            },
-          ),
-        ],
-      ),
-      body: const HomeBody(),
-    );
-  }
-}
-
-class HomeBody extends StatelessWidget {
-  const HomeBody({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "Welcome to Muslim App",
-            style: MyTheme.style.subtitle,
-          ),
-        ],
       ),
     );
   }
