@@ -1,11 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter_quran/routing/route.gr.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_quran/bloc/theme/theme_bloc.dart';
-
-import 'package:flutter_quran/config/app_config.dart';
-import 'package:flutter_quran/extension/extensions.dart';
+import 'package:flutter_quran/routing/route.gr.dart';
 import 'package:flutter_quran/theme/theme.dart';
 
 @RoutePage()
@@ -14,72 +9,108 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Home Screen',
-          style: MyTheme.style.title.copyWith(
-            color: MyTheme.color.white,
-            fontSize: AppSetting.setFontSize(45),
-          ),
-        ),
-        automaticallyImplyLeading: false,
-        backgroundColor:
-            context.isDark ? context.containerColor : MyTheme.color.primary,
-        actions: [
-          /// Icon button choose popup menu button theme from Light, Dark or System
-          PopupMenuButton<ThemeMode>(
-            icon: Icon(
-              Icons.more_vert,
+    return AutoTabsScaffold(
+      routes: const [
+        HomeTabRoute(),
+        QuranRoute(),
+        PrayerTimeRoute(),
+        QiblaRoute(),
+        CalendarRoute(),
+      ],
+      floatingActionButton: Builder(builder: (context) {
+        final tabsRouter = AutoTabsRouter.of(context);
+        return SizedBox(
+          width: 70,
+          height: 70,
+          child: FloatingActionButton(
+            shape: const CircleBorder(),
+            backgroundColor: MyTheme.color.primary,
+            onPressed: () => tabsRouter.setActiveIndex(2),
+            child: Icon(
+              Icons.mosque,
               color: MyTheme.color.white,
+              size: 30,
             ),
-            onSelected: (ThemeMode mode) {
-              context.read<ThemeBloc>().setTheme(mode);
-            },
-            itemBuilder: (BuildContext context) {
-              return <PopupMenuEntry<ThemeMode>>[
-                const PopupMenuItem<ThemeMode>(
-                  value: ThemeMode.light,
-                  child: Text('Light'),
-                ),
-                const PopupMenuItem<ThemeMode>(
-                  value: ThemeMode.dark,
-                  child: Text('Dark'),
-                ),
-                const PopupMenuItem<ThemeMode>(
-                  value: ThemeMode.system,
-                  child: Text('System'),
-                ),
-              ];
-            },
           ),
-        ],
-      ),
-      body: const HomeBody(),
+        );
+      }),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBuilder: (_, tabsRouter) {
+        return BottomAppBar(
+          shape: const CircularNotchedRectangle(),
+          notchMargin: 10,
+          clipBehavior: Clip.antiAlias,
+          child: SizedBox(
+            height: kBottomNavigationBarHeight,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _BottomNavItem(
+                  icon: Icons.home,
+                  label: "Home",
+                  isActive: tabsRouter.activeIndex == 0,
+                  onTap: () => tabsRouter.setActiveIndex(0),
+                ),
+                _BottomNavItem(
+                  icon: Icons.menu_book,
+                  label: "Quran",
+                  isActive: tabsRouter.activeIndex == 1,
+                  onTap: () => tabsRouter.setActiveIndex(1),
+                ),
+                const SizedBox(width: 40), // Gap for FAB
+                _BottomNavItem(
+                  icon: Icons.explore,
+                  label: "Qibla",
+                  isActive: tabsRouter.activeIndex == 3,
+                  onTap: () => tabsRouter.setActiveIndex(3),
+                ),
+                _BottomNavItem(
+                  icon: Icons.calendar_today,
+                  label: "Calendar",
+                  isActive: tabsRouter.activeIndex == 4,
+                  onTap: () => tabsRouter.setActiveIndex(4),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
 
-class HomeBody extends StatelessWidget {
-  const HomeBody({super.key});
+class _BottomNavItem extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final bool isActive;
+  final VoidCallback onTap;
+
+  const _BottomNavItem({
+    required this.icon,
+    required this.label,
+    required this.isActive,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return InkWell(
+      onTap: onTap,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            "Welcome to Muslim App",
-            style: MyTheme.style.title
-                .copyWith(fontSize: AppSetting.setFontSize(30)),
+          Icon(
+            icon,
+            color: isActive ? MyTheme.color.primary : Colors.grey,
           ),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              context.router.push(const QuranRoute());
-            },
-            child: const Text("Mulai Baca Quran"),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: MyTheme.style.subtitle.copyWith(
+              fontSize: 10,
+              color: isActive ? MyTheme.color.primary : Colors.grey,
+            ),
           ),
         ],
       ),

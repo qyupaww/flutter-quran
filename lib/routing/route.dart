@@ -9,8 +9,20 @@ class AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(page: SplashRoute.page, initial: true),
-        AutoRoute(page: HomeRoute.page),
-        AutoRoute(page: QuranRoute.page),
+        AutoRoute(
+          page: HomeRoute.page,
+          children: [
+            AutoRoute(page: HomeTabRoute.page),
+            AutoRoute(page: QuranRoute.page),
+            AutoRoute(page: PrayerTimeRoute.page),
+            AutoRoute(page: QiblaRoute.page),
+            AutoRoute(page: CalendarRoute.page),
+          ],
+        ),
+        AutoRoute(page: HomeTabRoute.page),
+        AutoRoute(page: QiblaRoute.page),
+        AutoRoute(page: CalendarRoute.page),
+        AutoRoute(page: PrayerTimeRoute.page),
       ];
   @override
   List<AutoRouteGuard> get guards => [];
