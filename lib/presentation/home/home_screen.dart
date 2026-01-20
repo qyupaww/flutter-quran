@@ -6,7 +6,6 @@ import 'package:flutter_quran/bloc/theme/theme_bloc.dart';
 
 import 'package:flutter_quran/config/app_config.dart';
 import 'package:flutter_quran/extension/extensions.dart';
-import 'package:flutter_quran/presentation/test.dart';
 import 'package:flutter_quran/theme/theme.dart';
 
 @RoutePage()
@@ -28,19 +27,6 @@ class HomeScreen extends StatelessWidget {
         backgroundColor:
             context.isDark ? context.containerColor : MyTheme.color.primary,
         actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const TestPage()),
-              );
-            },
-            icon: Icon(
-              Icons.terminal,
-              color: MyTheme.color.white,
-            ),
-          ),
-
           /// Icon button choose popup menu button theme from Light, Dark or System
           PopupMenuButton<ThemeMode>(
             icon: Icon(
