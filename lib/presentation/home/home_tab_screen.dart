@@ -19,14 +19,12 @@ class HomeTabScreen extends StatelessWidget {
       backgroundColor: context.isDark
           ? context.backgroundColor
           : const Color(0xFFF5F6F8), // Light grey background like design
+      appBar: const HomeAppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Space.h(20),
-              const HomeAppBar(),
-              Space.h(20),
               Padding(
                 padding:
                     EdgeInsets.symmetric(horizontal: AppSetting.setWidth(20)),
