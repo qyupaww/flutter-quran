@@ -10,8 +10,9 @@ class PrayerTrackerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: AppSetting.setWidth(20)),
-      padding: EdgeInsets.all(AppSetting.setWidth(20)),
+      width: double.infinity,
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: context.containerColor,
         borderRadius: BorderRadius.circular(20),
@@ -26,12 +27,12 @@ class PrayerTrackerCard extends StatelessWidget {
               Row(
                 children: [
                   Icon(Icons.access_time, color: context.blackWhiteColor),
-                  Space.w(8),
+                  const SizedBox(width: 8),
                   Text(
                     "Prayer Tracker",
                     style: MyTheme.style.subtitle.copyWith(
                       fontWeight: FontWeight.bold,
-                      fontSize: AppSetting.setFontSize(16),
+                      fontSize: 16,
                       color: context.blackWhiteColor,
                     ),
                   ),
@@ -40,7 +41,7 @@ class PrayerTrackerCard extends StatelessWidget {
               Icon(Icons.ios_share, color: context.greyDarkColor, size: 20),
             ],
           ),
-          Space.h(20),
+          const SizedBox(height: 20),
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -51,7 +52,7 @@ class PrayerTrackerCard extends StatelessWidget {
               _TrackerItem(label: "Isya'", isChecked: false),
             ],
           ),
-          Space.h(20),
+          const SizedBox(height: 20),
           SizedBox(
             width: double.infinity,
             child: OutlinedButton(
@@ -61,8 +62,7 @@ class PrayerTrackerCard extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                padding:
-                    EdgeInsets.symmetric(vertical: AppSetting.setHeight(12)),
+                padding: const EdgeInsets.symmetric(vertical: 12),
               ),
               child: Text(
                 "Prayer Together",
@@ -107,11 +107,11 @@ class _TrackerItem extends StatelessWidget {
               ? Icon(Icons.check, color: MyTheme.color.white, size: 20)
               : null,
         ),
-        Space.h(8),
+        const SizedBox(height: 8),
         Text(
           label,
           style: MyTheme.style.subtitle.copyWith(
-            fontSize: AppSetting.setFontSize(12),
+            fontSize: 12,
           ),
         ),
       ],

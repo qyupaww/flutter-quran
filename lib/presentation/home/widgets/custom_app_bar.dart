@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quran/config/app_config.dart';
 import 'package:flutter_quran/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quran/bloc/theme/theme_bloc.dart';
@@ -29,16 +28,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             dateText,
             style: MyTheme.style.subtitle.copyWith(
               fontWeight: FontWeight.normal,
-              fontSize: AppSetting.setFontSize(30),
+              fontSize: 12,
               color: context.blackWhiteColor,
             ),
           ),
-          Space.h(8),
+          const SizedBox(height: 6),
           Text(
             titleText,
             style: MyTheme.style.subtitle.copyWith(
               fontWeight: FontWeight.bold,
-              fontSize: AppSetting.setFontSize(32),
+              fontSize: 14,
               color: context.isDark
                   ? MyTheme.color.secondary
                   : MyTheme.color.primary,

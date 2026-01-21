@@ -10,21 +10,21 @@ class DailyPrayerSection extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppSetting.setWidth(20)),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "Daily Prayer",
                 style: MyTheme.style.title.copyWith(
-                  fontSize: AppSetting.setFontSize(18),
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: AppSetting.setWidth(10),
-                  vertical: AppSetting.setHeight(4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
                 ),
                 decoration: BoxDecoration(
                   color: MyTheme.color.primary,
@@ -34,35 +34,35 @@ class DailyPrayerSection extends StatelessWidget {
                   "See All",
                   style: MyTheme.style.subtitle.copyWith(
                     color: MyTheme.color.white,
-                    fontSize: AppSetting.setFontSize(10),
+                    fontSize: 10,
                   ),
                 ),
               )
             ],
           ),
         ),
-        Space.h(16),
+        const SizedBox(height: 16),
         SizedBox(
           height: 100,
           child: ListView(
             scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.symmetric(horizontal: AppSetting.setWidth(20)),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             children: [
               const _DailyPrayerItem(
                 icon: Icons.coffee,
                 title: "Prayer for eating",
               ),
-              Space.w(16),
+              const SizedBox(width: 16),
               const _DailyPrayerItem(
                 icon: Icons.menu_book,
                 title: "Study prayer",
               ),
-              Space.w(16),
+              const SizedBox(width: 16),
               const _DailyPrayerItem(
                 icon: Icons.bedtime,
                 title: "Bedtime prayers",
               ),
-              Space.w(16),
+              const SizedBox(width: 16),
             ],
           ),
         )
@@ -84,7 +84,7 @@ class _DailyPrayerItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 100,
-      padding: EdgeInsets.all(AppSetting.setWidth(12)),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: MyTheme.color.white,
         borderRadius: BorderRadius.circular(16),
@@ -95,13 +95,13 @@ class _DailyPrayerItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(icon, color: MyTheme.color.black, size: 28),
-          Space.h(8),
+          const SizedBox(height: 8),
           Text(
             title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: MyTheme.style.subtitle.copyWith(
-              fontSize: AppSetting.setFontSize(12),
+              fontSize: 12,
               fontWeight: FontWeight.bold,
             ),
           ),
