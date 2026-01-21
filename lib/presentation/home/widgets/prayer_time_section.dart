@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quran/config/app_config.dart';
 import 'package:flutter_quran/theme/theme.dart';
 
 import 'package:flutter_quran/extension/extensions.dart';
