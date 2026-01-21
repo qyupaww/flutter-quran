@@ -8,37 +8,16 @@ class DailyPrayerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Daily Prayer",
-                style: MyTheme.style.title.copyWith(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 4,
-                ),
-                decoration: BoxDecoration(
-                  color: MyTheme.color.primary,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  "See All",
-                  style: MyTheme.style.subtitle.copyWith(
-                    color: MyTheme.color.white,
-                    fontSize: 10,
-                  ),
-                ),
-              )
-            ],
+          child: Text(
+            "Do'a Harian",
+            style: MyTheme.style.title.copyWith(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         const SizedBox(height: 16),
