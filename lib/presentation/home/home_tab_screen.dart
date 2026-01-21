@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quran/config/app_config.dart';
-import 'package:flutter_quran/presentation/home/widgets/prayer_time_section.dart';
+import 'package:flutter_quran/presentation/home/widgets/daily_prayer_card.dart';
 import 'package:flutter_quran/presentation/home/widgets/custom_app_bar.dart';
 import 'package:flutter_quran/presentation/home/widgets/prayer_time_card.dart';
-import 'package:flutter_quran/presentation/home/widgets/prayer_tracker_card.dart';
+import 'package:flutter_quran/presentation/home/widgets/prayer_time_section.dart';
 
 @RoutePage()
 class HomeTabScreen extends StatelessWidget {
@@ -33,9 +33,9 @@ class HomeTabScreen extends StatelessWidget {
                   seconds: "15",
                 ),
                 Space.h(20),
-                const PrayerTrackerCard(),
+                const PrayerTimeSection(),
                 Space.h(30),
-                const DailyPrayerSection(),
+                const DailyPrayerCard(),
                 Space.h(100), // Bottom padding for FAB
               ],
             ),

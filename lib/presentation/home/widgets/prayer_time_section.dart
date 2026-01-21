@@ -2,111 +2,119 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quran/config/app_config.dart';
 import 'package:flutter_quran/theme/theme.dart';
 
-class DailyPrayerSection extends StatelessWidget {
-  const DailyPrayerSection({super.key});
+import 'package:flutter_quran/extension/extensions.dart';
+
+class PrayerTimeSection extends StatelessWidget {
+  const PrayerTimeSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: context.containerColor,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: AppSetting.softShadow,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.access_time, color: context.blackWhiteColor),
+                  const SizedBox(width: 8),
+                  Text(
+                    "Prayer Tracker",
+                    style: MyTheme.style.subtitle.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: context.blackWhiteColor,
+                    ),
+                  ),
+                ],
+              ),
+              Icon(Icons.ios_share, color: context.greyDarkColor, size: 20),
+            ],
+          ),
+          const SizedBox(height: 20),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _TrackerItem(label: "Subuh", isChecked: true),
+              _TrackerItem(label: "Dzuhur", isChecked: true),
+              _TrackerItem(label: "Ashar", isChecked: true),
+              _TrackerItem(label: "Maghrib", isChecked: false),
+              _TrackerItem(label: "Isya'", isChecked: false),
+            ],
+          ),
+          const SizedBox(height: 20),
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton(
+              onPressed: () {},
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(color: MyTheme.color.primary.withAlpha(30)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                padding: const EdgeInsets.symmetric(vertical: 12),
+              ),
+              child: Text(
+                "Prayer Together",
+                style: MyTheme.style.subtitle.copyWith(
+                  color: MyTheme.color.primary,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _TrackerItem extends StatelessWidget {
+  final String label;
+  final bool isChecked;
+
+  const _TrackerItem({
+    required this.label,
+    required this.isChecked,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Daily Prayer",
-                style: MyTheme.style.title.copyWith(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 4,
-                ),
-                decoration: BoxDecoration(
-                  color: MyTheme.color.primary,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  "See All",
-                  style: MyTheme.style.subtitle.copyWith(
-                    color: MyTheme.color.white,
-                    fontSize: 10,
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-        const SizedBox(height: 16),
-        SizedBox(
-          height: 100,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            children: const [
-              _DailyPrayerItem(
-                icon: Icons.coffee,
-                title: "Prayer for eating",
-              ),
-              SizedBox(width: 16),
-              _DailyPrayerItem(
-                icon: Icons.menu_book,
-                title: "Study prayer",
-              ),
-              SizedBox(width: 16),
-              _DailyPrayerItem(
-                icon: Icons.bedtime,
-                title: "Bedtime prayers",
-              ),
-              SizedBox(width: 16),
-            ],
-          ),
-        )
-      ],
-    );
-  }
-}
-
-class _DailyPrayerItem extends StatelessWidget {
-  final IconData icon;
-  final String title;
-
-  const _DailyPrayerItem({
-    required this.icon,
-    required this.title,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 100,
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: MyTheme.color.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: AppSetting.softShadow,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, color: MyTheme.color.black, size: 28),
-          const SizedBox(height: 8),
-          Text(
-            title,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: MyTheme.style.subtitle.copyWith(
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
+        Container(
+          width: 30,
+          height: 30,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: isChecked ? MyTheme.color.primary : MyTheme.color.white,
+            border: Border.all(
+              color: isChecked ? MyTheme.color.primary : MyTheme.color.primary,
+              width: 2,
             ),
           ),
-        ],
-      ),
+          child: isChecked
+              ? Icon(Icons.check, color: MyTheme.color.white, size: 20)
+              : null,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          label,
+          style: MyTheme.style.subtitle.copyWith(
+            fontSize: 12,
+          ),
+        ),
+      ],
     );
   }
 }
