@@ -98,11 +98,11 @@ class PrayerTimeCard extends StatelessWidget {
                 Row(
                   children: [
                     Icon(Icons.schedule,
-                        color: MyTheme.color.secondary, size: 20),
+                        color: MyTheme.color.secondary, size: 18),
                     const SizedBox(width: 8),
                     Text(startTime,
                         style: TextStyle(
-                            color: MyTheme.color.white, fontSize: 16)),
+                            color: MyTheme.color.white, fontSize: 14)),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 6),
                       child: Text("•",
@@ -110,7 +110,7 @@ class PrayerTimeCard extends StatelessWidget {
                     ),
                     Text(endTime,
                         style: TextStyle(
-                            color: MyTheme.color.white, fontSize: 16)),
+                            color: MyTheme.color.white, fontSize: 14)),
                   ],
                 ),
                 GestureDetector(
