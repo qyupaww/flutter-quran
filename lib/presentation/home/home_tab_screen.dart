@@ -6,6 +6,9 @@ import 'package:flutter_quran/presentation/home/widgets/custom_app_bar.dart';
 import 'package:flutter_quran/presentation/home/widgets/prayer_time_card.dart';
 import 'package:flutter_quran/presentation/home/widgets/prayer_time_section.dart';
 
+import '../../extension/app_color_extension.dart';
+import '../../theme/theme.dart';
+
 @RoutePage()
 class HomeTabScreen extends StatelessWidget {
   const HomeTabScreen({super.key});
@@ -72,9 +75,55 @@ class HomeTabScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                Space.h(30),
-                const DailyPrayerCard(),
-                Space.h(100), // Bottom padding for FAB
+                const SizedBox(height: 8),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    "Do'a Harian",
+                    style: MyTheme.style.title.copyWith(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: context.blackWhiteColor,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                GridView.count(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 12,
+                  childAspectRatio: 1.4,
+                  children: const [
+                    DailyPrayerCard(
+                      text: "Do'a Makan",
+                      icon: Icons.rice_bowl,
+                    ),
+                    DailyPrayerCard(
+                      text: "Do'a Belajar",
+                      icon: Icons.menu_book,
+                    ),
+                    DailyPrayerCard(
+                      text: "Do'a Tidur",
+                      icon: Icons.bed, // Atau Icons.nightlight_round
+                    ),
+                    DailyPrayerCard(
+                      text: "Masuk Masjid",
+                      icon: Icons.mosque,
+                    ),
+                    DailyPrayerCard(
+                      text: "Keluar Masjid",
+                      icon: Icons.directions_walk,
+                    ),
+                    DailyPrayerCard(
+                      text: "Naik Kendaraan",
+                      icon: Icons.directions_car,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 24),
               ],
             ),
           ),
