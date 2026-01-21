@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quran/config/app_config.dart';
 import 'package:flutter_quran/presentation/home/widgets/daily_prayer_section.dart';
-import 'package:flutter_quran/presentation/home/widgets/home_app_bar.dart';
+import 'package:flutter_quran/presentation/home/widgets/custom_app_bar.dart';
 import 'package:flutter_quran/presentation/home/widgets/prayer_time_card.dart';
 import 'package:flutter_quran/presentation/home/widgets/prayer_tracker_card.dart';
 import 'package:flutter_quran/theme/theme.dart';
@@ -19,7 +19,10 @@ class HomeTabScreen extends StatelessWidget {
       backgroundColor: context.isDark
           ? context.backgroundColor
           : const Color(0xFFF5F6F8), // Light grey background like design
-      appBar: const HomeAppBar(),
+      appBar: const CustomAppBar(
+        dateText: "21 Januari 2026",
+        titleText: "Wilayah Tanjungsari, Sumedang, Jawa Barat",
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
