@@ -47,22 +47,22 @@ class DailyPrayerSection extends StatelessWidget {
           child: ListView(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            children: [
-              const _DailyPrayerItem(
+            children: const [
+              _DailyPrayerItem(
                 icon: Icons.coffee,
                 title: "Prayer for eating",
               ),
-              const SizedBox(width: 16),
-              const _DailyPrayerItem(
+              SizedBox(width: 16),
+              _DailyPrayerItem(
                 icon: Icons.menu_book,
                 title: "Study prayer",
               ),
-              const SizedBox(width: 16),
-              const _DailyPrayerItem(
+              SizedBox(width: 16),
+              _DailyPrayerItem(
                 icon: Icons.bedtime,
                 title: "Bedtime prayers",
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
             ],
           ),
         )

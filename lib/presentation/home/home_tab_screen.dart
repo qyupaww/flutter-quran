@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quran/config/app_config.dart';
-import 'package:flutter_quran/presentation/home/widgets/daily_prayer_section.dart';
+import 'package:flutter_quran/presentation/home/widgets/prayer_time_section.dart';
 import 'package:flutter_quran/presentation/home/widgets/custom_app_bar.dart';
 import 'package:flutter_quran/presentation/home/widgets/prayer_time_card.dart';
 import 'package:flutter_quran/presentation/home/widgets/prayer_tracker_card.dart';
@@ -15,7 +15,7 @@ class HomeTabScreen extends StatelessWidget {
     return Scaffold(
       appBar: const CustomAppBar(
         dateText: "21 Januari 2026",
-        titleText: "Wilayah Tanjungsari, Sumedang, Jawa Barat",
+        titleText: "Wilayah Tanjungsari, Sumedang dan sekitarnya",
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -25,9 +25,9 @@ class HomeTabScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const PrayerTimeCard(
-                  prayerName: "Fajr",
-                  startTime: "04:20 AM",
-                  endTime: "05:40 AM",
+                  prayerName: "Dzuhur",
+                  startTime: "11:40 AM",
+                  endTime: "03:00 PM",
                   hours: "02",
                   minutes: "30",
                   seconds: "15",
