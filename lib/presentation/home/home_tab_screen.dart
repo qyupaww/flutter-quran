@@ -5,9 +5,6 @@ import 'package:flutter_quran/presentation/home/widgets/daily_prayer_section.dar
 import 'package:flutter_quran/presentation/home/widgets/custom_app_bar.dart';
 import 'package:flutter_quran/presentation/home/widgets/prayer_time_card.dart';
 import 'package:flutter_quran/presentation/home/widgets/prayer_tracker_card.dart';
-import 'package:flutter_quran/theme/theme.dart';
-
-import 'package:flutter_quran/extension/extensions.dart';
 
 @RoutePage()
 class HomeTabScreen extends StatelessWidget {
@@ -16,58 +13,32 @@ class HomeTabScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.isDark
-          ? context.backgroundColor
-          : const Color(0xFFF5F6F8), // Light grey background like design
       appBar: const CustomAppBar(
         dateText: "21 Januari 2026",
         titleText: "Wilayah Tanjungsari, Sumedang, Jawa Barat",
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: AppSetting.setWidth(20)),
-                child: Container(
-                  padding: EdgeInsets.all(AppSetting.setWidth(16)),
-                  decoration: BoxDecoration(
-                    color: MyTheme.color.white,
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          const Icon(Icons.wb_sunny_outlined,
-                              color: Colors.orange,
-                              size: 20), // Placeholder sun/lamp icon
-                          Space.w(8),
-                          Text(
-                            "Start your day with these prayers",
-                            style: MyTheme.style.subtitle.copyWith(
-                              fontWeight: FontWeight.bold,
-                              fontSize: AppSetting.setFontSize(14),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const Icon(Icons.chevron_right, color: Colors.grey),
-                    ],
-                  ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const PrayerTimeCard(
+                  prayerName: "Fajr",
+                  startTime: "04:20 AM",
+                  endTime: "05:40 AM",
+                  hours: "02",
+                  minutes: "30",
+                  seconds: "15",
                 ),
-              ),
-              Space.h(20),
-              const PrayerTimeCard(),
-              Space.h(20),
-              const PrayerTrackerCard(),
-              Space.h(30),
-              const DailyPrayerSection(),
-              Space.h(100), // Bottom padding for FAB
-            ],
+                Space.h(20),
+                const PrayerTrackerCard(),
+                Space.h(30),
+                const DailyPrayerSection(),
+                Space.h(100), // Bottom padding for FAB
+              ],
+            ),
           ),
         ),
       ),

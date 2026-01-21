@@ -57,7 +57,7 @@ class PrayerTrackerCard extends StatelessWidget {
             child: OutlinedButton(
               onPressed: () {},
               style: OutlinedButton.styleFrom(
-                side: BorderSide(color: MyTheme.color.primary.withOpacity(0.3)),
+                side: BorderSide(color: MyTheme.color.primary.withAlpha(30)),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),

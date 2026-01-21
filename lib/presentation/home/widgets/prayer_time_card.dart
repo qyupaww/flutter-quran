@@ -1,151 +1,196 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
-import 'package:flutter_quran/config/app_config.dart';
 import 'package:flutter_quran/theme/theme.dart';
 
-import 'package:flutter_quran/extension/extensions.dart';
-
 class PrayerTimeCard extends StatelessWidget {
-  const PrayerTimeCard({super.key});
+  final String prayerName;
+  final String startTime;
+  final String endTime;
+  final String hours;
+  final String minutes;
+  final String seconds;
 
+  const PrayerTimeCard({
+    super.key,
+    required this.prayerName,
+    required this.startTime,
+    required this.endTime,
+    required this.hours,
+    required this.minutes,
+    required this.seconds,
+  });
+
+  @override
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: AppSetting.setWidth(20)),
-      padding: EdgeInsets.all(AppSetting.setWidth(20)),
+      width: double.infinity,
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: context.containerColor,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: AppSetting.softShadow,
+        color: MyTheme.color.primary,
+        borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
+          // HEADER
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  color: Colors.white.withAlpha(10),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    "28 Rabi'ul awal, 1445 H",
-                    style: MyTheme.style.subtitle.copyWith(
-                      fontSize: AppSetting.setFontSize(12),
-                      color: context.greyDarkColor,
+                    "NEXT PRAYER",
+                    style: TextStyle(
+                      color: MyTheme.color.secondary,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.2,
                     ),
                   ),
-                  Space.h(4),
+                  // MENGGUNAKAN VARIABEL prayerName
                   Text(
-                    "17:21",
-                    style: MyTheme.style.title.copyWith(
-                        fontSize: AppSetting.setFontSize(40),
-                        fontWeight: FontWeight.bold,
-                        color: context.blackWhiteColor),
-                  ),
-                  Space.h(4),
-                  Row(
-                    children: [
-                      Text(
-                        "Maghrib less than ",
-                        style: MyTheme.style.subtitle.copyWith(
-                          fontSize: AppSetting.setFontSize(14),
-                          color: context.greyDarkColor,
-                        ),
-                      ),
-                      Text(
-                        "05:23",
-                        style: MyTheme.style.subtitle.copyWith(
-                          fontSize: AppSetting.setFontSize(14),
-                          fontWeight: FontWeight.bold,
-                          color: context.blackWhiteColor,
-                        ),
-                      ),
-                    ],
+                    prayerName,
+                    style: TextStyle(
+                      color: MyTheme.color.white,
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
-              ),
-              // Placeholder for Bedug Image
-              Icon(
-                FlutterIslamicIcons.prayingPerson, // Placeholder icon
-                size: 80,
-                color: MyTheme.color.primary.withOpacity(0.5),
-              ),
+              )
             ],
           ),
-          Space.h(20),
-          Divider(color: context.greyDarkColor.withOpacity(0.2)),
-          Space.h(20),
-          const Row(
+
+          const SizedBox(height: 30),
+
+          // COUNTDOWN
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _buildTimeBox(hours, "JAM"),
+              _buildSeparator(),
+              _buildTimeBox(minutes, "MENIT"),
+              _buildSeparator(),
+              _buildTimeBox(seconds, "DETIK"),
+            ],
+          ),
+
+          const SizedBox(height: 30),
+          Divider(color: MyTheme.color.white.withAlpha(30), thickness: 1),
+          const SizedBox(height: 16),
+
+          // FOOTER
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _PrayerItem(
-                  name: "Subuh",
-                  time: "03:53",
-                  icon: FlutterIslamicIcons.solidMosque),
-              _PrayerItem(
-                  name: "Dzuhur", time: "11:20", icon: Icons.wb_sunny_outlined),
-              _PrayerItem(
-                  name: "Ashar", time: "14:21", icon: Icons.cloud_outlined),
-              _PrayerItem(
-                  name: "Maghrib",
-                  time: "17:26",
-                  icon: Icons.wb_twilight,
-                  isHighLight: true),
-              _PrayerItem(
-                  name: "Isya'",
-                  time: "18:34",
-                  icon: Icons.nights_stay_outlined),
+              Row(
+                children: [
+                  Icon(Icons.schedule,
+                      color: MyTheme.color.secondary, size: 20),
+                  const SizedBox(width: 8),
+                  // MENGGUNAKAN VARIABEL startTime & endTime
+                  Text(startTime,
+                      style:
+                          TextStyle(color: MyTheme.color.white, fontSize: 16)),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 6),
+                    child: Text("•", style: TextStyle(color: Colors.grey)),
+                  ),
+                  Text(endTime,
+                      style:
+                          TextStyle(color: MyTheme.color.white, fontSize: 16)),
+                ],
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Row(
+                  children: [
+                    Text(
+                      "LIHAT JADWAL",
+                      style: TextStyle(
+                        color: MyTheme.color.secondary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Icon(Icons.arrow_forward,
+                        color: MyTheme.color.secondary, size: 18),
+                  ],
+                ),
+              )
             ],
-          )
+          ),
         ],
       ),
     );
   }
-}
 
-class _PrayerItem extends StatelessWidget {
-  final String name;
-  final String time;
-  final IconData icon;
-  final bool isHighLight;
-
-  const _PrayerItem({
-    required this.name,
-    required this.time,
-    required this.icon,
-    this.isHighLight = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildTimeBox(String value, String label) {
     return Column(
       children: [
-        Text(
-          name,
-          style: MyTheme.style.subtitle.copyWith(
-            fontSize: AppSetting.setFontSize(12),
-            fontWeight: isHighLight ? FontWeight.bold : FontWeight.normal,
-            color:
-                isHighLight ? MyTheme.color.primary : context.blackWhiteColor,
+        Container(
+          width: 70,
+          height: 70,
+          decoration: BoxDecoration(
+            color: MyTheme.color.secondary.withAlpha(10),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Center(
+            child: Text(
+              value,
+              style: TextStyle(
+                color: MyTheme.color.white,
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ),
-        Space.h(8),
-        Icon(
-          icon,
-          color: isHighLight ? MyTheme.color.primary : context.blackWhiteColor,
-          size: 24,
-        ),
-        Space.h(8),
+        const SizedBox(height: 8),
         Text(
-          time,
-          style: MyTheme.style.subtitle.copyWith(
-            fontSize: AppSetting.setFontSize(12),
-            fontWeight: isHighLight ? FontWeight.bold : FontWeight.normal,
-            color: isHighLight ? MyTheme.color.primary : context.greyDarkColor,
+          label,
+          style: TextStyle(
+            color: MyTheme.color.secondary,
+            fontSize: 10,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1.5,
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildSeparator() {
+    return Container(
+      height: 70,
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            ":",
+            style: TextStyle(
+              color: MyTheme.color.secondary,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 18),
+        ],
+      ),
     );
   }
 }
