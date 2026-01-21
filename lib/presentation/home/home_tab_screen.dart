@@ -32,8 +32,46 @@ class HomeTabScreen extends StatelessWidget {
                   minutes: "30",
                   seconds: "15",
                 ),
-                Space.h(20),
-                const PrayerTimeSection(),
+                Space.h(8),
+                const Row(
+                  children: [
+                    Expanded(
+                      child: PrayerTimeSection(
+                        text: "Subuh",
+                        icon: Icons.cloud_outlined,
+                        time: "04.00",
+                      ),
+                    ),
+                    Expanded(
+                      child: PrayerTimeSection(
+                        text: "Dzuhur",
+                        icon: Icons.wb_sunny_outlined,
+                        time: "11:40",
+                      ),
+                    ),
+                    Expanded(
+                      child: PrayerTimeSection(
+                        text: "Ashar",
+                        icon: Icons.wb_sunny,
+                        time: "15.00",
+                      ),
+                    ),
+                    Expanded(
+                      child: PrayerTimeSection(
+                        text: "Maghrib",
+                        icon: Icons.wb_twilight_outlined,
+                        time: "18.00",
+                      ),
+                    ),
+                    Expanded(
+                      child: PrayerTimeSection(
+                        text: "Isya",
+                        icon: Icons.nightlight_round,
+                        time: "19.00",
+                      ),
+                    ),
+                  ],
+                ),
                 Space.h(30),
                 const DailyPrayerCard(),
                 Space.h(100), // Bottom padding for FAB
