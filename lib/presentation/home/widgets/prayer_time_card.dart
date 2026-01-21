@@ -41,11 +41,13 @@ class PrayerTimeCard extends StatelessWidget {
               children: [
                 Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                   decoration: BoxDecoration(
                     color: Colors.white.withAlpha(10),
                     borderRadius: BorderRadius.circular(20),
                   ),
+                  child: Icon(Icons.location_on,
+                      color: MyTheme.color.secondary, size: 24),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,

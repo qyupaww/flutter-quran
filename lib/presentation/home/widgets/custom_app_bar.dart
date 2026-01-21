@@ -50,7 +50,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         /// Icon button choose popup menu button theme from Light, Dark or System
         PopupMenuButton<ThemeMode>(
           icon: Icon(
-            Icons.more_vert,
+            Icons.menu,
             color: context.blackWhiteColor,
           ),
           onSelected: (ThemeMode mode) {
