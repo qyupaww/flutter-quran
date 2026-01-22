@@ -21,7 +21,7 @@ class DailyPrayerCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color:
-              context.isDark ? MyTheme.color.secondary : MyTheme.color.primary,
+              context.isDark ? MyTheme.color.primary : MyTheme.color.secondary,
           width: 2.0,
         ),
       ),
@@ -31,8 +31,8 @@ class DailyPrayerCard extends StatelessWidget {
         children: [
           Icon(icon,
               color: context.isDark
-                  ? MyTheme.color.secondary
-                  : MyTheme.color.primary,
+                  ? MyTheme.color.primary
+                  : MyTheme.color.secondary,
               size: 24),
           Text(
             text,
