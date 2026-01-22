@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
+      resizeToAvoidBottomInset: false,
       routes: const [
         HomeTabRoute(),
         QuranRoute(),

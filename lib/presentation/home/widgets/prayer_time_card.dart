@@ -98,34 +98,43 @@ class PrayerTimeCard extends StatelessWidget {
 
                 // FOOTER
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        Icon(Icons.schedule,
-                            color: MyTheme.color.secondary, size: 18),
-                        const SizedBox(width: 8),
-                        Text(
-                            state.nextPrayerTime.isEmpty ||
-                                    state.nextPrayerTime == "-"
-                                ? "-"
-                                : state.nextPrayerTime
-                                    .split(" ")[0], // Just H:M
-                            style: TextStyle(
-                                color: MyTheme.color.white, fontSize: 14)),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 6),
-                          child: Text("•",
-                              style: TextStyle(color: MyTheme.color.white)),
-                        ),
-                        Text(state.locationName.split(",").last, // Show City
-                            style: TextStyle(
-                                color: MyTheme.color.white, fontSize: 14)),
-                      ],
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Icon(Icons.schedule,
+                              color: MyTheme.color.secondary, size: 18),
+                          const SizedBox(width: 8),
+                          Text(
+                              state.nextPrayerTime.isEmpty ||
+                                      state.nextPrayerTime == "-"
+                                  ? "-"
+                                  : state.nextPrayerTime
+                                      .split(" ")[0], // Just H:M
+                              style: TextStyle(
+                                  color: MyTheme.color.white, fontSize: 14)),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 6),
+                            child: Text("•",
+                                style: TextStyle(color: MyTheme.color.white)),
+                          ),
+                          Expanded(
+                            child: Text(
+                              state.locationName.split(",").last, // Show City
+                              style: TextStyle(
+                                  color: MyTheme.color.white, fontSize: 14),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
+                    const SizedBox(width: 8),
                     GestureDetector(
                       onTap: () {},
                       child: Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
                             "LIHAT JADWAL",
