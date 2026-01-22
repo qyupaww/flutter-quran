@@ -1,5 +1,7 @@
 part of 'theme_bloc.dart';
 
+// Trigger rebuild
+
 @freezed
 class ThemeState with _$ThemeState {
   const factory ThemeState.initial() = _ThemeInitialState;

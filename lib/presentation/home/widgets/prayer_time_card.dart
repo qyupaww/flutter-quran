@@ -1,143 +1,149 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_quran/bloc/prayer_time/prayer_time_bloc.dart';
+import 'package:flutter_quran/presentation/home/widgets/location_picker_dialog.dart';
 import 'package:flutter_quran/theme/theme.dart';
 
 class PrayerTimeCard extends StatelessWidget {
-  final String prayerName;
-  final String startTime;
-  final String endTime;
-  final String hours;
-  final String minutes;
-  final String seconds;
+  const PrayerTimeCard({super.key});
 
-  const PrayerTimeCard({
-    super.key,
-    required this.prayerName,
-    required this.startTime,
-    required this.endTime,
-    required this.hours,
-    required this.minutes,
-    required this.seconds,
-  });
-
-  @override
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(24),
-        decoration: BoxDecoration(
-          color: MyTheme.color.primary,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // HEADER
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withAlpha(10),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Icon(Icons.location_on,
-                      color: MyTheme.color.secondary, size: 24),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "WAKTU SHOLAT SELANJUTNYA",
-                      style: TextStyle(
-                        color: MyTheme.color.secondary,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1.2,
-                      ),
-                    ),
-                    Text(
-                      prayerName,
-                      style: TextStyle(
-                        color: MyTheme.color.white,
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                )
-              ],
+    return BlocBuilder<PrayerTimeBloc, PrayerTimeState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: MyTheme.color.primary,
+              borderRadius: BorderRadius.circular(12),
             ),
-
-            const SizedBox(height: 30),
-
-            // COUNTDOWN
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                _buildTimeBox(hours, "JAM"),
-                _buildSeparator(),
-                _buildTimeBox(minutes, "MENIT"),
-                _buildSeparator(),
-                _buildTimeBox(seconds, "DETIK"),
-              ],
-            ),
-
-            const SizedBox(height: 30),
-            Divider(color: MyTheme.color.white.withAlpha(30), thickness: 1),
-            const SizedBox(height: 16),
-
-            // FOOTER
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+                // HEADER
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.schedule,
-                        color: MyTheme.color.secondary, size: 18),
-                    const SizedBox(width: 8),
-                    Text(startTime,
-                        style: TextStyle(
-                            color: MyTheme.color.white, fontSize: 14)),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 6),
-                      child: Text("•",
-                          style: TextStyle(color: MyTheme.color.white)),
+                    GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => const LocationPickerDialog(),
+                        );
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withAlpha(10),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Icon(Icons.location_on,
+                            color: MyTheme.color.secondary, size: 24),
+                      ),
                     ),
-                    Text(endTime,
-                        style: TextStyle(
-                            color: MyTheme.color.white, fontSize: 14)),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "WAKTU SHOLAT SELANJUTNYA",
+                          style: TextStyle(
+                            color: MyTheme.color.secondary,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.2,
+                          ),
+                        ),
+                        Text(
+                          state.nextPrayerName.isEmpty
+                              ? "-"
+                              : state.nextPrayerName,
+                          style: TextStyle(
+                            color: MyTheme.color.white,
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Row(
-                    children: [
-                      Text(
-                        "LIHAT JADWAL",
-                        style: TextStyle(
-                          color: MyTheme.color.secondary,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
+
+                const SizedBox(height: 30),
+
+                // COUNTDOWN
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _buildTimeBox(state.hoursLeft, "JAM"),
+                    _buildSeparator(),
+                    _buildTimeBox(state.minutesLeft, "MENIT"),
+                    _buildSeparator(),
+                    _buildTimeBox(state.secondsLeft, "DETIK"),
+                  ],
+                ),
+
+                const SizedBox(height: 30),
+                Divider(color: MyTheme.color.white.withAlpha(30), thickness: 1),
+                const SizedBox(height: 16),
+
+                // FOOTER
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.schedule,
+                            color: MyTheme.color.secondary, size: 18),
+                        const SizedBox(width: 8),
+                        Text(
+                            state.nextPrayerTime.isEmpty ||
+                                    state.nextPrayerTime == "-"
+                                ? "-"
+                                : state.nextPrayerTime
+                                    .split(" ")[0], // Just H:M
+                            style: TextStyle(
+                                color: MyTheme.color.white, fontSize: 14)),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 6),
+                          child: Text("•",
+                              style: TextStyle(color: MyTheme.color.white)),
                         ),
+                        Text(state.locationName.split(",").last, // Show City
+                            style: TextStyle(
+                                color: MyTheme.color.white, fontSize: 14)),
+                      ],
+                    ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Row(
+                        children: [
+                          Text(
+                            "LIHAT JADWAL",
+                            style: TextStyle(
+                              color: MyTheme.color.secondary,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                          Icon(Icons.arrow_forward,
+                              color: MyTheme.color.secondary, size: 18),
+                        ],
                       ),
-                      const SizedBox(width: 4),
-                      Icon(Icons.arrow_forward,
-                          color: MyTheme.color.secondary, size: 18),
-                    ],
-                  ),
-                )
+                    )
+                  ],
+                ),
               ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
@@ -158,6 +164,7 @@ class PrayerTimeCard extends StatelessWidget {
                 color: MyTheme.color.white,
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
+                letterSpacing: 1.0,
               ),
             ),
           ),

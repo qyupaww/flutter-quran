@@ -73,6 +73,9 @@ dependencies:
   logger: ^2.6.2
   flutter_launcher_icons: 0.13.1
   flutter_islamic_icons: ^1.0.2
+  adhan: ^2.0.0+1
+  hijri: ^3.0.0
+  geocoding: ^4.0.0
 
 dev_dependencies:
   flutter_test:
