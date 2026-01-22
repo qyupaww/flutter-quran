@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
       routes: const [
         HomeTabRoute(),
         QuranRoute(),
-        PrayerTimeRoute(),
+        MapRoute(),
         QiblaRoute(),
         CalendarRoute(),
       ],

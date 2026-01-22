@@ -22,22 +22,24 @@ class DailyPrayerCard extends StatelessWidget {
         border: Border.all(
           color:
               context.isDark ? MyTheme.color.secondary : MyTheme.color.primary,
+          width: 2.0,
         ),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(icon,
               color: context.isDark
                   ? MyTheme.color.secondary
                   : MyTheme.color.primary,
-              size: 28),
+              size: 24),
           Text(
             text,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: MyTheme.style.subtitle.copyWith(
-              fontSize: 12,
+              fontSize: 11,
               fontWeight: FontWeight.bold,
               color: context.blackWhiteColor,
             ),

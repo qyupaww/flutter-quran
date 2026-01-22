@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quran/theme/theme.dart';
 
 @RoutePage()
-class PrayerTimeScreen extends StatelessWidget {
-  const PrayerTimeScreen({super.key});
+class MapScreen extends StatelessWidget {
+  const MapScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

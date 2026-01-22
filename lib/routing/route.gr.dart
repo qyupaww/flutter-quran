@@ -14,8 +14,7 @@ import 'package:flutter_quran/presentation/calendar/calendar_screen.dart'
     as _i1;
 import 'package:flutter_quran/presentation/home/home_screen.dart' as _i2;
 import 'package:flutter_quran/presentation/home/home_tab_screen.dart' as _i3;
-import 'package:flutter_quran/presentation/prayer_time/prayer_time_screen.dart'
-    as _i4;
+import 'package:flutter_quran/presentation/maps/map_screen.dart' as _i4;
 import 'package:flutter_quran/presentation/qibla/qibla_screen.dart' as _i5;
 import 'package:flutter_quran/presentation/quran/quran_screen.dart' as _i6;
 import 'package:flutter_quran/presentation/splash/splash_screen.dart' as _i7;
@@ -69,17 +68,17 @@ class HomeTabRoute extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.PrayerTimeScreen]
-class PrayerTimeRoute extends _i8.PageRouteInfo<void> {
-  const PrayerTimeRoute({List<_i8.PageRouteInfo>? children})
-      : super(PrayerTimeRoute.name, initialChildren: children);
+/// [_i4.MapScreen]
+class MapRoute extends _i8.PageRouteInfo<void> {
+  const MapRoute({List<_i8.PageRouteInfo>? children})
+      : super(MapRoute.name, initialChildren: children);
 
-  static const String name = 'PrayerTimeRoute';
+  static const String name = 'MapRoute';
 
   static _i8.PageInfo page = _i8.PageInfo(
     name,
     builder: (data) {
-      return const _i4.PrayerTimeScreen();
+      return const _i4.MapScreen();
     },
   );
 }

@@ -14,7 +14,7 @@ class AppRouter extends RootStackRouter {
           children: [
             AutoRoute(page: HomeTabRoute.page),
             AutoRoute(page: QuranRoute.page),
-            AutoRoute(page: PrayerTimeRoute.page),
+            AutoRoute(page: MapRoute.page),
             AutoRoute(page: QiblaRoute.page),
             AutoRoute(page: CalendarRoute.page),
           ],
@@ -22,7 +22,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: HomeTabRoute.page),
         AutoRoute(page: QiblaRoute.page),
         AutoRoute(page: CalendarRoute.page),
-        AutoRoute(page: PrayerTimeRoute.page),
+        AutoRoute(page: MapRoute.page),
       ];
   @override
   List<AutoRouteGuard> get guards => [];
