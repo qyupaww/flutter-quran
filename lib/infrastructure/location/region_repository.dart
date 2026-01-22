@@ -34,7 +34,7 @@ class RegionRepository {
   Future<Map<String, double>?> getCoordinates(String address) async {
     try {
       // Using OpenStreetMap Nominatim API
-      final url = 'https://nominatim.openstreetmap.org/search';
+      const url = 'https://nominatim.openstreetmap.org/search';
       final response = await _dio.get(
         url,
         queryParameters: {
