@@ -144,29 +144,35 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
     try {
       if (!mounted) return;
 
-      // Attempt Geocoding
-      List<Location> locations = await locationFromAddress(address);
-
-      if (locations.isNotEmpty) {
-        final loc = locations.first;
-        if (mounted) {
-          context.read<PrayerTimeBloc>().add(
-                PrayerTimeEvent.locationChanged(
-                  _selectedProvince?['name'] ?? '',
-                  _selectedCity?['name'] ?? '',
-                  district['name'],
-                  loc.latitude,
-                  loc.longitude,
-                ),
-              );
-          Navigator.pop(context);
+      // Attempt 1: Platform Geocoding
+      try {
+        List<Location> locations = await locationFromAddress(address);
+        if (locations.isNotEmpty) {
+          _processLocation(locations.first, district);
+          return;
         }
-      } else {
-        _showError("Koordinat tidak ditemukan untuk lokasi ini.");
+      } catch (_) {
+        // Fallback to Nominatim
       }
+
+      // Attempt 2: Nominatim Fallback
+      if (mounted) {
+        final coords = await _repository.getCoordinates(address);
+        if (coords != null) {
+          // Manually construct Location object or pass lat/long directly
+          final loc = Location(
+            latitude: coords['lat']!,
+            longitude: coords['long']!,
+            timestamp: DateTime.now(),
+          );
+          _processLocation(loc, district);
+          return;
+        }
+      }
+
+      _showError("Koordinat tidak ditemukan untuk lokasi ini.");
     } catch (e) {
-      // Common error: IO Exception (Network) or No location found
-      String msg = "Gagal mendapatkan lokasi.";
+      String msg = "Gagal mendapatkan lokasi: $e";
       if (e.toString().contains("IO_ERROR") ||
           e.toString().contains("network")) {
         msg = "Periksa koneksi internet Anda.";
@@ -175,12 +181,34 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
     }
   }
 
+  void _processLocation(Location loc, Map<String, dynamic> district) {
+    if (mounted) {
+      context.read<PrayerTimeBloc>().add(
+            PrayerTimeEvent.locationChanged(
+              _selectedProvince?['name'] ?? '',
+              _selectedCity?['name'] ?? '',
+              district['name'],
+              loc.latitude,
+              loc.longitude,
+            ),
+          );
+      Navigator.pop(context);
+    }
+  }
+
+  // Error state
+  String? _errorMessage;
+
   void _showError(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(message),
-      backgroundColor: Colors.red,
-      behavior: SnackBarBehavior.floating,
-    ));
+    setState(() {
+      _errorMessage = message;
+    });
+    // Auto clear after 3 seconds
+    Future.delayed(const Duration(seconds: 4), () {
+      if (mounted) {
+        setState(() => _errorMessage = null);
+      }
+    });
   }
 
   @override
@@ -249,6 +277,35 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
                 fillColor: Colors.grey.shade100,
               ),
             ),
+
+            // Inline Error Message
+            if (_errorMessage != null) ...[
+              const SizedBox(height: 8),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.red.shade50,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.red.shade200),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.error_outline,
+                        color: Colors.red, size: 20),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        _errorMessage!,
+                        style:
+                            TextStyle(color: Colors.red.shade800, fontSize: 13),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+
             const SizedBox(height: 12),
 
             // Content

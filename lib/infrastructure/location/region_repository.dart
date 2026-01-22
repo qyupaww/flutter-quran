@@ -30,4 +30,33 @@ class RegionRepository {
       return [];
     }
   }
+
+  Future<Map<String, double>?> getCoordinates(String address) async {
+    try {
+      // Using OpenStreetMap Nominatim API
+      final url = 'https://nominatim.openstreetmap.org/search';
+      final response = await _dio.get(
+        url,
+        queryParameters: {
+          'q': address,
+          'format': 'json',
+          'limit': 1,
+        },
+        options: Options(headers: {
+          'User-Agent': 'FlutterQuranApp/1.0', // Required by Nominatim policy
+        }),
+      );
+
+      if (response.data is List && (response.data as List).isNotEmpty) {
+        final first = response.data[0];
+        return {
+          'lat': double.parse(first['lat']),
+          'long': double.parse(first['lon']),
+        };
+      }
+      return null;
+    } catch (e) {
+      return null; // Fail silently, let caller handle
+    }
+  }
 }

@@ -30,9 +30,13 @@ class PrayerTimeCard extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
+                        final bloc = context.read<PrayerTimeBloc>();
                         showDialog(
                           context: context,
-                          builder: (context) => const LocationPickerDialog(),
+                          builder: (_) => BlocProvider.value(
+                            value: bloc,
+                            child: const LocationPickerDialog(),
+                          ),
                         );
                       },
                       child: Container(
