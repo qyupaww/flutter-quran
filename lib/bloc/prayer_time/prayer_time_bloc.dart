@@ -153,10 +153,26 @@ class PrayerTimeBloc extends Bloc<PrayerTimeEvent, PrayerTimeState> {
       nextNameStr = _mapPrayerName(next);
       nextTimeStr = DateFormat('HH:mm a').format(nextTime);
     } else {
-      // All prayers done for today
-      if (next == Prayer.none) {
-        // Logic for next day can be added here
+      // All prayers done for today -> Get tomorrow's Fajr
+      final tomorrow = now.add(const Duration(days: 1));
+
+      // Re-calculate parameters for tomorrow
+      final tomorrowPrayerTimes = PrayerTimes(
+        coordinates,
+        DateComponents.from(tomorrow),
+        params,
+      );
+
+      final nextDayFajr = tomorrowPrayerTimes.fajr;
+      final diff = nextDayFajr.difference(now);
+      if (!diff.isNegative) {
+        hLeft = diff.inHours.toString().padLeft(2, '0');
+        mLeft = (diff.inMinutes % 60).toString().padLeft(2, '0');
+        sLeft = (diff.inSeconds % 60).toString().padLeft(2, '0');
       }
+
+      nextNameStr = "Subuh";
+      nextTimeStr = DateFormat('HH:mm a').format(nextDayFajr);
     }
 
     emit(state.copyWith(
