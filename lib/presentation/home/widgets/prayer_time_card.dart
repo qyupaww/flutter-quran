@@ -97,61 +97,25 @@ class PrayerTimeCard extends StatelessWidget {
                 const SizedBox(height: 16),
 
                 // FOOTER
-                Row(
-                  children: [
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Icon(Icons.schedule,
-                              color: MyTheme.color.secondary, size: 18),
-                          const SizedBox(width: 8),
-                          Text(
-                              state.nextPrayerTime.isEmpty ||
-                                      state.nextPrayerTime == "-"
-                                  ? "-"
-                                  : state.nextPrayerTime
-                                      .split(" ")[0], // Just H:M
-                              style: TextStyle(
-                                  color: MyTheme.color.white, fontSize: 14)),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 6),
-                            child: Text("•",
-                                style: TextStyle(color: MyTheme.color.white)),
-                          ),
-                          Expanded(
-                            child: Text(
-                              state.locationName.split(",").last, // Show City
-                              style: TextStyle(
-                                  color: MyTheme.color.white, fontSize: 14),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                            ),
-                          ),
-                        ],
+                GestureDetector(
+                  onTap: () {},
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "LIHAT JADWAL SHOLAT",
+                        style: TextStyle(
+                          color: MyTheme.color.secondary,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 8),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "LIHAT JADWAL",
-                            style: TextStyle(
-                              color: MyTheme.color.secondary,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                            ),
-                          ),
-                          const SizedBox(width: 4),
-                          Icon(Icons.arrow_forward,
-                              color: MyTheme.color.secondary, size: 18),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                      const SizedBox(width: 4),
+                      Icon(Icons.arrow_forward,
+                          color: MyTheme.color.secondary, size: 18),
+                    ],
+                  ),
+                )
               ],
             ),
           ),
