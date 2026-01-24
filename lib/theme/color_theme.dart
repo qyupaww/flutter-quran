@@ -28,4 +28,5 @@ class PColor {
   Color orange = const Color(0xffE8A01D);
   Color limeGreen = const Color(0xff4BAC87);
   Color brown = const Color(0xff66460D);
+  Color greyDark = const Color(0xff4B4B4B);
 }
