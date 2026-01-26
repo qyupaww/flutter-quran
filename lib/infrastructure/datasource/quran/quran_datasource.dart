@@ -24,7 +24,7 @@ class QuranDatasource {
     );
   }
 
-  Future<BaseResponse<SurahDetailDtoV2>> getSurahDetail(int number) async {
+  Future<BaseResponse<SurahDetailDto>> getSurahDetail(int number) async {
     final response = await _client.get('/surah/$number');
     dynamic data = response.data;
     if (data is String) {
@@ -33,7 +33,7 @@ class QuranDatasource {
     return BaseResponse.fromJson(
       data,
       ResponseCode.fromCode(response.statusCode ?? 0),
-      (data) => SurahDetailDtoV2.fromJson(data),
+      (data) => SurahDetailDto.fromJson(data),
     );
   }
 }

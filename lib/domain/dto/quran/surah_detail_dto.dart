@@ -6,18 +6,18 @@ part 'surah_detail_dto.freezed.dart';
 part 'surah_detail_dto.g.dart';
 
 @freezed
-class SurahDetailDtoV2 with _$SurahDetailDtoV2 {
-  const SurahDetailDtoV2._();
-  const factory SurahDetailDtoV2({
+class SurahDetailDto with _$SurahDetailDto {
+  const SurahDetailDto._();
+  const factory SurahDetailDto({
     required int number,
     required int numberOfVerses,
     required SurahNameObjDto name,
     required SurahRevelationDto revelation,
     required List<VerseDto> verses,
-  }) = _SurahDetailDtoV2;
+  }) = _SurahDetailDto;
 
-  factory SurahDetailDtoV2.fromJson(Map<String, dynamic> json) =>
-      _$SurahDetailDtoV2FromJson(json);
+  factory SurahDetailDto.fromJson(Map<String, dynamic> json) =>
+      _$SurahDetailDtoFromJson(json);
 
   SurahDetailEntity toEntity() {
     return SurahDetailEntity(

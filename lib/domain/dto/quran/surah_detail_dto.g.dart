@@ -6,8 +6,8 @@ part of 'surah_detail_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_SurahDetailDtoV2 _$SurahDetailDtoV2FromJson(Map<String, dynamic> json) =>
-    _SurahDetailDtoV2(
+_SurahDetailDto _$SurahDetailDtoFromJson(Map<String, dynamic> json) =>
+    _SurahDetailDto(
       number: (json['number'] as num).toInt(),
       numberOfVerses: (json['numberOfVerses'] as num).toInt(),
       name: SurahNameObjDto.fromJson(json['name'] as Map<String, dynamic>),
@@ -18,7 +18,7 @@ _SurahDetailDtoV2 _$SurahDetailDtoV2FromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$SurahDetailDtoV2ToJson(_SurahDetailDtoV2 instance) =>
+Map<String, dynamic> _$SurahDetailDtoToJson(_SurahDetailDto instance) =>
     <String, dynamic>{
       'number': instance.number,
       'numberOfVerses': instance.numberOfVerses,

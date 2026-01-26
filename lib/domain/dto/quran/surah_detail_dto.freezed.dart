@@ -15,21 +15,9 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SurahDetailDto {
   int get number;
-  String get name;
-  SurahNameDto
-      get nameTransliteration; // 'name' in entity, 'name' object in API logic usually mismatch. Let's check typical struct.
-// Wait, typical structure for this API:
-/*
-      number: 1,
-      name: "سورة الفاتحة",
-      name: { short: "...", transliteration: { en: "..." } } -- Wait, the previous API analysis for list might be slightly different.
-    */
-// Let's rely on the previous SurahDto structure if possible or standard gading.dev structure.
-// Based on previous SurahDto, it might be flat or nested.
-// I will use a robust structure.
-  String get revelation;
   int get numberOfVerses;
-  SurahNameDto get nameDto; // Mapped from 'name' key in JSON which is object
+  SurahNameObjDto get name;
+  SurahRevelationDto get revelation;
   List<VerseDto> get verses;
 
   /// Create a copy of SurahDetailDto
@@ -40,37 +28,31 @@ mixin _$SurahDetailDto {
       _$SurahDetailDtoCopyWithImpl<SurahDetailDto>(
           this as SurahDetailDto, _$identity);
 
+  /// Serializes this SurahDetailDto to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is SurahDetailDto &&
             (identical(other.number, number) || other.number == number) &&
-            (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality()
-                .equals(other.nameTransliteration, nameTransliteration) &&
-            (identical(other.revelation, revelation) ||
-                other.revelation == revelation) &&
             (identical(other.numberOfVerses, numberOfVerses) ||
                 other.numberOfVerses == numberOfVerses) &&
-            const DeepCollectionEquality().equals(other.nameDto, nameDto) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.revelation, revelation) ||
+                other.revelation == revelation) &&
             const DeepCollectionEquality().equals(other.verses, verses));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      number,
-      name,
-      const DeepCollectionEquality().hash(nameTransliteration),
-      revelation,
-      numberOfVerses,
-      const DeepCollectionEquality().hash(nameDto),
-      const DeepCollectionEquality().hash(verses));
+  int get hashCode => Object.hash(runtimeType, number, numberOfVerses, name,
+      revelation, const DeepCollectionEquality().hash(verses));
 
   @override
   String toString() {
-    return 'SurahDetailDto(number: $number, name: $name, nameTransliteration: $nameTransliteration, revelation: $revelation, numberOfVerses: $numberOfVerses, nameDto: $nameDto, verses: $verses)';
+    return 'SurahDetailDto(number: $number, numberOfVerses: $numberOfVerses, name: $name, revelation: $revelation, verses: $verses)';
   }
 }
 
@@ -82,12 +64,13 @@ abstract mixin class $SurahDetailDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {int number,
-      String name,
-      SurahNameDto nameTransliteration,
-      String revelation,
       int numberOfVerses,
-      SurahNameDto nameDto,
+      SurahNameObjDto name,
+      SurahRevelationDto revelation,
       List<VerseDto> verses});
+
+  $SurahNameObjDtoCopyWith<$Res> get name;
+  $SurahRevelationDtoCopyWith<$Res> get revelation;
 }
 
 /// @nodoc
@@ -104,11 +87,9 @@ class _$SurahDetailDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? number = null,
-    Object? name = null,
-    Object? nameTransliteration = freezed,
-    Object? revelation = null,
     Object? numberOfVerses = null,
-    Object? nameDto = freezed,
+    Object? name = null,
+    Object? revelation = null,
     Object? verses = null,
   }) {
     return _then(_self.copyWith(
@@ -116,31 +97,43 @@ class _$SurahDetailDtoCopyWithImpl<$Res>
           ? _self.number
           : number // ignore: cast_nullable_to_non_nullable
               as int,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      nameTransliteration: freezed == nameTransliteration
-          ? _self.nameTransliteration
-          : nameTransliteration // ignore: cast_nullable_to_non_nullable
-              as SurahNameDto,
-      revelation: null == revelation
-          ? _self.revelation
-          : revelation // ignore: cast_nullable_to_non_nullable
-              as String,
       numberOfVerses: null == numberOfVerses
           ? _self.numberOfVerses
           : numberOfVerses // ignore: cast_nullable_to_non_nullable
               as int,
-      nameDto: freezed == nameDto
-          ? _self.nameDto
-          : nameDto // ignore: cast_nullable_to_non_nullable
-              as SurahNameDto,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as SurahNameObjDto,
+      revelation: null == revelation
+          ? _self.revelation
+          : revelation // ignore: cast_nullable_to_non_nullable
+              as SurahRevelationDto,
       verses: null == verses
           ? _self.verses
           : verses // ignore: cast_nullable_to_non_nullable
               as List<VerseDto>,
     ));
+  }
+
+  /// Create a copy of SurahDetailDto
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $SurahNameObjDtoCopyWith<$Res> get name {
+    return $SurahNameObjDtoCopyWith<$Res>(_self.name, (value) {
+      return _then(_self.copyWith(name: value));
+    });
+  }
+
+  /// Create a copy of SurahDetailDto
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $SurahRevelationDtoCopyWith<$Res> get revelation {
+    return $SurahRevelationDtoCopyWith<$Res>(_self.revelation, (value) {
+      return _then(_self.copyWith(revelation: value));
+    });
   }
 }
 
@@ -237,493 +230,6 @@ extension SurahDetailDtoPatterns on SurahDetailDto {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            int number,
-            String name,
-            SurahNameDto nameTransliteration,
-            String revelation,
-            int numberOfVerses,
-            SurahNameDto nameDto,
-            List<VerseDto> verses)?
-        $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _SurahDetailDto() when $default != null:
-        return $default(
-            _that.number,
-            _that.name,
-            _that.nameTransliteration,
-            _that.revelation,
-            _that.numberOfVerses,
-            _that.nameDto,
-            _that.verses);
-      case _:
-        return orElse();
-    }
-  }
-
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// As opposed to `map`, this offers destructuring.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case Subclass2(:final field2):
-  ///     return ...;
-  /// }
-  /// ```
-
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(
-            int number,
-            String name,
-            SurahNameDto nameTransliteration,
-            String revelation,
-            int numberOfVerses,
-            SurahNameDto nameDto,
-            List<VerseDto> verses)
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _SurahDetailDto():
-        return $default(
-            _that.number,
-            _that.name,
-            _that.nameTransliteration,
-            _that.revelation,
-            _that.numberOfVerses,
-            _that.nameDto,
-            _that.verses);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
-
-  /// A variant of `when` that fallback to returning `null`
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
-
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(
-            int number,
-            String name,
-            SurahNameDto nameTransliteration,
-            String revelation,
-            int numberOfVerses,
-            SurahNameDto nameDto,
-            List<VerseDto> verses)?
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _SurahDetailDto() when $default != null:
-        return $default(
-            _that.number,
-            _that.name,
-            _that.nameTransliteration,
-            _that.revelation,
-            _that.numberOfVerses,
-            _that.nameDto,
-            _that.verses);
-      case _:
-        return null;
-    }
-  }
-}
-
-/// @nodoc
-
-class _SurahDetailDto extends SurahDetailDto {
-  const _SurahDetailDto(
-      {required this.number,
-      required this.name,
-      required this.nameTransliteration,
-      required this.revelation,
-      required this.numberOfVerses,
-      required this.nameDto,
-      required final List<VerseDto> verses})
-      : _verses = verses,
-        super._();
-
-  @override
-  final int number;
-  @override
-  final String name;
-  @override
-  final SurahNameDto nameTransliteration;
-// 'name' in entity, 'name' object in API logic usually mismatch. Let's check typical struct.
-// Wait, typical structure for this API:
-/*
-      number: 1,
-      name: "سورة الفاتحة",
-      name: { short: "...", transliteration: { en: "..." } } -- Wait, the previous API analysis for list might be slightly different.
-    */
-// Let's rely on the previous SurahDto structure if possible or standard gading.dev structure.
-// Based on previous SurahDto, it might be flat or nested.
-// I will use a robust structure.
-  @override
-  final String revelation;
-  @override
-  final int numberOfVerses;
-  @override
-  final SurahNameDto nameDto;
-// Mapped from 'name' key in JSON which is object
-  final List<VerseDto> _verses;
-// Mapped from 'name' key in JSON which is object
-  @override
-  List<VerseDto> get verses {
-    if (_verses is EqualUnmodifiableListView) return _verses;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_verses);
-  }
-
-  /// Create a copy of SurahDetailDto
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$SurahDetailDtoCopyWith<_SurahDetailDto> get copyWith =>
-      __$SurahDetailDtoCopyWithImpl<_SurahDetailDto>(this, _$identity);
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _SurahDetailDto &&
-            (identical(other.number, number) || other.number == number) &&
-            (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality()
-                .equals(other.nameTransliteration, nameTransliteration) &&
-            (identical(other.revelation, revelation) ||
-                other.revelation == revelation) &&
-            (identical(other.numberOfVerses, numberOfVerses) ||
-                other.numberOfVerses == numberOfVerses) &&
-            const DeepCollectionEquality().equals(other.nameDto, nameDto) &&
-            const DeepCollectionEquality().equals(other._verses, _verses));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      number,
-      name,
-      const DeepCollectionEquality().hash(nameTransliteration),
-      revelation,
-      numberOfVerses,
-      const DeepCollectionEquality().hash(nameDto),
-      const DeepCollectionEquality().hash(_verses));
-
-  @override
-  String toString() {
-    return 'SurahDetailDto(number: $number, name: $name, nameTransliteration: $nameTransliteration, revelation: $revelation, numberOfVerses: $numberOfVerses, nameDto: $nameDto, verses: $verses)';
-  }
-}
-
-/// @nodoc
-abstract mixin class _$SurahDetailDtoCopyWith<$Res>
-    implements $SurahDetailDtoCopyWith<$Res> {
-  factory _$SurahDetailDtoCopyWith(
-          _SurahDetailDto value, $Res Function(_SurahDetailDto) _then) =
-      __$SurahDetailDtoCopyWithImpl;
-  @override
-  @useResult
-  $Res call(
-      {int number,
-      String name,
-      SurahNameDto nameTransliteration,
-      String revelation,
-      int numberOfVerses,
-      SurahNameDto nameDto,
-      List<VerseDto> verses});
-}
-
-/// @nodoc
-class __$SurahDetailDtoCopyWithImpl<$Res>
-    implements _$SurahDetailDtoCopyWith<$Res> {
-  __$SurahDetailDtoCopyWithImpl(this._self, this._then);
-
-  final _SurahDetailDto _self;
-  final $Res Function(_SurahDetailDto) _then;
-
-  /// Create a copy of SurahDetailDto
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? number = null,
-    Object? name = null,
-    Object? nameTransliteration = freezed,
-    Object? revelation = null,
-    Object? numberOfVerses = null,
-    Object? nameDto = freezed,
-    Object? verses = null,
-  }) {
-    return _then(_SurahDetailDto(
-      number: null == number
-          ? _self.number
-          : number // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      nameTransliteration: freezed == nameTransliteration
-          ? _self.nameTransliteration
-          : nameTransliteration // ignore: cast_nullable_to_non_nullable
-              as SurahNameDto,
-      revelation: null == revelation
-          ? _self.revelation
-          : revelation // ignore: cast_nullable_to_non_nullable
-              as String,
-      numberOfVerses: null == numberOfVerses
-          ? _self.numberOfVerses
-          : numberOfVerses // ignore: cast_nullable_to_non_nullable
-              as int,
-      nameDto: freezed == nameDto
-          ? _self.nameDto
-          : nameDto // ignore: cast_nullable_to_non_nullable
-              as SurahNameDto,
-      verses: null == verses
-          ? _self._verses
-          : verses // ignore: cast_nullable_to_non_nullable
-              as List<VerseDto>,
-    ));
-  }
-}
-
-/// @nodoc
-mixin _$SurahDetailDtoV2 {
-  int get number;
-  int get numberOfVerses;
-  SurahNameObjDto get name;
-  SurahRevelationDto get revelation;
-  List<VerseDto> get verses;
-
-  /// Create a copy of SurahDetailDtoV2
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $SurahDetailDtoV2CopyWith<SurahDetailDtoV2> get copyWith =>
-      _$SurahDetailDtoV2CopyWithImpl<SurahDetailDtoV2>(
-          this as SurahDetailDtoV2, _$identity);
-
-  /// Serializes this SurahDetailDtoV2 to a JSON map.
-  Map<String, dynamic> toJson();
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is SurahDetailDtoV2 &&
-            (identical(other.number, number) || other.number == number) &&
-            (identical(other.numberOfVerses, numberOfVerses) ||
-                other.numberOfVerses == numberOfVerses) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.revelation, revelation) ||
-                other.revelation == revelation) &&
-            const DeepCollectionEquality().equals(other.verses, verses));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, number, numberOfVerses, name,
-      revelation, const DeepCollectionEquality().hash(verses));
-
-  @override
-  String toString() {
-    return 'SurahDetailDtoV2(number: $number, numberOfVerses: $numberOfVerses, name: $name, revelation: $revelation, verses: $verses)';
-  }
-}
-
-/// @nodoc
-abstract mixin class $SurahDetailDtoV2CopyWith<$Res> {
-  factory $SurahDetailDtoV2CopyWith(
-          SurahDetailDtoV2 value, $Res Function(SurahDetailDtoV2) _then) =
-      _$SurahDetailDtoV2CopyWithImpl;
-  @useResult
-  $Res call(
-      {int number,
-      int numberOfVerses,
-      SurahNameObjDto name,
-      SurahRevelationDto revelation,
-      List<VerseDto> verses});
-
-  $SurahNameObjDtoCopyWith<$Res> get name;
-  $SurahRevelationDtoCopyWith<$Res> get revelation;
-}
-
-/// @nodoc
-class _$SurahDetailDtoV2CopyWithImpl<$Res>
-    implements $SurahDetailDtoV2CopyWith<$Res> {
-  _$SurahDetailDtoV2CopyWithImpl(this._self, this._then);
-
-  final SurahDetailDtoV2 _self;
-  final $Res Function(SurahDetailDtoV2) _then;
-
-  /// Create a copy of SurahDetailDtoV2
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? number = null,
-    Object? numberOfVerses = null,
-    Object? name = null,
-    Object? revelation = null,
-    Object? verses = null,
-  }) {
-    return _then(_self.copyWith(
-      number: null == number
-          ? _self.number
-          : number // ignore: cast_nullable_to_non_nullable
-              as int,
-      numberOfVerses: null == numberOfVerses
-          ? _self.numberOfVerses
-          : numberOfVerses // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as SurahNameObjDto,
-      revelation: null == revelation
-          ? _self.revelation
-          : revelation // ignore: cast_nullable_to_non_nullable
-              as SurahRevelationDto,
-      verses: null == verses
-          ? _self.verses
-          : verses // ignore: cast_nullable_to_non_nullable
-              as List<VerseDto>,
-    ));
-  }
-
-  /// Create a copy of SurahDetailDtoV2
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $SurahNameObjDtoCopyWith<$Res> get name {
-    return $SurahNameObjDtoCopyWith<$Res>(_self.name, (value) {
-      return _then(_self.copyWith(name: value));
-    });
-  }
-
-  /// Create a copy of SurahDetailDtoV2
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $SurahRevelationDtoCopyWith<$Res> get revelation {
-    return $SurahRevelationDtoCopyWith<$Res>(_self.revelation, (value) {
-      return _then(_self.copyWith(revelation: value));
-    });
-  }
-}
-
-/// Adds pattern-matching-related methods to [SurahDetailDtoV2].
-extension SurahDetailDtoV2Patterns on SurahDetailDtoV2 {
-  /// A variant of `map` that fallback to returning `orElse`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
-
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_SurahDetailDtoV2 value)? $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _SurahDetailDtoV2() when $default != null:
-        return $default(_that);
-      case _:
-        return orElse();
-    }
-  }
-
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// Callbacks receives the raw object, upcasted.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case final Subclass2 value:
-  ///     return ...;
-  /// }
-  /// ```
-
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_SurahDetailDtoV2 value) $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _SurahDetailDtoV2():
-        return $default(_that);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
-
-  /// A variant of `map` that fallback to returning `null`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
-
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_SurahDetailDtoV2 value)? $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _SurahDetailDtoV2() when $default != null:
-        return $default(_that);
-      case _:
-        return null;
-    }
-  }
-
-  /// A variant of `when` that fallback to an `orElse` callback.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
-
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
     TResult Function(int number, int numberOfVerses, SurahNameObjDto name,
             SurahRevelationDto revelation, List<VerseDto> verses)?
         $default, {
@@ -731,7 +237,7 @@ extension SurahDetailDtoV2Patterns on SurahDetailDtoV2 {
   }) {
     final _that = this;
     switch (_that) {
-      case _SurahDetailDtoV2() when $default != null:
+      case _SurahDetailDto() when $default != null:
         return $default(_that.number, _that.numberOfVerses, _that.name,
             _that.revelation, _that.verses);
       case _:
@@ -760,7 +266,7 @@ extension SurahDetailDtoV2Patterns on SurahDetailDtoV2 {
   ) {
     final _that = this;
     switch (_that) {
-      case _SurahDetailDtoV2():
+      case _SurahDetailDto():
         return $default(_that.number, _that.numberOfVerses, _that.name,
             _that.revelation, _that.verses);
       case _:
@@ -788,7 +294,7 @@ extension SurahDetailDtoV2Patterns on SurahDetailDtoV2 {
   ) {
     final _that = this;
     switch (_that) {
-      case _SurahDetailDtoV2() when $default != null:
+      case _SurahDetailDto() when $default != null:
         return $default(_that.number, _that.numberOfVerses, _that.name,
             _that.revelation, _that.verses);
       case _:
@@ -799,8 +305,8 @@ extension SurahDetailDtoV2Patterns on SurahDetailDtoV2 {
 
 /// @nodoc
 @JsonSerializable()
-class _SurahDetailDtoV2 extends SurahDetailDtoV2 {
-  const _SurahDetailDtoV2(
+class _SurahDetailDto extends SurahDetailDto {
+  const _SurahDetailDto(
       {required this.number,
       required this.numberOfVerses,
       required this.name,
@@ -808,8 +314,8 @@ class _SurahDetailDtoV2 extends SurahDetailDtoV2 {
       required final List<VerseDto> verses})
       : _verses = verses,
         super._();
-  factory _SurahDetailDtoV2.fromJson(Map<String, dynamic> json) =>
-      _$SurahDetailDtoV2FromJson(json);
+  factory _SurahDetailDto.fromJson(Map<String, dynamic> json) =>
+      _$SurahDetailDtoFromJson(json);
 
   @override
   final int number;
@@ -827,17 +333,17 @@ class _SurahDetailDtoV2 extends SurahDetailDtoV2 {
     return EqualUnmodifiableListView(_verses);
   }
 
-  /// Create a copy of SurahDetailDtoV2
+  /// Create a copy of SurahDetailDto
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$SurahDetailDtoV2CopyWith<_SurahDetailDtoV2> get copyWith =>
-      __$SurahDetailDtoV2CopyWithImpl<_SurahDetailDtoV2>(this, _$identity);
+  _$SurahDetailDtoCopyWith<_SurahDetailDto> get copyWith =>
+      __$SurahDetailDtoCopyWithImpl<_SurahDetailDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$SurahDetailDtoV2ToJson(
+    return _$SurahDetailDtoToJson(
       this,
     );
   }
@@ -846,7 +352,7 @@ class _SurahDetailDtoV2 extends SurahDetailDtoV2 {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _SurahDetailDtoV2 &&
+            other is _SurahDetailDto &&
             (identical(other.number, number) || other.number == number) &&
             (identical(other.numberOfVerses, numberOfVerses) ||
                 other.numberOfVerses == numberOfVerses) &&
@@ -863,16 +369,16 @@ class _SurahDetailDtoV2 extends SurahDetailDtoV2 {
 
   @override
   String toString() {
-    return 'SurahDetailDtoV2(number: $number, numberOfVerses: $numberOfVerses, name: $name, revelation: $revelation, verses: $verses)';
+    return 'SurahDetailDto(number: $number, numberOfVerses: $numberOfVerses, name: $name, revelation: $revelation, verses: $verses)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$SurahDetailDtoV2CopyWith<$Res>
-    implements $SurahDetailDtoV2CopyWith<$Res> {
-  factory _$SurahDetailDtoV2CopyWith(
-          _SurahDetailDtoV2 value, $Res Function(_SurahDetailDtoV2) _then) =
-      __$SurahDetailDtoV2CopyWithImpl;
+abstract mixin class _$SurahDetailDtoCopyWith<$Res>
+    implements $SurahDetailDtoCopyWith<$Res> {
+  factory _$SurahDetailDtoCopyWith(
+          _SurahDetailDto value, $Res Function(_SurahDetailDto) _then) =
+      __$SurahDetailDtoCopyWithImpl;
   @override
   @useResult
   $Res call(
@@ -889,14 +395,14 @@ abstract mixin class _$SurahDetailDtoV2CopyWith<$Res>
 }
 
 /// @nodoc
-class __$SurahDetailDtoV2CopyWithImpl<$Res>
-    implements _$SurahDetailDtoV2CopyWith<$Res> {
-  __$SurahDetailDtoV2CopyWithImpl(this._self, this._then);
+class __$SurahDetailDtoCopyWithImpl<$Res>
+    implements _$SurahDetailDtoCopyWith<$Res> {
+  __$SurahDetailDtoCopyWithImpl(this._self, this._then);
 
-  final _SurahDetailDtoV2 _self;
-  final $Res Function(_SurahDetailDtoV2) _then;
+  final _SurahDetailDto _self;
+  final $Res Function(_SurahDetailDto) _then;
 
-  /// Create a copy of SurahDetailDtoV2
+  /// Create a copy of SurahDetailDto
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -907,7 +413,7 @@ class __$SurahDetailDtoV2CopyWithImpl<$Res>
     Object? revelation = null,
     Object? verses = null,
   }) {
-    return _then(_SurahDetailDtoV2(
+    return _then(_SurahDetailDto(
       number: null == number
           ? _self.number
           : number // ignore: cast_nullable_to_non_nullable
@@ -931,7 +437,7 @@ class __$SurahDetailDtoV2CopyWithImpl<$Res>
     ));
   }
 
-  /// Create a copy of SurahDetailDtoV2
+  /// Create a copy of SurahDetailDto
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -941,7 +447,7 @@ class __$SurahDetailDtoV2CopyWithImpl<$Res>
     });
   }
 
-  /// Create a copy of SurahDetailDtoV2
+  /// Create a copy of SurahDetailDto
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
