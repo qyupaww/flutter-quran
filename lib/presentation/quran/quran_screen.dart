@@ -65,7 +65,6 @@ class _QuranScreenState extends State<QuranScreen>
                         ),
                         const SizedBox(height: 12),
                         const LastReadCard(),
-                        const SizedBox(height: 24),
                       ],
                     ),
                   ),

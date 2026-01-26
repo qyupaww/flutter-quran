@@ -9,7 +9,7 @@ class LastReadCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 140, // Fixed height for consistency
+      height: 180, // Fixed height for consistency
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         gradient: LinearGradient(
@@ -51,11 +51,10 @@ class LastReadCard extends StatelessWidget {
                   children: [
                     const Row(
                       children: [
-                        Icon(Icons.menu_book,
-                            color: Colors.white, size: 16),
+                        Icon(Icons.menu_book, color: Colors.white, size: 16),
                         SizedBox(width: 8),
                         Text(
-                          "Continue Reading",
+                          "Lanjutkan Membaca",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 12,
@@ -97,7 +96,7 @@ class LastReadCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: const Text(
-                      "Continue",
+                      "Lanjut",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 12,
