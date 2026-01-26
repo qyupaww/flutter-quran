@@ -52,7 +52,7 @@ class _QuranScreenState extends State<QuranScreen>
                       children: [
                         // Header / Search
                         const QuranSearchBar(),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 12),
 
                         // Last Read
                         Text(
@@ -82,8 +82,7 @@ class _QuranScreenState extends State<QuranScreen>
                       tabs: const [
                         Tab(text: "Surah"),
                         Tab(text: "Juz"), // Placeholder
-                        Tab(text: "Penanda"), // Placeholder
-                        Tab(text: "Daftar Putar"), // Placeholder
+                        Tab(text: "Penanda"), // Placeholder // Placeholder
                       ],
                     ),
                   ),
@@ -126,9 +125,6 @@ class _QuranScreenState extends State<QuranScreen>
 
                 // 3. BOOKMARKS
                 const Center(child: Text("Fitur Penanda Segera Hadir")),
-
-                // 4. PLAYLISTS
-                const Center(child: Text("Fitur Daftar Putar Segera Hadir")),
               ],
             ),
           ),
