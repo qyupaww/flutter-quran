@@ -16,10 +16,9 @@ class QuranSearchBar extends StatelessWidget {
       child: TextField(
         decoration: InputDecoration(
           icon: Icon(Icons.search, color: Colors.grey[400]),
-          hintText: "Search Surah by name or number...",
+          hintText: "Cari Surah...",
           hintStyle: TextStyle(color: Colors.grey[400], fontSize: 14),
           border: InputBorder.none,
-          suffixIcon: Icon(Icons.tune, color: Colors.grey[400], size: 20),
         ),
         style: TextStyle(color: context.blackWhiteColor),
       ),

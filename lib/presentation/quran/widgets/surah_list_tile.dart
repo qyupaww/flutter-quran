@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_quran/extension/extensions.dart';
 import 'package:flutter_quran/domain/entities/quran/surah_entity.dart';
 import 'package:flutter_quran/extension/app_color_extension.dart';
 import 'package:flutter_quran/theme/theme.dart';
@@ -33,10 +33,10 @@ class SurahListTile extends StatelessWidget {
                 ),
                 Text(
                   "${surah.number}",
-                  style: const TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      color: context.isDark ? Colors.white : Colors.white),
                 ),
               ],
             ),

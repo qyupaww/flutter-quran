@@ -56,7 +56,7 @@ class _QuranScreenState extends State<QuranScreen>
 
                         // Last Read
                         Text(
-                          "Last Read",
+                          "Bacaan Terakhir",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -83,8 +83,7 @@ class _QuranScreenState extends State<QuranScreen>
                       tabs: const [
                         Tab(text: "Surah"),
                         Tab(text: "Juz"), // Placeholder
-                        Tab(text: "Bookmarks"), // Placeholder
-                        Tab(text: "Playlists"), // Placeholder
+                        Tab(text: "Bookmarks"), // Placeholder // Placeholder
                       ],
                     ),
                   ),
