@@ -55,11 +55,11 @@ class SurahListTile extends StatelessWidget {
                       color: context.blackWhiteColor,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 8),
                   Row(
                     children: [
                       Text(
-                        surah.revelationType.toUpperCase() == 'MECCAN'
+                        surah.revelationType.toUpperCase().contains('MECCAN')
                             ? 'MAKKIYAH'
                             : 'MADANIYAH',
                         style: TextStyle(
@@ -87,15 +87,29 @@ class SurahListTile extends StatelessWidget {
               ),
             ),
 
-            // Arabic Name
-            Text(
-              surah.name, // Usually Arabic script
-              style: TextStyle(
-                color: MyTheme.color.primary,
-                fontSize: 20,
-                fontFamily: 'Amiri', // Assuming font is setup or will fallback
-                fontWeight: FontWeight.bold,
-              ),
+            // Arabic Name & Translation
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  surah.name, // Arabic script
+                  style: TextStyle(
+                    color: MyTheme.color.primary,
+                    fontSize: 20,
+                    fontFamily: 'Amiri',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  surah.nameTranslation, // Meaning
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey[500],
+                  ),
+                ),
+              ],
             ),
           ],
         ),
