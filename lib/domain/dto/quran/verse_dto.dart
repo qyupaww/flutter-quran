@@ -5,7 +5,7 @@ part 'verse_dto.freezed.dart';
 part 'verse_dto.g.dart';
 
 @freezed
-class VerseDto with _$VerseDto {
+abstract class VerseDto with _$VerseDto {
   const VerseDto._();
   const factory VerseDto({
     required VerseNumberDto number,
@@ -27,7 +27,7 @@ class VerseDto with _$VerseDto {
 }
 
 @freezed
-class VerseNumberDto with _$VerseNumberDto {
+abstract class VerseNumberDto with _$VerseNumberDto {
   const factory VerseNumberDto({
     required int inQuran,
     required int inSurah,
@@ -38,7 +38,7 @@ class VerseNumberDto with _$VerseNumberDto {
 }
 
 @freezed
-class VerseTextDto with _$VerseTextDto {
+abstract class VerseTextDto with _$VerseTextDto {
   const factory VerseTextDto({
     required String arab,
     required VerseTransliterationDto transliteration,
@@ -49,7 +49,7 @@ class VerseTextDto with _$VerseTextDto {
 }
 
 @freezed
-class VerseTransliterationDto with _$VerseTransliterationDto {
+abstract class VerseTransliterationDto with _$VerseTransliterationDto {
   const factory VerseTransliterationDto({
     required String en,
   }) = _VerseTransliterationDto;
@@ -59,7 +59,7 @@ class VerseTransliterationDto with _$VerseTransliterationDto {
 }
 
 @freezed
-class VerseTranslationDto with _$VerseTranslationDto {
+abstract class VerseTranslationDto with _$VerseTranslationDto {
   const factory VerseTranslationDto({
     required String id,
   }) = _VerseTranslationDto;

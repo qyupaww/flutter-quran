@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_quran/core/networks/error_handler.dart';
+import 'package:flutter_quran/domain/entities/quran/surah_detail_entity.dart';
 import 'package:flutter_quran/domain/entities/quran/surah_entity.dart';
 import 'package:flutter_quran/domain/repositories/quran/quran_repository.dart';
 import 'package:flutter_quran/infrastructure/datasource/quran/quran_datasource.dart';

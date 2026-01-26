@@ -4,7 +4,7 @@ import 'package:flutter_quran/domain/entities/quran/verse_entity.dart';
 part 'surah_detail_entity.freezed.dart';
 
 @freezed
-class SurahDetailEntity with _$SurahDetailEntity {
+abstract class SurahDetailEntity with _$SurahDetailEntity {
   const factory SurahDetailEntity({
     required int number,
     required String name,

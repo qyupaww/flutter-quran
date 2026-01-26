@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'verse_entity.freezed.dart';
 
 @freezed
-class VerseEntity with _$VerseEntity {
+abstract class VerseEntity with _$VerseEntity {
   const factory VerseEntity({
     required int numberInSurah,
     required String textArab,

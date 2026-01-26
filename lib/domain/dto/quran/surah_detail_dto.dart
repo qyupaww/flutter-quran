@@ -6,7 +6,7 @@ part 'surah_detail_dto.freezed.dart';
 part 'surah_detail_dto.g.dart';
 
 @freezed
-class SurahDetailDto with _$SurahDetailDto {
+abstract class SurahDetailDto with _$SurahDetailDto {
   const SurahDetailDto._();
   const factory SurahDetailDto({
     required int number,
@@ -34,7 +34,7 @@ class SurahDetailDto with _$SurahDetailDto {
 }
 
 @freezed
-class SurahNameObjDto with _$SurahNameObjDto {
+abstract class SurahNameObjDto with _$SurahNameObjDto {
   const factory SurahNameObjDto({
     required String short,
     required String long,
@@ -47,7 +47,7 @@ class SurahNameObjDto with _$SurahNameObjDto {
 }
 
 @freezed
-class SurahTransliterationDto with _$SurahTransliterationDto {
+abstract class SurahTransliterationDto with _$SurahTransliterationDto {
   const factory SurahTransliterationDto({
     required String en,
     required String id,
@@ -58,7 +58,7 @@ class SurahTransliterationDto with _$SurahTransliterationDto {
 }
 
 @freezed
-class SurahTranslationDto with _$SurahTranslationDto {
+abstract class SurahTranslationDto with _$SurahTranslationDto {
   const factory SurahTranslationDto({
     required String en,
     required String id,
@@ -69,7 +69,7 @@ class SurahTranslationDto with _$SurahTranslationDto {
 }
 
 @freezed
-class SurahRevelationDto with _$SurahRevelationDto {
+abstract class SurahRevelationDto with _$SurahRevelationDto {
   const factory SurahRevelationDto({
     required String arab,
     required String en,

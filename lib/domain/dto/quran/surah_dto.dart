@@ -5,7 +5,6 @@ part 'surah_dto.freezed.dart';
 part 'surah_dto.g.dart';
 
 @freezed
-@freezed
 abstract class SurahDto with _$SurahDto {
   const SurahDto._();
 
