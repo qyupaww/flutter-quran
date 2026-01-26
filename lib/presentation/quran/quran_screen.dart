@@ -108,7 +108,6 @@ class _QuranScreenState extends State<QuranScreen>
                         separatorBuilder: (context, index) => Divider(
                             color: Colors.grey.withAlpha(50), height: 1),
                         itemBuilder: (context, index) {
-                          // TODO: Implement Search Filtering if needed later
                           return SurahListTile(
                             surah: surahs[index],
                             onTap: () {

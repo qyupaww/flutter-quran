@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quran/bloc/quran/detail/surah_detail_bloc.dart';
-import 'package:flutter_quran/domain/entities/quran/surah_entity.dart';
 import 'package:flutter_quran/extension/app_color_extension.dart';
 import 'package:flutter_quran/injection/injector.dart';
 import 'package:flutter_quran/theme/theme.dart';
