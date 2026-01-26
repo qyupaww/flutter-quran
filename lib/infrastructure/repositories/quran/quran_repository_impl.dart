@@ -25,4 +25,20 @@ class QuranRepositoryImpl implements QuranRepository {
           statusCode: ResponseCode.defaultError, message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, SurahDetailEntity>> getSurahDetail(int number) async {
+    try {
+      final response = await _datasource.getSurahDetail(number);
+      if (response.responseCode == ResponseCode.success) {
+        return Right(response.data.toEntity());
+      } else {
+        return Left(Failure(
+            statusCode: response.responseCode, message: response.message));
+      }
+    } catch (e) {
+      return Left(Failure(
+          statusCode: ResponseCode.defaultError, message: e.toString()));
+    }
+  }
 }

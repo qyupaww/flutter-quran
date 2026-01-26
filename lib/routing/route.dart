@@ -23,6 +23,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: QiblaRoute.page),
         AutoRoute(page: CalendarRoute.page),
         AutoRoute(page: MapRoute.page),
+        AutoRoute(page: SurahDetailRoute.page),
       ];
   @override
   List<AutoRouteGuard> get guards => [];

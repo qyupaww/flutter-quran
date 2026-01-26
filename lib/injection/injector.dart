@@ -8,6 +8,7 @@ import 'package:flutter_quran/infrastructure/datasource/quran/quran_datasource.d
 import 'package:flutter_quran/domain/repositories/quran/quran_repository.dart';
 import 'package:flutter_quran/infrastructure/repositories/quran/quran_repository_impl.dart';
 import 'package:flutter_quran/bloc/quran/quran_bloc.dart';
+import 'package:flutter_quran/bloc/quran/detail/surah_detail_bloc.dart';
 import 'package:flutter_quran/routing/route.dart';
 
 GetIt inject = GetIt.instance;
@@ -53,4 +54,5 @@ Future<void> setupInjector() async {
   );
 
   inject.registerFactory(() => QuranBloc(inject<QuranRepository>()));
+  inject.registerFactory(() => SurahDetailBloc(inject<QuranRepository>()));
 }

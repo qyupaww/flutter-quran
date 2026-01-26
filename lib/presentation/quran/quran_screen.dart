@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_quran/routing/route.gr.dart';
 import 'package:flutter_quran/bloc/quran/quran_bloc.dart';
 import 'package:flutter_quran/extension/app_color_extension.dart';
 import 'package:flutter_quran/injection/injector.dart';
@@ -111,7 +112,10 @@ class _QuranScreenState extends State<QuranScreen>
                           return SurahListTile(
                             surah: surahs[index],
                             onTap: () {
-                              // Navigate to Detail
+                              context.router.push(SurahDetailRoute(
+                                surahNumber: surahs[index].number,
+                                surahName: surahs[index].englishName,
+                              ));
                             },
                           );
                         },
