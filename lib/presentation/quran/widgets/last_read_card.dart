@@ -74,7 +74,7 @@ class LastReadCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      "Ayah 12",
+                      "Ayat 12",
                       style: TextStyle(
                         color: Colors.white.withAlpha(200),
                         fontSize: 12,

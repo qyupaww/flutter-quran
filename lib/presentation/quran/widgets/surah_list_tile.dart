@@ -59,7 +59,9 @@ class SurahListTile extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        surah.revelationType.toUpperCase(),
+                        surah.revelationType.toUpperCase() == 'MECCAN'
+                            ? 'MAKKIYAH'
+                            : 'MADANIYAH',
                         style: TextStyle(
                           fontSize: 10,
                           color: Colors.grey[500],
@@ -72,7 +74,7 @@ class SurahListTile extends StatelessWidget {
                             size: 4, color: Colors.grey[400]),
                       ),
                       Text(
-                        "${surah.numberOfAyahs} Verses",
+                        "${surah.numberOfAyahs} Ayat",
                         style: TextStyle(
                           fontSize: 10,
                           color: Colors.grey[500],

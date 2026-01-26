@@ -56,7 +56,7 @@ class _QuranScreenState extends State<QuranScreen>
 
                         // Last Read
                         Text(
-                          "Bacaan Terakhir",
+                          "Terakhir Dibaca",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -82,7 +82,8 @@ class _QuranScreenState extends State<QuranScreen>
                       tabs: const [
                         Tab(text: "Surah"),
                         Tab(text: "Juz"), // Placeholder
-                        Tab(text: "Bookmarks"), // Placeholder // Placeholder
+                        Tab(text: "Penanda"), // Placeholder
+                        Tab(text: "Daftar Putar"), // Placeholder
                       ],
                     ),
                   ),
@@ -121,13 +122,13 @@ class _QuranScreenState extends State<QuranScreen>
                 ),
 
                 // 2. JUZ (Placeholder)
-                const Center(child: Text("Juz Feature Coming Soon")),
+                const Center(child: Text("Fitur Juz Segera Hadir")),
 
                 // 3. BOOKMARKS
-                const Center(child: Text("Bookmarks Feature Coming Soon")),
+                const Center(child: Text("Fitur Penanda Segera Hadir")),
 
                 // 4. PLAYLISTS
-                const Center(child: Text("Playlists Feature Coming Soon")),
+                const Center(child: Text("Fitur Daftar Putar Segera Hadir")),
               ],
             ),
           ),
