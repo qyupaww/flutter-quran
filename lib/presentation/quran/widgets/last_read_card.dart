@@ -51,8 +51,8 @@ class LastReadCard extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.menu_book, color: Colors.white, size: 16),
-                        SizedBox(width: 8),
+                        const Icon(Icons.menu_book, color: Colors.white, size: 16),
+                        const SizedBox(width: 8),
                         Text(
                           "Lanjutkan Membaca",
                           style: MyTheme.style.text12.copyWith(
