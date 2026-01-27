@@ -105,6 +105,19 @@ class SurahDetailScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
 
+                        // Transliteration
+                        Text(
+                          verse.textTransliteration,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: MyTheme.color.primary,
+                            fontStyle: FontStyle.italic,
+                            height: 1.5,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+
                         // Translation
                         Text(
                           verse.translationId, // Indonesian Translation
