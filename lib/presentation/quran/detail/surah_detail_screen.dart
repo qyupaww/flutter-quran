@@ -67,9 +67,8 @@ class SurahDetailScreen extends StatelessWidget {
                                 backgroundColor: MyTheme.color.primary,
                                 child: Text(
                                   "${verse.numberInSurah}",
-                                  style: const TextStyle(
+                                  style: MyTheme.style.text12.copyWith(
                                     color: Colors.white,
-                                    fontSize: 12,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -95,9 +94,7 @@ class SurahDetailScreen extends StatelessWidget {
                         Text(
                           verse.textArab,
                           textAlign: TextAlign.right,
-                          style: TextStyle(
-                            fontFamily: 'Amiri',
-                            fontSize: 28,
+                          style: MyTheme.style.arabicText.copyWith(
                             height: 2.2,
                             color: context.blackWhiteColor,
                             fontWeight: FontWeight.bold,
@@ -109,8 +106,7 @@ class SurahDetailScreen extends StatelessWidget {
                         Text(
                           verse.textTransliteration,
                           textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 16,
+                          style: MyTheme.style.text16.copyWith(
                             color: MyTheme.color.primary,
                             fontStyle: FontStyle.italic,
                             height: 1.5,
@@ -122,8 +118,7 @@ class SurahDetailScreen extends StatelessWidget {
                         Text(
                           verse.translationId, // Indonesian Translation
                           textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 14,
+                          style: MyTheme.style.text14.copyWith(
                             color: context.isDark
                                 ? Colors.grey[300]
                                 : Colors.grey[700],
