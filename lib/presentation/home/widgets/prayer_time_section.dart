@@ -24,9 +24,8 @@ class PrayerTimeSection extends StatelessWidget {
         children: [
           Text(
             text,
-            style: TextStyle(
+            style: MyTheme.style.text12.copyWith(
               color: context.blackWhiteColor,
-              fontSize: 12,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -39,9 +38,8 @@ class PrayerTimeSection extends StatelessWidget {
           const SizedBox(height: 2),
           Text(
             time,
-            style: TextStyle(
+            style: MyTheme.style.text12.copyWith(
               color: context.blackWhiteColor,
-              fontSize: 12,
               fontWeight: FontWeight.w500,
             ),
           ),

@@ -33,7 +33,7 @@ class SurahListTile extends StatelessWidget {
                 ),
                 Text(
                   "${surah.number}",
-                  style: TextStyle(
+                  style: MyTheme.style.text12.copyWith(
                       fontSize: 10,
                       fontWeight: FontWeight.bold,
                       color: context.isDark ? Colors.white : Colors.white),
@@ -49,8 +49,7 @@ class SurahListTile extends StatelessWidget {
                 children: [
                   Text(
                     surah.englishName,
-                    style: TextStyle(
-                      fontSize: 16,
+                    style: MyTheme.style.text16.copyWith(
                       fontWeight: FontWeight.bold,
                       color: context.blackWhiteColor,
                     ),
@@ -62,7 +61,7 @@ class SurahListTile extends StatelessWidget {
                         surah.revelationType.toUpperCase().contains('MECCAN')
                             ? 'MAKKIYAH'
                             : 'MADANIYAH',
-                        style: TextStyle(
+                        style: MyTheme.style.text12.copyWith(
                           fontSize: 10,
                           color: Colors.grey[500],
                           fontWeight: FontWeight.bold,
@@ -75,7 +74,7 @@ class SurahListTile extends StatelessWidget {
                       ),
                       Text(
                         "${surah.numberOfAyahs} Ayat",
-                        style: TextStyle(
+                        style: MyTheme.style.text12.copyWith(
                           fontSize: 10,
                           color: Colors.grey[500],
                           fontWeight: FontWeight.bold,
@@ -94,17 +93,15 @@ class SurahListTile extends StatelessWidget {
               children: [
                 Text(
                   surah.name, // Arabic script
-                  style: TextStyle(
+                  style: MyTheme.style.arabicText.copyWith(
                     color: MyTheme.color.primary,
                     fontSize: 20,
-                    fontFamily: 'Amiri',
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   surah.nameTranslation, // Meaning
-                  style: TextStyle(
-                    fontSize: 12,
+                  style: MyTheme.style.text12.copyWith(
                     fontWeight: FontWeight.w500,
                     color: Colors.grey[500],
                   ),

@@ -17,10 +17,10 @@ class QuranSearchBar extends StatelessWidget {
         decoration: InputDecoration(
           icon: Icon(Icons.search, color: Colors.grey[400]),
           hintText: "Cari Surah berdasarkan nama atau nomor...",
-          hintStyle: TextStyle(color: Colors.grey[400], fontSize: 14),
+          hintStyle: MyTheme.style.text14.copyWith(color: Colors.grey[400]),
           border: InputBorder.none,
         ),
-        style: TextStyle(color: context.blackWhiteColor),
+        style: MyTheme.style.text14.copyWith(color: context.blackWhiteColor),
       ),
     );
   }

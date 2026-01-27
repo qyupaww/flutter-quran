@@ -58,8 +58,7 @@ class _QuranScreenState extends State<QuranScreen>
                         // Last Read
                         Text(
                           "Terakhir Dibaca",
-                          style: TextStyle(
-                            fontSize: 18,
+                          style: MyTheme.style.text18.copyWith(
                             fontWeight: FontWeight.bold,
                             color: context.blackWhiteColor,
                           ),
@@ -78,8 +77,8 @@ class _QuranScreenState extends State<QuranScreen>
                       unselectedLabelColor: Colors.grey,
                       indicatorColor: MyTheme.color.primary,
                       indicatorWeight: 3,
-                      labelStyle: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16),
+                      labelStyle: MyTheme.style.text16
+                          .copyWith(fontWeight: FontWeight.bold),
                       tabs: const [
                         Tab(text: "Surah"),
                         Tab(text: "Juz"), // Placeholder

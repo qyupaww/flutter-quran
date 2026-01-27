@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quran/bloc/prayer_time/prayer_time_bloc.dart';
 import 'package:flutter_quran/infrastructure/location/region_repository.dart';
+import 'package:flutter_quran/theme/theme.dart';
 import 'package:geocoding/geocoding.dart';
 
 class LocationPickerDialog extends StatefulWidget {
@@ -248,8 +249,8 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
                         : _step == 1
                             ? "Pilih Kota/Kab"
                             : "Pilih Kecamatan",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18),
+                    style: MyTheme.style.text18
+                        .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),
                 IconButton(
@@ -297,8 +298,8 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
                     Expanded(
                       child: Text(
                         _errorMessage!,
-                        style:
-                            TextStyle(color: Colors.red.shade800, fontSize: 13),
+                        style: MyTheme.style.text12
+                            .copyWith(color: Colors.red.shade800, fontSize: 13),
                       ),
                     ),
                   ],

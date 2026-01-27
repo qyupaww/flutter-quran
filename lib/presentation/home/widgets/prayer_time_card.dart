@@ -55,9 +55,8 @@ class PrayerTimeCard extends StatelessWidget {
                       children: [
                         Text(
                           "WAKTU SHOLAT SELANJUTNYA",
-                          style: TextStyle(
+                          style: MyTheme.style.text12.copyWith(
                             color: MyTheme.color.secondary,
-                            fontSize: 12,
                             fontWeight: FontWeight.bold,
                             letterSpacing: 1.2,
                           ),
@@ -66,7 +65,7 @@ class PrayerTimeCard extends StatelessWidget {
                           state.nextPrayerName.isEmpty
                               ? "-"
                               : state.nextPrayerName,
-                          style: TextStyle(
+                          style: MyTheme.style.subtitle.copyWith(
                             color: MyTheme.color.white,
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
@@ -104,10 +103,9 @@ class PrayerTimeCard extends StatelessWidget {
                     children: [
                       Text(
                         "LIHAT JADWAL SHOLAT",
-                        style: TextStyle(
+                        style: MyTheme.style.text14.copyWith(
                           color: MyTheme.color.secondary,
                           fontWeight: FontWeight.bold,
-                          fontSize: 14,
                         ),
                       ),
                       const SizedBox(width: 4),
@@ -137,7 +135,7 @@ class PrayerTimeCard extends StatelessWidget {
           child: Center(
             child: Text(
               value,
-              style: TextStyle(
+              style: MyTheme.style.subtitle.copyWith(
                 color: MyTheme.color.white,
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
@@ -149,7 +147,7 @@ class PrayerTimeCard extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           label,
-          style: TextStyle(
+          style: MyTheme.style.text12.copyWith(
             color: MyTheme.color.secondary,
             fontSize: 10,
             fontWeight: FontWeight.bold,
@@ -170,7 +168,7 @@ class PrayerTimeCard extends StatelessWidget {
         children: [
           Text(
             ":",
-            style: TextStyle(
+            style: MyTheme.style.text18.copyWith(
               color: MyTheme.color.secondary,
               fontSize: 24,
               fontWeight: FontWeight.bold,

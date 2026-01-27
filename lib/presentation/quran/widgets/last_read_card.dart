@@ -49,24 +49,23 @@ class LastReadCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Row(
+                    Row(
                       children: [
                         Icon(Icons.menu_book, color: Colors.white, size: 16),
                         SizedBox(width: 8),
                         Text(
                           "Lanjutkan Membaca",
-                          style: TextStyle(
+                          style: MyTheme.style.text12.copyWith(
                             color: Colors.white,
-                            fontSize: 12,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 12),
-                    const Text(
+                    Text(
                       "Surah Al-Mulk", // Placeholder for now
-                      style: TextStyle(
+                      style: MyTheme.style.text18.copyWith(
                         color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -75,9 +74,9 @@ class LastReadCard extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       "Ayat 12",
-                      style: TextStyle(
-                        color: Colors.white.withAlpha(200),
-                        fontSize: 12,
+                      style: MyTheme.style.text12.copyWith(
+                        color: Colors.white.withValues(
+                            alpha: 0.8), // using withValues 0.8 approx 200/255
                       ),
                     ),
                   ],
@@ -95,11 +94,10 @@ class LastReadCard extends StatelessWidget {
                       color: Colors.black.withAlpha(40),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Text(
+                    child: Text(
                       "Lanjut",
-                      style: TextStyle(
+                      style: MyTheme.style.text12.copyWith(
                         color: Colors.white,
-                        fontSize: 12,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

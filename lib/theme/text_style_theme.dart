@@ -33,22 +33,22 @@ class Style {
   );
 
   TextStyle text18 = GoogleFonts.poppins(
-    fontSize: AppSetting.setFontSize(18),
+    fontSize: AppSetting.setFontSize(54),
   );
 
   TextStyle text16 = GoogleFonts.poppins(
-    fontSize: AppSetting.setFontSize(16),
+    fontSize: AppSetting.setFontSize(48),
   );
 
   TextStyle text14 = GoogleFonts.poppins(
-    fontSize: AppSetting.setFontSize(14),
+    fontSize: AppSetting.setFontSize(42),
   );
 
   TextStyle text12 = GoogleFonts.poppins(
-    fontSize: AppSetting.setFontSize(12),
+    fontSize: AppSetting.setFontSize(36),
   );
 
   TextStyle arabicText = GoogleFonts.amiri(
-    fontSize: AppSetting.setFontSize(28),
+    fontSize: AppSetting.setFontSize(84),
   );
 }
