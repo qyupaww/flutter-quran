@@ -27,7 +27,10 @@ class SurahDetailScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             surahName,
-            style: MyTheme.style.title.copyWith(color: MyTheme.color.white),
+            style: MyTheme.style.title.copyWith(
+              color: MyTheme.color.white,
+              fontSize: 20,
+            ),
           ),
           backgroundColor: MyTheme.color.primary,
           iconTheme: IconThemeData(color: MyTheme.color.white),

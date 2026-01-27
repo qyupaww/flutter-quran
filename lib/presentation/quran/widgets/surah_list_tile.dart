@@ -34,7 +34,6 @@ class SurahListTile extends StatelessWidget {
                 Text(
                   "${surah.number}",
                   style: MyTheme.style.text12.copyWith(
-                      fontSize: 10,
                       fontWeight: FontWeight.bold,
                       color: context.isDark ? Colors.white : Colors.white),
                 ),
@@ -53,16 +52,18 @@ class SurahListTile extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: context.blackWhiteColor,
                     ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                   const SizedBox(height: 8),
-                  Row(
+                  Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       Text(
                         surah.revelationType.toUpperCase().contains('MECCAN')
                             ? 'MAKKIYAH'
                             : 'MADANIYAH',
                         style: MyTheme.style.text12.copyWith(
-                          fontSize: 10,
                           color: Colors.grey[500],
                           fontWeight: FontWeight.bold,
                         ),
@@ -75,7 +76,6 @@ class SurahListTile extends StatelessWidget {
                       Text(
                         "${surah.numberOfAyahs} Ayat",
                         style: MyTheme.style.text12.copyWith(
-                          fontSize: 10,
                           color: Colors.grey[500],
                           fontWeight: FontWeight.bold,
                         ),
@@ -85,28 +85,33 @@ class SurahListTile extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(width: 8),
 
             // Arabic Name & Translation
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  surah.name, // Arabic script
-                  style: MyTheme.style.arabicText.copyWith(
-                    color: MyTheme.color.primary,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+            Flexible(
+              flex: 0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min, // shrink wrap
+                children: [
+                  Text(
+                    surah.name, // Arabic script
+                    style: MyTheme.style.arabicText.copyWith(
+                      color: MyTheme.color.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  surah.nameTranslation, // Meaning
-                  style: MyTheme.style.text12.copyWith(
-                    fontWeight: FontWeight.w500,
-                    color: Colors.grey[500],
+                  Text(
+                    surah.nameTranslation, // Meaning
+                    style: MyTheme.style.text12.copyWith(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey[500],
+                    ),
+                    textAlign: TextAlign.right,
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
