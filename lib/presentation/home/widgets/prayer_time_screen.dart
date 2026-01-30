@@ -142,6 +142,7 @@ class PrayerTimeScreen extends StatelessWidget {
                     color: MyTheme.color.secondary,
                   ),
                 ),
+                const SizedBox(height: 8),
               ],
             );
           },
