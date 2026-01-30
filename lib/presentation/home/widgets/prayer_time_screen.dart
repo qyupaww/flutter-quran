@@ -90,7 +90,7 @@ class PrayerTimeScreen extends StatelessWidget {
                   child: ListView.separated(
                     itemCount: state.monthlyPrayerTimes.length,
                     separatorBuilder: (context, index) =>
-                        const Divider(height: 1, thickness: 0.5),
+                        const Divider(height: 1, thickness: 0.3),
                     itemBuilder: (context, index) {
                       final item = state.monthlyPrayerTimes[index];
                       final isToday = item['date'] ==
