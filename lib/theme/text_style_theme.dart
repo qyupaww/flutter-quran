@@ -48,6 +48,10 @@ class Style {
     fontSize: AppSetting.setFontSize(36),
   );
 
+  TextStyle text10 = GoogleFonts.poppins(
+    fontSize: AppSetting.setFontSize(28),
+  );
+
   TextStyle arabicText = GoogleFonts.amiri(
     fontSize: AppSetting.setFontSize(84),
   );

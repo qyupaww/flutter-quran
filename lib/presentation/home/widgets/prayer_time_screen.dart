@@ -134,6 +134,14 @@ class PrayerTimeScreen extends StatelessWidget {
                     },
                   ),
                 ),
+                const SizedBox(height: 8),
+                Text(
+                  "Untuk memastikan keakuratan, silahkan verifikasi dengan masjid terdekat di wilayah anda",
+                  textAlign: TextAlign.center,
+                  style: MyTheme.style.text10.copyWith(
+                    color: MyTheme.color.secondary,
+                  ),
+                ),
               ],
             );
           },
