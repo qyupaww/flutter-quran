@@ -68,7 +68,7 @@ class PrayerTimeScreen extends StatelessWidget {
 
                 // Table Header
                 Container(
-                  color: MyTheme.color.primary.withOpacity(0.1),
+                  color: MyTheme.color.primary.withAlpha(15),
                   padding:
                       const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
                   child: Row(
@@ -97,7 +97,7 @@ class PrayerTimeScreen extends StatelessWidget {
 
                       return Container(
                         color: isToday
-                            ? MyTheme.color.primary.withOpacity(0.05)
+                            ? MyTheme.color.primary.withAlpha(30)
                             : Colors.transparent,
                         padding: const EdgeInsets.symmetric(
                             vertical: 12, horizontal: 8),
