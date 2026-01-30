@@ -9,28 +9,31 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i9;
-import 'package:flutter/material.dart' as _i10;
+import 'package:auto_route/auto_route.dart' as _i10;
+import 'package:flutter/material.dart' as _i11;
+import 'package:flutter_quran/bloc/prayer_time/prayer_time_bloc.dart' as _i12;
 import 'package:flutter_quran/presentation/calendar/calendar_screen.dart'
     as _i1;
 import 'package:flutter_quran/presentation/home/home_screen.dart' as _i2;
 import 'package:flutter_quran/presentation/home/home_tab_screen.dart' as _i3;
 import 'package:flutter_quran/presentation/maps/map_screen.dart' as _i4;
-import 'package:flutter_quran/presentation/qibla/qibla_screen.dart' as _i5;
+import 'package:flutter_quran/presentation/prayer_time/prayer_time_screen.dart'
+    as _i5;
+import 'package:flutter_quran/presentation/qibla/qibla_screen.dart' as _i6;
 import 'package:flutter_quran/presentation/quran/detail/surah_detail_screen.dart'
-    as _i8;
-import 'package:flutter_quran/presentation/quran/quran_screen.dart' as _i6;
-import 'package:flutter_quran/presentation/splash/splash_screen.dart' as _i7;
+    as _i9;
+import 'package:flutter_quran/presentation/quran/quran_screen.dart' as _i7;
+import 'package:flutter_quran/presentation/splash/splash_screen.dart' as _i8;
 
 /// generated route for
 /// [_i1.CalendarScreen]
-class CalendarRoute extends _i9.PageRouteInfo<void> {
-  const CalendarRoute({List<_i9.PageRouteInfo>? children})
+class CalendarRoute extends _i10.PageRouteInfo<void> {
+  const CalendarRoute({List<_i10.PageRouteInfo>? children})
       : super(CalendarRoute.name, initialChildren: children);
 
   static const String name = 'CalendarRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
       return const _i1.CalendarScreen();
@@ -40,13 +43,13 @@ class CalendarRoute extends _i9.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.HomeScreen]
-class HomeRoute extends _i9.PageRouteInfo<void> {
-  const HomeRoute({List<_i9.PageRouteInfo>? children})
+class HomeRoute extends _i10.PageRouteInfo<void> {
+  const HomeRoute({List<_i10.PageRouteInfo>? children})
       : super(HomeRoute.name, initialChildren: children);
 
   static const String name = 'HomeRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
       return const _i2.HomeScreen();
@@ -56,13 +59,13 @@ class HomeRoute extends _i9.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.HomeTabScreen]
-class HomeTabRoute extends _i9.PageRouteInfo<void> {
-  const HomeTabRoute({List<_i9.PageRouteInfo>? children})
+class HomeTabRoute extends _i10.PageRouteInfo<void> {
+  const HomeTabRoute({List<_i10.PageRouteInfo>? children})
       : super(HomeTabRoute.name, initialChildren: children);
 
   static const String name = 'HomeTabRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
       return const _i3.HomeTabScreen();
@@ -72,13 +75,13 @@ class HomeTabRoute extends _i9.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.MapScreen]
-class MapRoute extends _i9.PageRouteInfo<void> {
-  const MapRoute({List<_i9.PageRouteInfo>? children})
+class MapRoute extends _i10.PageRouteInfo<void> {
+  const MapRoute({List<_i10.PageRouteInfo>? children})
       : super(MapRoute.name, initialChildren: children);
 
   static const String name = 'MapRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
       return const _i4.MapScreen();
@@ -87,61 +90,108 @@ class MapRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.QiblaScreen]
-class QiblaRoute extends _i9.PageRouteInfo<void> {
-  const QiblaRoute({List<_i9.PageRouteInfo>? children})
+/// [_i5.PrayerTimeScreen]
+class PrayerTimeRoute extends _i10.PageRouteInfo<PrayerTimeRouteArgs> {
+  PrayerTimeRoute({
+    _i11.Key? key,
+    required _i12.PrayerTimeBloc bloc,
+    List<_i10.PageRouteInfo>? children,
+  }) : super(
+          PrayerTimeRoute.name,
+          args: PrayerTimeRouteArgs(key: key, bloc: bloc),
+          initialChildren: children,
+        );
+
+  static const String name = 'PrayerTimeRoute';
+
+  static _i10.PageInfo page = _i10.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<PrayerTimeRouteArgs>();
+      return _i5.PrayerTimeScreen(key: args.key, bloc: args.bloc);
+    },
+  );
+}
+
+class PrayerTimeRouteArgs {
+  const PrayerTimeRouteArgs({this.key, required this.bloc});
+
+  final _i11.Key? key;
+
+  final _i12.PrayerTimeBloc bloc;
+
+  @override
+  String toString() {
+    return 'PrayerTimeRouteArgs{key: $key, bloc: $bloc}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! PrayerTimeRouteArgs) return false;
+    return key == other.key && bloc == other.bloc;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ bloc.hashCode;
+}
+
+/// generated route for
+/// [_i6.QiblaScreen]
+class QiblaRoute extends _i10.PageRouteInfo<void> {
+  const QiblaRoute({List<_i10.PageRouteInfo>? children})
       : super(QiblaRoute.name, initialChildren: children);
 
   static const String name = 'QiblaRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
-      return const _i5.QiblaScreen();
+      return const _i6.QiblaScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i6.QuranScreen]
-class QuranRoute extends _i9.PageRouteInfo<void> {
-  const QuranRoute({List<_i9.PageRouteInfo>? children})
+/// [_i7.QuranScreen]
+class QuranRoute extends _i10.PageRouteInfo<void> {
+  const QuranRoute({List<_i10.PageRouteInfo>? children})
       : super(QuranRoute.name, initialChildren: children);
 
   static const String name = 'QuranRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
-      return const _i6.QuranScreen();
+      return const _i7.QuranScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i7.SplashScreen]
-class SplashRoute extends _i9.PageRouteInfo<void> {
-  const SplashRoute({List<_i9.PageRouteInfo>? children})
+/// [_i8.SplashScreen]
+class SplashRoute extends _i10.PageRouteInfo<void> {
+  const SplashRoute({List<_i10.PageRouteInfo>? children})
       : super(SplashRoute.name, initialChildren: children);
 
   static const String name = 'SplashRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
-      return const _i7.SplashScreen();
+      return const _i8.SplashScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i8.SurahDetailScreen]
-class SurahDetailRoute extends _i9.PageRouteInfo<SurahDetailRouteArgs> {
+/// [_i9.SurahDetailScreen]
+class SurahDetailRoute extends _i10.PageRouteInfo<SurahDetailRouteArgs> {
   SurahDetailRoute({
-    _i10.Key? key,
+    _i11.Key? key,
     required int surahNumber,
     required String surahName,
-    List<_i9.PageRouteInfo>? children,
+    List<_i10.PageRouteInfo>? children,
   }) : super(
           SurahDetailRoute.name,
           args: SurahDetailRouteArgs(
@@ -154,11 +204,11 @@ class SurahDetailRoute extends _i9.PageRouteInfo<SurahDetailRouteArgs> {
 
   static const String name = 'SurahDetailRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<SurahDetailRouteArgs>();
-      return _i8.SurahDetailScreen(
+      return _i9.SurahDetailScreen(
         key: args.key,
         surahNumber: args.surahNumber,
         surahName: args.surahName,
@@ -174,7 +224,7 @@ class SurahDetailRouteArgs {
     required this.surahName,
   });
 
-  final _i10.Key? key;
+  final _i11.Key? key;
 
   final int surahNumber;
 

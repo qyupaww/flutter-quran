@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quran/bloc/prayer_time/prayer_time_bloc.dart';
 import 'package:flutter_quran/presentation/home/widgets/location_picker_dialog.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter_quran/routing/route.gr.dart';
 import 'package:flutter_quran/theme/theme.dart';
 
 class PrayerTimeCard extends StatelessWidget {
@@ -97,7 +99,10 @@ class PrayerTimeCard extends StatelessWidget {
 
                 // FOOTER
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    context.router.push(
+                        PrayerTimeRoute(bloc: context.read<PrayerTimeBloc>()));
+                  },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

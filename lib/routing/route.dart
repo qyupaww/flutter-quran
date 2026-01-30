@@ -24,6 +24,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: CalendarRoute.page),
         AutoRoute(page: MapRoute.page),
         AutoRoute(page: SurahDetailRoute.page),
+        AutoRoute(page: PrayerTimeRoute.page),
       ];
   @override
   List<AutoRouteGuard> get guards => [];
