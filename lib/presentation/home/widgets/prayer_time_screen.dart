@@ -73,13 +73,13 @@ class PrayerTimeScreen extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
                   child: Row(
                     children: [
-                      Expanded(flex: 2, child: _buildHeader("Tanggal")),
-                      Expanded(child: _buildHeader("Imsak")),
-                      Expanded(child: _buildHeader("Subuh")),
-                      Expanded(child: _buildHeader("Dzuhur")),
-                      Expanded(child: _buildHeader("Ashar")),
-                      Expanded(child: _buildHeader("Maghrib")),
-                      Expanded(child: _buildHeader("Isya")),
+                      Expanded(flex: 3, child: _buildHeader("Tanggal")),
+                      Expanded(flex: 2, child: _buildHeader("Imsak")),
+                      Expanded(flex: 2, child: _buildHeader("Subuh")),
+                      Expanded(flex: 2, child: _buildHeader("Dzuhur")),
+                      Expanded(flex: 2, child: _buildHeader("Ashar")),
+                      Expanded(flex: 2, child: _buildHeader("Maghrib")),
+                      Expanded(flex: 2, child: _buildHeader("Isya")),
                     ],
                   ),
                 ),
@@ -104,22 +104,28 @@ class PrayerTimeScreen extends StatelessWidget {
                         child: Row(
                           children: [
                             Expanded(
-                                flex: 2,
+                                flex: 3,
                                 child: _buildCell(item['date'] ?? '', isToday)),
                             Expanded(
+                                flex: 2,
                                 child:
                                     _buildCell(item['imsak'] ?? '', isToday)),
                             Expanded(
+                                flex: 2,
                                 child: _buildCell(item['fajr'] ?? '', isToday)),
                             Expanded(
+                                flex: 2,
                                 child:
                                     _buildCell(item['dhuhr'] ?? '', isToday)),
                             Expanded(
+                                flex: 2,
                                 child: _buildCell(item['asr'] ?? '', isToday)),
                             Expanded(
+                                flex: 2,
                                 child:
                                     _buildCell(item['maghrib'] ?? '', isToday)),
                             Expanded(
+                                flex: 2,
                                 child: _buildCell(item['isha'] ?? '', isToday)),
                           ],
                         ),
