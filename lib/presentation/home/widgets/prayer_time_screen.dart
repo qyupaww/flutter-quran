@@ -20,7 +20,8 @@ class PrayerTimeScreen extends StatelessWidget {
           title: Text(
             "Jadwal Sholat Bulanan",
             style: MyTheme.style.title.copyWith(
-              fontSize: 20,
+              fontSize: 18,
+              fontWeight: FontWeight.w400,
               color: MyTheme.color.secondary,
             ),
           ),
@@ -55,7 +56,7 @@ class PrayerTimeScreen extends StatelessWidget {
                           ),
                           Text(
                             state.locationName,
-                            style: MyTheme.style.text16.copyWith(
+                            style: MyTheme.style.text12.copyWith(
                               fontWeight: FontWeight.bold,
                               color: MyTheme.color.secondary,
                             ),
