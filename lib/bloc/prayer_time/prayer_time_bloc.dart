@@ -206,6 +206,8 @@ class PrayerTimeBloc extends Bloc<PrayerTimeEvent, PrayerTimeState> {
 
       monthData.add({
         'date': DateFormat('d MMM yyyy').format(date),
+        'imsak': DateFormat('HH:mm')
+            .format(prayers.fajr.subtract(const Duration(minutes: 10))),
         'fajr': DateFormat('HH:mm').format(prayers.fajr),
         'dhuhr': DateFormat('HH:mm').format(prayers.dhuhr),
         'asr': DateFormat('HH:mm').format(prayers.asr),

@@ -74,6 +74,7 @@ class PrayerTimeScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       Expanded(flex: 2, child: _buildHeader("Tanggal")),
+                      Expanded(child: _buildHeader("Imsak")),
                       Expanded(child: _buildHeader("Subuh")),
                       Expanded(child: _buildHeader("Dzuhur")),
                       Expanded(child: _buildHeader("Ashar")),
@@ -105,6 +106,9 @@ class PrayerTimeScreen extends StatelessWidget {
                             Expanded(
                                 flex: 2,
                                 child: _buildCell(item['date'] ?? '', isToday)),
+                            Expanded(
+                                child:
+                                    _buildCell(item['imsak'] ?? '', isToday)),
                             Expanded(
                                 child: _buildCell(item['fajr'] ?? '', isToday)),
                             Expanded(
