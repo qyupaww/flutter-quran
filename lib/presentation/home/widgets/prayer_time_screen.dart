@@ -21,13 +21,13 @@ class PrayerTimeScreen extends StatelessWidget {
             "Jadwal Sholat Bulanan",
             style: MyTheme.style.title.copyWith(
               fontSize: 20,
-              color: MyTheme.color.primary,
+              color: MyTheme.color.secondary,
             ),
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: MyTheme.color.primary),
+            icon: Icon(Icons.arrow_back, color: MyTheme.color.secondary),
             onPressed: () => Navigator.pop(context),
           ),
         ),
@@ -57,7 +57,7 @@ class PrayerTimeScreen extends StatelessWidget {
                             state.locationName,
                             style: MyTheme.style.text16.copyWith(
                               fontWeight: FontWeight.bold,
-                              color: MyTheme.color.primary,
+                              color: MyTheme.color.secondary,
                             ),
                           ),
                         ],
@@ -68,7 +68,7 @@ class PrayerTimeScreen extends StatelessWidget {
 
                 // Table Header
                 Container(
-                  color: MyTheme.color.primary.withAlpha(15),
+                  color: MyTheme.color.secondary.withAlpha(15),
                   padding:
                       const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
                   child: Row(
@@ -97,7 +97,7 @@ class PrayerTimeScreen extends StatelessWidget {
 
                       return Container(
                         color: isToday
-                            ? MyTheme.color.primary.withAlpha(30)
+                            ? MyTheme.color.secondary.withAlpha(30)
                             : Colors.transparent,
                         padding: const EdgeInsets.symmetric(
                             vertical: 12, horizontal: 8),
@@ -147,7 +147,7 @@ class PrayerTimeScreen extends StatelessWidget {
       textAlign: TextAlign.center,
       style: MyTheme.style.text12.copyWith(
         fontWeight: FontWeight.bold,
-        color: MyTheme.color.primary,
+        color: MyTheme.color.secondary,
         fontSize: 11, // Smaller for table
       ),
     );
@@ -158,7 +158,7 @@ class PrayerTimeScreen extends StatelessWidget {
       text,
       textAlign: TextAlign.center,
       style: MyTheme.style.text12.copyWith(
-        color: highlight ? MyTheme.color.primary : const Color(0xFF666666),
+        color: highlight ? MyTheme.color.secondary : const Color(0xFF666666),
         fontWeight: highlight ? FontWeight.bold : FontWeight.normal,
         fontSize: 11,
       ),
