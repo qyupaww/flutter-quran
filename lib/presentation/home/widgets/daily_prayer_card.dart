@@ -28,7 +28,7 @@ class DailyPrayerCard extends StatelessWidget {
         children: [
           Icon(icon,
               color: context.isDark
-                  ? MyTheme.color.primary
+                  ? MyTheme.color.secondary
                   : MyTheme.color.secondary,
               size: 24),
           Text(
