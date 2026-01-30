@@ -17,13 +17,10 @@ class DailyPrayerCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.transparent,
+        color: context.isDark
+            ? MyTheme.color.white.withAlpha(15)
+            : MyTheme.color.white,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color:
-              context.isDark ? MyTheme.color.primary : MyTheme.color.secondary,
-          width: 2.0,
-        ),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
