@@ -15,5 +15,6 @@ abstract class PrayerTimeState with _$PrayerTimeState {
     @JsonKey(includeFromJson: false, includeToJson: false)
     dynamic prayerTimesData,
     @Default([]) List<Map<String, String>> dailyPrayers,
+    @Default([]) List<Map<String, dynamic>> monthlyPrayerTimes,
   }) = _PrayerTimeState;
 }

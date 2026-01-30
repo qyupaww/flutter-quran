@@ -184,7 +184,36 @@ class PrayerTimeBloc extends Bloc<PrayerTimeEvent, PrayerTimeState> {
       secondsLeft: sLeft,
       nextPrayerName: nextNameStr,
       nextPrayerTime: nextTimeStr,
+      monthlyPrayerTimes: _getMonthlyPrayerTimes(coordinates, params),
     ));
+  }
+
+  List<Map<String, dynamic>> _getMonthlyPrayerTimes(
+      Coordinates coordinates, CalculationParameters params) {
+    final now = DateTime.now();
+    final firstDay = DateTime(now.year, now.month, 1);
+    final daysInMonth = DateTime(now.year, now.month + 1, 0).day;
+
+    List<Map<String, dynamic>> monthData = [];
+
+    for (int i = 0; i < daysInMonth; i++) {
+      final date = firstDay.add(Duration(days: i));
+      final prayers = PrayerTimes(
+        coordinates,
+        DateComponents.from(date),
+        params,
+      );
+
+      monthData.add({
+        'date': DateFormat('d MMM yyyy').format(date),
+        'fajr': DateFormat('HH:mm').format(prayers.fajr),
+        'dhuhr': DateFormat('HH:mm').format(prayers.dhuhr),
+        'asr': DateFormat('HH:mm').format(prayers.asr),
+        'maghrib': DateFormat('HH:mm').format(prayers.maghrib),
+        'isha': DateFormat('HH:mm').format(prayers.isha),
+      });
+    }
+    return monthData;
   }
 
   String _mapPrayerName(Prayer p) {

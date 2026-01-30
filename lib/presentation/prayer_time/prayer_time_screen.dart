@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quran/bloc/prayer_time/prayer_time_bloc.dart';
 import 'package:flutter_quran/theme/theme.dart';
-import 'package:flutter_quran/extension/extensions.dart';
+import 'package:intl/intl.dart';
 
 @RoutePage()
 class PrayerTimeScreen extends StatelessWidget {
@@ -18,9 +18,9 @@ class PrayerTimeScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            "Jadwal Sholat",
+            "Jadwal Sholat Bulanan",
             style: MyTheme.style.title.copyWith(
-              fontSize: 24,
+              fontSize: 20,
               color: MyTheme.color.primary,
             ),
           ),
@@ -37,93 +37,92 @@ class PrayerTimeScreen extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             }
 
-            return ListView(
-              padding: const EdgeInsets.all(16),
+            return Column(
               children: [
-                // Location info
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: MyTheme.color.primary.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
+                // Header Info
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Icon(Icons.location_on, color: MyTheme.color.primary),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          state.locationName,
-                          style: MyTheme.style.text16.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: MyTheme.color.primary,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            "Jadwal sholat untuk wilayah",
+                            style: MyTheme.style.text12
+                                .copyWith(color: Colors.grey),
                           ),
-                        ),
+                          Text(
+                            state.locationName,
+                            style: MyTheme.style.text16.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: MyTheme.color.primary,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 24),
 
-                // Prayer List
-                ...state.dailyPrayers.map((prayer) {
-                  final isNext = prayer['name'] == state.nextPrayerName;
+                // Table Header
+                Container(
+                  color: MyTheme.color.primary.withOpacity(0.1),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                  child: Row(
+                    children: [
+                      Expanded(flex: 2, child: _buildHeader("Tanggal")),
+                      Expanded(child: _buildHeader("Subuh")),
+                      Expanded(child: _buildHeader("Dzuhur")),
+                      Expanded(child: _buildHeader("Ashar")),
+                      Expanded(child: _buildHeader("Maghrib")),
+                      Expanded(child: _buildHeader("Isya")),
+                    ],
+                  ),
+                ),
 
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 12),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16, horizontal: 20),
-                    decoration: BoxDecoration(
-                      color: isNext ? MyTheme.color.primary : Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color:
-                            isNext ? Colors.transparent : Colors.grey.shade200,
-                      ),
-                      boxShadow: isNext
-                          ? [
-                              BoxShadow(
-                                color: MyTheme.color.primary.withOpacity(0.3),
-                                blurRadius: 10,
-                                offset: const Offset(0, 4),
-                              )
-                            ]
-                          : null,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
+                // List Data
+                Expanded(
+                  child: ListView.separated(
+                    itemCount: state.monthlyPrayerTimes.length,
+                    separatorBuilder: (context, index) =>
+                        const Divider(height: 1, thickness: 0.5),
+                    itemBuilder: (context, index) {
+                      final item = state.monthlyPrayerTimes[index];
+                      final isToday = item['date'] ==
+                          DateFormat('d MMM yyyy').format(DateTime.now());
+
+                      return Container(
+                        color: isToday
+                            ? MyTheme.color.primary.withOpacity(0.05)
+                            : Colors.transparent,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 12, horizontal: 8),
+                        child: Row(
                           children: [
-                            Icon(
-                              _getIcon(prayer['icon']),
-                              color: isNext ? Colors.white : Colors.grey,
-                            ),
-                            const SizedBox(width: 16),
-                            Text(
-                              prayer['name'] ?? '',
-                              style: MyTheme.style.text16.copyWith(
-                                fontWeight:
-                                    isNext ? FontWeight.bold : FontWeight.w500,
-                                color: isNext
-                                    ? Colors.white
-                                    : context.blackWhiteColor,
-                              ),
-                            ),
+                            Expanded(
+                                flex: 2,
+                                child: _buildCell(item['date'] ?? '', isToday)),
+                            Expanded(
+                                child: _buildCell(item['fajr'] ?? '', isToday)),
+                            Expanded(
+                                child:
+                                    _buildCell(item['dhuhr'] ?? '', isToday)),
+                            Expanded(
+                                child: _buildCell(item['asr'] ?? '', isToday)),
+                            Expanded(
+                                child:
+                                    _buildCell(item['maghrib'] ?? '', isToday)),
+                            Expanded(
+                                child: _buildCell(item['isha'] ?? '', isToday)),
                           ],
                         ),
-                        Text(
-                          prayer['time'] ?? '',
-                          style: MyTheme.style.text18.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color:
-                                isNext ? Colors.white : context.blackWhiteColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }).toList(),
+                      );
+                    },
+                  ),
+                ),
               ],
             );
           },
@@ -132,20 +131,27 @@ class PrayerTimeScreen extends StatelessWidget {
     );
   }
 
-  IconData _getIcon(String? iconName) {
-    switch (iconName) {
-      case 'cloud_outlined':
-        return Icons.cloud_outlined;
-      case 'wb_sunny_outlined':
-        return Icons.wb_sunny_outlined;
-      case 'wb_sunny':
-        return Icons.wb_sunny;
-      case 'wb_twilight_outlined':
-        return Icons.wb_twilight_outlined;
-      case 'nightlight_round':
-        return Icons.nightlight_round;
-      default:
-        return Icons.access_time;
-    }
+  Widget _buildHeader(String text) {
+    return Text(
+      text,
+      textAlign: TextAlign.center,
+      style: MyTheme.style.text12.copyWith(
+        fontWeight: FontWeight.bold,
+        color: MyTheme.color.primary,
+        fontSize: 11, // Smaller for table
+      ),
+    );
+  }
+
+  Widget _buildCell(String text, bool highlight) {
+    return Text(
+      text,
+      textAlign: TextAlign.center,
+      style: MyTheme.style.text12.copyWith(
+        color: highlight ? MyTheme.color.primary : const Color(0xFF666666),
+        fontWeight: highlight ? FontWeight.bold : FontWeight.normal,
+        fontSize: 11,
+      ),
+    );
   }
 }
