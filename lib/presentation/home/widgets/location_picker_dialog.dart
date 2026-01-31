@@ -350,7 +350,7 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
                             trailing: Icon(
                               Icons.chevron_right,
                               size: 20,
-                              color: const Color(0xFF4BAC87), // Green arrow
+                              color: MyTheme.color.primary, // Green arrow
                             ),
                             onTap: () {
                               if (_step == 0) {
