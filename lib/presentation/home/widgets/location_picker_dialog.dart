@@ -5,6 +5,8 @@ import 'package:flutter_quran/infrastructure/location/region_repository.dart';
 import 'package:flutter_quran/theme/theme.dart';
 import 'package:geocoding/geocoding.dart';
 
+import '../../../extension/app_color_extension.dart';
+
 class LocationPickerDialog extends StatefulWidget {
   const LocationPickerDialog({super.key});
 
@@ -264,7 +266,7 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
                     style: MyTheme.style.title.copyWith(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: const Color(0xFF4A6572),
+                      color: context.blackWhiteColor,
                     ),
                   ),
                 ),
@@ -288,7 +290,7 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
-                fillColor: const Color(0xFFF5F6F8),
+                fillColor: context.blackWhiteColor,
               ),
             ),
           ),
