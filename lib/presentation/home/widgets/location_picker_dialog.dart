@@ -325,7 +325,7 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
           ),
 
           const SizedBox(height: 16),
-          const Divider(height: 1),
+          const Divider(height: 1, color: Colors.grey),
 
           // Content List
           Expanded(
