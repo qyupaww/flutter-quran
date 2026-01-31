@@ -250,8 +250,8 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(right: 12),
-                      child:
-                          Icon(Icons.arrow_back, color: MyTheme.color.primary),
+                      child: Icon(Icons.arrow_back,
+                          color: MyTheme.color.secondary),
                     ),
                   ),
                 Expanded(
@@ -280,7 +280,7 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: "Cari...",
-                prefixIcon: Icon(Icons.search, color: MyTheme.color.primary),
+                prefixIcon: Icon(Icons.search, color: MyTheme.color.secondary),
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                 border: OutlineInputBorder(
@@ -311,7 +311,7 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
               child: Row(
                 children: [
                   Icon(Icons.my_location,
-                      color: MyTheme.color.primary), // Green
+                      color: MyTheme.color.secondary), // Green
                   const SizedBox(width: 12),
                   Text(
                     "Gunakan lokasi saat ini",
@@ -350,7 +350,7 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
                             trailing: Icon(
                               Icons.chevron_right,
                               size: 20,
-                              color: MyTheme.color.primary, // Green arrow
+                              color: MyTheme.color.secondary, // Green arrow
                             ),
                             onTap: () {
                               if (_step == 0) {
