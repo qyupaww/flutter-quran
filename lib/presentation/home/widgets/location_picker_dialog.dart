@@ -264,7 +264,7 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
                     style: MyTheme.style.title.copyWith(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: const Color(0xFF4A6572), // Custom Greenish Gray
+                      color: const Color(0xFF4A6572),
                     ),
                   ),
                 ),
@@ -288,7 +288,7 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
-                fillColor: const Color(0xFFF5F6F8), // Very light grey
+                fillColor: const Color(0xFFF5F6F8),
               ),
             ),
           ),
@@ -310,8 +310,7 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
               },
               child: Row(
                 children: [
-                  Icon(Icons.my_location,
-                      color: MyTheme.color.secondary), // Green
+                  Icon(Icons.my_location, color: MyTheme.color.secondary),
                   const SizedBox(width: 12),
                   Text(
                     "Gunakan lokasi saat ini",
