@@ -349,7 +349,7 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
                             title: Text(
                               item['name'],
                               style: MyTheme.style.text14.copyWith(
-                                color: const Color(0xFF333333),
+                                color: context.blackWhiteColor,
                               ),
                             ),
                             trailing: Icon(
