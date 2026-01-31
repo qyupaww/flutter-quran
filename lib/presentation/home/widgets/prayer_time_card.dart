@@ -33,8 +33,14 @@ class PrayerTimeCard extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         final bloc = context.read<PrayerTimeBloc>();
-                        showDialog(
+                        showModalBottomSheet(
                           context: context,
+                          isScrollControlled: true,
+                          useSafeArea: true,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.vertical(top: Radius.circular(20)),
+                          ),
                           builder: (_) => BlocProvider.value(
                             value: bloc,
                             child: const LocationPickerDialog(),
