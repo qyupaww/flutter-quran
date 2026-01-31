@@ -318,7 +318,7 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
                   Text(
                     "Gunakan lokasi saat ini",
                     style: MyTheme.style.text14.copyWith(
-                      color: const Color(0xFF333333),
+                      color: context.blackWhiteColor,
                     ),
                   ),
                 ],
