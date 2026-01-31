@@ -280,7 +280,7 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: "Cari...",
-                prefixIcon: const Icon(Icons.search, color: Color(0xFF4BAC87)),
+                prefixIcon: Icon(Icons.search, color: MyTheme.color.primary),
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                 border: OutlineInputBorder(
@@ -310,8 +310,8 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
               },
               child: Row(
                 children: [
-                  const Icon(Icons.my_location,
-                      color: Color(0xFF4BAC87)), // Green
+                  Icon(Icons.my_location,
+                      color: MyTheme.color.primary), // Green
                   const SizedBox(width: 12),
                   Text(
                     "Gunakan lokasi saat ini",
