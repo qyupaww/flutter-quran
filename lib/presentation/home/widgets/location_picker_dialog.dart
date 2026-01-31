@@ -290,7 +290,8 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
-                fillColor: context.blackWhiteColor,
+                fillColor:
+                    context.isDark ? Colors.white.withAlpha(10) : Colors.white,
               ),
             ),
           ),
