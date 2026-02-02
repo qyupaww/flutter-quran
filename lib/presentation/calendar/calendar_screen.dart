@@ -87,56 +87,50 @@ class _CalendarScreenState extends State<CalendarScreen> {
         firstDayGregorian.weekday == 7 ? 0 : firstDayGregorian.weekday;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Kalender Islam"),
-        backgroundColor: MyTheme.color.white,
-        elevation: 0,
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              // Header Control
-              _buildHeaderControl(),
-              const SizedBox(height: 24),
+        body: SafeArea(
+            child: SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            // Header Control
+            _buildHeaderControl(),
+            const SizedBox(height: 24),
 
-              // Days Name
-              _buildWeekDays(),
-              const SizedBox(height: 12),
+            // Days Name
+            _buildWeekDays(),
+            const SizedBox(height: 12),
 
-              // Calendar Grid
-              _buildCalendarGrid(monthLength, startOffset),
+            // Calendar Grid
+            _buildCalendarGrid(monthLength, startOffset),
 
-              const SizedBox(height: 24),
-              // Info Card
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: MyTheme.color.primary.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  children: [
-                    Icon(Icons.info_outline, color: MyTheme.color.primary),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Text(
-                        "Menampilkan kalender Hijriyah berdasarkan perhitungan Umm al-Qura. Penetapan hari raya mungkin berbeda sesuai rukyatul hilal.",
-                        style: MyTheme.style.text12.copyWith(
-                          color: MyTheme.color.primary,
-                        ),
+            const SizedBox(height: 24),
+            // Info Card
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: MyTheme.color.primary.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.info_outline, color: MyTheme.color.primary),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      "Menampilkan kalender Hijriyah berdasarkan perhitungan Umm al-Qura. Penetapan hari raya mungkin berbeda sesuai rukyatul hilal.",
+                      style: MyTheme.style.text12.copyWith(
+                        color: MyTheme.color.primary,
                       ),
                     ),
-                  ],
-                ),
-              )
-            ],
-          ),
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
       ),
-    );
+    )));
   }
 
   Widget _buildHeaderControl() {
