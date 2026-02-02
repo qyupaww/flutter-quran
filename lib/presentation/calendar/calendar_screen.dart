@@ -17,9 +17,25 @@ class _CalendarScreenState extends State<CalendarScreen> {
   @override
   void initState() {
     super.initState();
-    HijriCalendar.setLocal('id');
+    // Default to 'en' internally but we will map names manually
     _currentHijri = HijriCalendar.now();
   }
+
+  // Manual Translation Map
+  final Map<int, String> _monthNames = {
+    1: 'Muharram',
+    2: 'Safar',
+    3: 'Rabiul Awal',
+    4: 'Rabiul Akhir',
+    5: 'Jumadil Awal',
+    6: 'Jumadil Akhir',
+    7: 'Rajab',
+    8: 'Sya\'ban',
+    9: 'Ramadhan',
+    10: 'Syawal',
+    11: 'Dzulqaidah',
+    12: 'Dzulhijjah',
+  };
 
   void _prevMonth() {
     setState(() {
@@ -135,7 +151,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         Column(
           children: [
             Text(
-              "${_currentHijri.longMonthName} ${_currentHijri.hYear} H",
+              "${_monthNames[_currentHijri.hMonth]} ${_currentHijri.hYear} H",
               style: MyTheme.style.title.copyWith(
                 fontSize: 20,
                 color: MyTheme.color.primary,
