@@ -1,9 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:flutter_quran/routing/route.gr.dart';
 import 'package:flutter_quran/theme/theme.dart';
-import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
-import 'package:flutter_quran/config/app_config.dart';
 
 @RoutePage()
 class HomeScreen extends StatelessWidget {
@@ -20,34 +19,38 @@ class HomeScreen extends StatelessWidget {
         QiblaRoute(),
         CalendarRoute(),
       ],
-      floatingActionButton: Builder(builder: (context) {
-        final tabsRouter = AutoTabsRouter.of(context);
-        return Transform.translate(
-          offset: const Offset(0, 25),
-          child: SizedBox(
-            width: 60,
-            height: 60,
+
+      // ================= FAB =================
+      floatingActionButton: Builder(
+        builder: (context) {
+          final tabsRouter = AutoTabsRouter.of(context);
+
+          return Transform.translate(
+            offset: const Offset(0, 12),
             child: FloatingActionButton(
-              shape: const CircleBorder(),
+              elevation: 0,
               backgroundColor: MyTheme.color.primary,
+              shape: const CircleBorder(),
               onPressed: () => tabsRouter.setActiveIndex(2),
-              child: Icon(
+              child: const Icon(
                 Icons.mosque,
-                color: MyTheme.color.white,
-                size: 28,
+                size: 24,
+                color: Colors.white,
               ),
             ),
-          ),
-        );
-      }),
+          );
+        },
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
+      // ================= BOTTOM BAR =================
       bottomNavigationBuilder: (_, tabsRouter) {
         return BottomAppBar(
           shape: const CircularNotchedRectangle(),
-          notchMargin: 10,
+          notchMargin: 2,
           clipBehavior: Clip.antiAlias,
           child: SizedBox(
-            height: kBottomNavigationBarHeight,
+            height: 56,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -63,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                   isActive: tabsRouter.activeIndex == 1,
                   onTap: () => tabsRouter.setActiveIndex(1),
                 ),
-                Space.w(40), // Gap for FAB
+                const SizedBox(width: 16),
                 _BottomNavItem(
                   icon: FlutterIslamicIcons.qibla2,
                   label: "Kiblat",
@@ -85,6 +88,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+// ================= NAV ITEM =================
 class _BottomNavItem extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -100,25 +104,32 @@ class _BottomNavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = isActive ? MyTheme.color.primary : Colors.grey;
+
     return InkWell(
+      borderRadius: BorderRadius.circular(12),
       onTap: onTap,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            color: isActive ? MyTheme.color.primary : Colors.grey,
-          ),
-          Space.h(4),
-          Text(
-            label,
-            style: MyTheme.style.subtitle.copyWith(
-              fontSize: 10,
-              color: isActive ? MyTheme.color.primary : Colors.grey,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              size: 22,
+              color: color,
             ),
-          ),
-        ],
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: MyTheme.style.subtitle.copyWith(
+                fontSize: 10,
+                color: color,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
