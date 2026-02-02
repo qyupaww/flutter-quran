@@ -9,10 +9,10 @@ class MapScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Prayer Times")),
+      appBar: AppBar(title: const Text("Masjid Sekitar")),
       body: Center(
         child: Text(
-          "Prayer Times Feature Coming Soon",
+          "Masjid Sekitar Feature Coming Soon",
           style: MyTheme.style.subtitle,
         ),
       ),
