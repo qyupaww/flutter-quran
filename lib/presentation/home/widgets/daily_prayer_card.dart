@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quran/core/components/molecules/card/vertical_icon_text_card.dart';
+import 'package:flutter_quran/core/components/molecules/vertical_icon_text_card.dart';
 
 class DailyPrayerCard extends StatelessWidget {
   final String text;

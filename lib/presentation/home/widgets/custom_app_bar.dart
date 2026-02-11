@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quran/core/components/molecules/header/date_location_header.dart';
+import 'package:flutter_quran/core/components/molecules/date_location_header.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quran/bloc/theme/theme_bloc.dart';
