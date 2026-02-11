@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quran/theme/theme.dart';
+import 'package:flutter_quran/extension/app_color_extension.dart';
 import 'package:hijri/hijri_calendar.dart';
 
 class HijriCalendarGrid extends StatelessWidget {
@@ -38,9 +39,16 @@ class HijriCalendarGrid extends StatelessWidget {
 
         return Container(
           decoration: BoxDecoration(
-            color: isToday ? MyTheme.color.primary : Colors.white,
+            color: isToday
+                ? MyTheme.color.primary
+                : (context.isDark ? MyTheme.color.greyDark : Colors.white),
             borderRadius: BorderRadius.circular(8),
-            border: isToday ? null : Border.all(color: Colors.grey.shade200),
+            border: isToday
+                ? null
+                : Border.all(
+                    color: context.isDark
+                        ? Colors.grey[800]!
+                        : Colors.grey.shade200),
             boxShadow: isToday
                 ? [
                     BoxShadow(
@@ -56,7 +64,7 @@ class HijriCalendarGrid extends StatelessWidget {
               "$day",
               style: MyTheme.style.text16.copyWith(
                 fontWeight: isToday ? FontWeight.bold : FontWeight.w500,
-                color: isToday ? Colors.white : Colors.black87,
+                color: isToday ? Colors.white : context.blackWhiteColor,
               ),
             ),
           ),

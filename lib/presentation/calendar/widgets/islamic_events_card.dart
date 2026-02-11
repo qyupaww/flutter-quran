@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quran/theme/theme.dart';
+import 'package:flutter_quran/extension/app_color_extension.dart';
 
 class IslamicEventsCard extends StatelessWidget {
   final int hijriMonth;
@@ -14,12 +15,13 @@ class IslamicEventsCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.isDark ? MyTheme.color.greyDark : Colors.white,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade200),
+        border: Border.all(
+            color: context.isDark ? Colors.grey[800]! : Colors.grey.shade200),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.shade100,
+            color: context.isDark ? Colors.black12 : Colors.grey.shade100,
             blurRadius: 10,
             offset: const Offset(0, 5),
           )
@@ -47,7 +49,7 @@ class IslamicEventsCard extends StatelessWidget {
                       child: Text(
                         event,
                         style: MyTheme.style.text14
-                            .copyWith(color: Colors.black87),
+                            .copyWith(color: context.blackWhiteColor),
                       ),
                     ),
                   ],

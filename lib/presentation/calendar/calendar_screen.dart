@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_quran/extension/app_color_extension.dart';
 import 'package:flutter_quran/presentation/calendar/widgets/calendar_header.dart';
 import 'package:flutter_quran/presentation/calendar/widgets/calendar_week_days.dart';
 import 'package:flutter_quran/presentation/calendar/widgets/hijri_calendar_grid.dart';
@@ -84,6 +85,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         firstDayGregorian.weekday == 7 ? 0 : firstDayGregorian.weekday;
 
     return Scaffold(
+      backgroundColor: context.backgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
