@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quran/bloc/prayer_time/prayer_time_bloc.dart';
+import 'package:flutter_quran/core/components/molecules/idle_item.dart';
 import 'package:flutter_quran/theme/theme.dart';
 import 'package:intl/intl.dart';
 
@@ -35,7 +36,7 @@ class PrayerTimeScreen extends StatelessWidget {
         body: BlocBuilder<PrayerTimeBloc, PrayerTimeState>(
           builder: (context, state) {
             if (state.isLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const IdleLoading();
             }
 
             return Column(

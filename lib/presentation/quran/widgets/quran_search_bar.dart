@@ -1,27 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quran/core/components/atoms/primary_textfield.dart';
 import 'package:flutter_quran/extension/app_color_extension.dart';
 import 'package:flutter_quran/theme/theme.dart';
 
-class QuranSearchBar extends StatelessWidget {
+class QuranSearchBar extends StatefulWidget {
   const QuranSearchBar({super.key});
 
   @override
+  State<QuranSearchBar> createState() => _QuranSearchBarState();
+}
+
+class _QuranSearchBarState extends State<QuranSearchBar> {
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: context.isDark ? MyTheme.color.greyDark : Colors.grey[100],
-        borderRadius: BorderRadius.circular(16),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: TextField(
-        decoration: InputDecoration(
-          icon: Icon(Icons.search, color: Colors.grey[400]),
-          hintText: "Cari Surah berdasarkan nama atau nomor...",
-          hintStyle: MyTheme.style.text14.copyWith(color: Colors.grey[400]),
-          border: InputBorder.none,
-        ),
-        style: MyTheme.style.text14.copyWith(color: context.blackWhiteColor),
-      ),
+    return PrimaryTextfield(
+      title: "",
+      hintText: "Cari Surah berdasarkan nama atau nomor...",
+      prefixIcon: Icon(Icons.search, color: Colors.grey[400]),
+      enableOutline: false,
+      radius: 16,
+      backgroundColor:
+          context.isDark ? MyTheme.color.greyDark : Colors.grey[100],
+      controller: _controller,
+      action: TextInputAction.search,
+      type: TextInputType.text,
+      validator: (value) => null,
     );
   }
 }

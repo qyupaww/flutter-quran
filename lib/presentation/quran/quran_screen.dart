@@ -5,6 +5,7 @@ import 'package:flutter_quran/routing/route.gr.dart';
 import 'package:flutter_quran/bloc/quran/quran_bloc.dart';
 import 'package:flutter_quran/extension/app_color_extension.dart';
 import 'package:flutter_quran/injection/injector.dart';
+import 'package:flutter_quran/core/components/molecules/idle_item.dart';
 import 'package:flutter_quran/presentation/quran/widgets/last_read_card.dart';
 import 'package:flutter_quran/presentation/quran/widgets/quran_search_bar.dart';
 import 'package:flutter_quran/presentation/quran/widgets/surah_list_tile.dart';
@@ -98,8 +99,7 @@ class _QuranScreenState extends State<QuranScreen>
                   builder: (context, state) {
                     return state.when(
                       initial: () => const SizedBox(),
-                      loading: () =>
-                          const Center(child: CircularProgressIndicator()),
+                      loading: () => const IdleLoading(),
                       error: (message) => Center(child: Text(message)),
                       loaded: (surahs) => ListView.separated(
                         padding: const EdgeInsets.symmetric(horizontal: 16),

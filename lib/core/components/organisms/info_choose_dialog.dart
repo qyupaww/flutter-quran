@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quran/core/components/button/primary_button.dart';
-import 'package:flutter_quran/core/components/button/primary_outline_button.dart';
+import 'package:flutter_quran/core/components/atoms/primary_button.dart';
+import 'package:flutter_quran/core/components/atoms/primary_outline_button.dart';
 import 'package:flutter_quran/extension/extensions.dart';
 import 'package:flutter_quran/gen/assets.gen.dart';
 
@@ -20,20 +20,19 @@ class InfoChooseDialog extends StatelessWidget {
   final Color negativeTextColor;
   final double paddingWidth;
 
-  const InfoChooseDialog({
-    super.key,
-    required this.title,
-    required this.description,
-    required this.onClickPositive,
-    required this.onClickNegative,
-    required this.positiveText,
-    required this.negativeText,
-    required this.positiveButtonColor,
-    required this.positiveTextColor,
-    required this.negativeButtonColor,
-    required this.negativeTextColor,
-    this.paddingWidth = 70
-  });
+  const InfoChooseDialog(
+      {super.key,
+      required this.title,
+      required this.description,
+      required this.onClickPositive,
+      required this.onClickNegative,
+      required this.positiveText,
+      required this.negativeText,
+      required this.positiveButtonColor,
+      required this.positiveTextColor,
+      required this.negativeButtonColor,
+      required this.negativeTextColor,
+      this.paddingWidth = 70});
 
   @override
   Widget build(BuildContext context) {
@@ -66,13 +65,11 @@ class InfoChooseDialog extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      title,
-                      textAlign: TextAlign.center,
-                      style: MyTheme.style.title.copyWith(
-                        fontSize: AppSetting.setFontSize(43),
-                      )
-                    ),
+                    Text(title,
+                        textAlign: TextAlign.center,
+                        style: MyTheme.style.title.copyWith(
+                          fontSize: AppSetting.setFontSize(43),
+                        )),
                     Space.h(10),
                     Text(
                       description,

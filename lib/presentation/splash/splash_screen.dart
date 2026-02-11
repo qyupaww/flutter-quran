@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quran/bloc/auth/auth_session_bloc.dart';
 import 'package:flutter_quran/config/app_config.dart';
-import 'package:flutter_quran/core/components/idle/idle_item.dart';
+import 'package:flutter_quran/core/components/molecules/idle_item.dart';
 import 'package:flutter_quran/extension/extensions.dart';
 import 'package:flutter_quran/routing/route.gr.dart';
 import 'package:flutter_quran/theme/theme.dart';

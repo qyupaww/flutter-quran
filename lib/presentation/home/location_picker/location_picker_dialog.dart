@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quran/bloc/prayer_time/prayer_time_bloc.dart';
 import 'package:flutter_quran/core/components/molecules/arrow_list_tile.dart';
-import 'package:flutter_quran/core/components/textfield/primary_textfield.dart';
+import 'package:flutter_quran/core/components/atoms/primary_textfield.dart';
 import 'package:flutter_quran/extension/extensions.dart';
 import 'package:flutter_quran/presentation/home/location_picker/cubit/location_picker_cubit.dart';
 import 'package:flutter_quran/theme/theme.dart';

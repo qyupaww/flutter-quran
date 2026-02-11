@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quran/config/app_config.dart';
-import 'package:flutter_quran/core/components/validate/required.dart';
+import 'package:flutter_quran/core/components/atoms/required.dart';
 import 'package:flutter_quran/extension/extensions.dart';
 import 'package:flutter_quran/theme/theme.dart';
 
@@ -94,27 +94,31 @@ class _PrimaryTextfieldState extends State<PrimaryTextfield> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         widget.title.isEmpty
-          ? const SizedBox()
-          : widget.required
-            ? Required(
-                child: Text(
-                  widget.title,
-                  style: MyTheme.style.title.copyWith(
-                    fontSize: AppSetting.setFontSize(AppSetting.isTablet(context) ? 33 : 38),
-                    fontWeight: FontWeight.w600,
-                    color: context.blackWhiteColor,
+            ? const SizedBox()
+            : widget.required
+                ? Required(
+                    child: Text(
+                      widget.title,
+                      style: MyTheme.style.title.copyWith(
+                        fontSize: AppSetting.setFontSize(
+                            AppSetting.isTablet(context) ? 33 : 38),
+                        fontWeight: FontWeight.w600,
+                        color: context.blackWhiteColor,
+                      ),
+                    ),
+                  )
+                : Text(
+                    widget.title,
+                    style: MyTheme.style.title.copyWith(
+                      fontSize: AppSetting.setFontSize(
+                          AppSetting.isTablet(context) ? 33 : 38),
+                      fontWeight: FontWeight.w600,
+                      color: context.blackWhiteColor,
+                    ),
                   ),
-                ),
-              )
-            : Text(
-                widget.title,
-                style: MyTheme.style.title.copyWith(
-                  fontSize: AppSetting.setFontSize(AppSetting.isTablet(context) ? 33 : 38),
-                  fontWeight: FontWeight.w600,
-                  color: context.blackWhiteColor,
-                ),
-              ),
-        Space.h(widget.title.isEmpty ? 0 : (AppSetting.isTablet(context) ? 30 : 15)),
+        Space.h(widget.title.isEmpty
+            ? 0
+            : (AppSetting.isTablet(context) ? 30 : 15)),
         ClipRRect(
           borderRadius: BorderRadius.circular(widget.radius),
           child: TextFormField(
@@ -134,29 +138,33 @@ class _PrimaryTextfieldState extends State<PrimaryTextfield> {
             maxLines: widget.disableMaxLine ? widget.disableMaxlineNumber : 1,
             maxLength: widget.maxLength,
             validator: widget.validator,
-            onFieldSubmitted: (value) => widget.onSubmitted != null ? widget.onSubmitted!(value) : {},
+            onFieldSubmitted: (value) =>
+                widget.onSubmitted != null ? widget.onSubmitted!(value) : {},
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            onChanged: (value) => widget.onChange != null ? widget.onChange!(value) : {},
-            onEditingComplete: () => widget.onEditComplete != null ? widget.onEditComplete!() : {},
+            onChanged: (value) =>
+                widget.onChange != null ? widget.onChange!(value) : {},
+            onEditingComplete: () =>
+                widget.onEditComplete != null ? widget.onEditComplete!() : {},
             style: MyTheme.style.subtitle.copyWith(
-              fontSize: AppSetting.setFontSize(widget.fontSize ?? 36) - (AppSetting.isTablet(context) ? 4 : 0),
-              color: widget.textColor ?? MyTheme.color.primary,
-              fontWeight: widget.fontWeight
-            ),
+                fontSize: AppSetting.setFontSize(widget.fontSize ?? 36) -
+                    (AppSetting.isTablet(context) ? 4 : 0),
+                color: widget.textColor ?? MyTheme.color.primary,
+                fontWeight: widget.fontWeight),
             decoration: InputDecoration(
               errorStyle: MyTheme.style.subtitle.copyWith(
-                fontSize: AppSetting.setFontSize((widget.fontSize!-10)) - (AppSetting.isTablet(context) ? 4 : 0),
+                fontSize: AppSetting.setFontSize((widget.fontSize! - 10)) -
+                    (AppSetting.isTablet(context) ? 4 : 0),
                 color: MyTheme.color.danger,
               ),
               focusedErrorBorder: widget.enableOutline
-                ? OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(widget.radius),
-                    borderSide: BorderSide(
-                      color: MyTheme.color.danger,
-                      width: 1,
-                    ),
-                  )
-                : null,
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(widget.radius),
+                      borderSide: BorderSide(
+                        color: MyTheme.color.danger,
+                        width: 1,
+                      ),
+                    )
+                  : null,
               errorBorder: widget.enableOutline
                   ? OutlineInputBorder(
                       borderRadius: BorderRadius.circular(widget.radius),
@@ -165,25 +173,25 @@ class _PrimaryTextfieldState extends State<PrimaryTextfield> {
                         width: 1,
                       ),
                     )
-                : null,
+                  : null,
               enabledBorder: widget.enableOutline
-                ? OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(widget.radius),
-                    borderSide: BorderSide(
-                      color: widget.enableColor ?? Colors.grey[200]!,
-                      width: 1,
-                    ),
-                  )
-                : null,
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(widget.radius),
+                      borderSide: BorderSide(
+                        color: widget.enableColor ?? Colors.grey[200]!,
+                        width: 1,
+                      ),
+                    )
+                  : null,
               focusedBorder: widget.enableOutline
-                ? OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(widget.radius),
-                    borderSide: BorderSide(
-                      color: MyTheme.color.primary,
-                      width: 1,
-                    ),
-                  )
-                : null,
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(widget.radius),
+                      borderSide: BorderSide(
+                        color: MyTheme.color.primary,
+                        width: 1,
+                      ),
+                    )
+                  : null,
               hintText: widget.hintText,
               contentPadding: widget.contentPadding,
               filled: widget.enableOutline == false,
@@ -192,7 +200,8 @@ class _PrimaryTextfieldState extends State<PrimaryTextfield> {
                   : (widget.backgroundColor ?? const Color(0xffEBF0FF)),
               counterText: "",
               hintStyle: MyTheme.style.subtitle.copyWith(
-                fontSize: AppSetting.setFontSize((widget.fontSize!-5)) - (AppSetting.isTablet(context) ? 4 : 0),
+                fontSize: AppSetting.setFontSize((widget.fontSize! - 5)) -
+                    (AppSetting.isTablet(context) ? 4 : 0),
                 color: widget.hintTextColor ?? MyTheme.color.primary,
                 fontWeight: widget.fontWeight,
               ),
@@ -208,7 +217,8 @@ class _PrimaryTextfieldState extends State<PrimaryTextfield> {
               prefixIcon: widget.prefixIcon,
               border: widget.border ?? InputBorder.none,
             ),
-            textCapitalization: widget.capitalization ?? TextCapitalization.none,
+            textCapitalization:
+                widget.capitalization ?? TextCapitalization.none,
           ),
         ),
       ],

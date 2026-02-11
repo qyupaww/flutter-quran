@@ -1,10 +1,10 @@
 import 'package:animations/animations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_quran/core/components/dialog/info_choose_dialog.dart';
-import 'package:flutter_quran/core/components/dialog/info_dialog.dart';
-import 'package:flutter_quran/core/components/dialog/input_dialog.dart';
-import 'package:flutter_quran/core/components/dialog/loading_dialog.dart';
+import 'package:flutter_quran/core/components/organisms/info_choose_dialog.dart';
+import 'package:flutter_quran/core/components/organisms/info_dialog.dart';
+import 'package:flutter_quran/core/components/organisms/input_dialog.dart';
+import 'package:flutter_quran/core/components/organisms/loading_dialog.dart';
 import 'package:flutter_quran/injection/injector.dart';
 import 'package:flutter_quran/routing/route.dart';
 
@@ -28,7 +28,8 @@ class DialogShow {
           canPop: dismiss,
           child: InfoDialog(
             text: message,
-            onClickOK: () => onClick != null ? onClick() : context.router.maybePop(),
+            onClickOK: () =>
+                onClick != null ? onClick() : context.router.maybePop(),
             clickText: buttonText,
             contentTextWidget: contentTextWidget,
             disableButton: disableButton,
@@ -40,15 +41,12 @@ class DialogShow {
   }
 
   static void showInputDialog(
-    String title,
-    String buttonText,
-    TextInputType type, {
-    Function(String)? onClick,
-    String? hintText,
-    String? defaultValue,
-    String? infoText,
-    bool secureText = false
-  }) {
+      String title, String buttonText, TextInputType type,
+      {Function(String)? onClick,
+      String? hintText,
+      String? defaultValue,
+      String? infoText,
+      bool secureText = false}) {
     var inputController = TextEditingController();
     if (defaultValue != null) {
       inputController.text = defaultValue;
@@ -92,7 +90,8 @@ class DialogShow {
   }) {
     showModal(
         context: inject<AppRouter>().navigatorKey.currentContext!,
-        configuration: const FadeScaleTransitionConfiguration(barrierDismissible: false),
+        configuration:
+            const FadeScaleTransitionConfiguration(barrierDismissible: false),
         builder: (context) {
           return InfoChooseDialog(
             title: title,
@@ -107,8 +106,7 @@ class DialogShow {
             negativeTextColor: negativeTextColor,
             paddingWidth: paddingWidth,
           );
-        }
-    );
+        });
   }
 
   static void showLoading(String message) {

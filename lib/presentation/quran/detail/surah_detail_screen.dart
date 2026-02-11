@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quran/bloc/quran/detail/surah_detail_bloc.dart';
 import 'package:flutter_quran/extension/app_color_extension.dart';
+import 'package:flutter_quran/core/components/molecules/idle_item.dart';
 import 'package:flutter_quran/injection/injector.dart';
 import 'package:flutter_quran/theme/theme.dart';
 
@@ -39,7 +40,7 @@ class SurahDetailScreen extends StatelessWidget {
           builder: (context, state) {
             return state.when(
               initial: () => const SizedBox(),
-              loading: () => const Center(child: CircularProgressIndicator()),
+              loading: () => const IdleLoading(),
               error: (msg) => Center(child: Text(msg)),
               loaded: (detail) {
                 return ListView.separated(

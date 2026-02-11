@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quran/extension/extensions.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_quran/config/app_config.dart';
-import 'package:flutter_quran/core/components/conditional/conditional_item.dart';
+import 'package:flutter_quran/core/components/atoms/conditional_item.dart';
 import 'package:flutter_quran/theme/theme.dart';
 
 class ModalBottomSheet {
@@ -51,53 +51,58 @@ class ModalBottomSheet {
                 children: <Widget>[
                   title.isNotEmpty
                       ? isFilter
-                            ? Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    title,
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.poppins(
-                                      fontSize: AppSetting.setFontSize(titleFontSize),
-                                      fontWeight: FontWeight.w600,
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  title,
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.poppins(
+                                    fontSize:
+                                        AppSetting.setFontSize(titleFontSize),
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () => onReset != null ? onReset() : {},
+                                  child: Text(
+                                    "Reset",
+                                    style: MyTheme.style.subtitle.copyWith(
+                                      fontSize: AppSetting.setFontSize(33),
+                                      color: MyTheme.color.primary,
                                     ),
                                   ),
-                                  InkWell(
-                                    onTap: () => onReset != null ? onReset() : {},
-                                    child: Text(
-                                      "Reset",
-                                      style: MyTheme.style.subtitle.copyWith(
-                                        fontSize: AppSetting.setFontSize(33),
-                                        color: MyTheme.color.primary,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              )
-                            : Row(
-                                children: [
-                                  Conditional(
+                                )
+                              ],
+                            )
+                          : Row(
+                              children: [
+                                Conditional(
                                     condition: enableClose,
                                     child: InkWell(
-                                      onTap: () => onClose != null ? onClose() : {},
+                                      onTap: () =>
+                                          onClose != null ? onClose() : {},
                                       child: Icon(
                                         Icons.close,
-                                        color: context.blackWhiteColor.withValues(alpha: 0.7),
+                                        color: context.blackWhiteColor
+                                            .withValues(alpha: 0.7),
                                       ),
-                                    )
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      title,
-                                      textAlign: enableClose ? TextAlign.center : TextAlign.start,
-                                      style: MyTheme.style.title.copyWith(
-                                        fontSize: AppSetting.setFontSize(titleFontSize),
-                                        fontWeight: FontWeight.w700,
-                                      ),
+                                    )),
+                                Expanded(
+                                  child: Text(
+                                    title,
+                                    textAlign: enableClose
+                                        ? TextAlign.center
+                                        : TextAlign.start,
+                                    style: MyTheme.style.title.copyWith(
+                                      fontSize:
+                                          AppSetting.setFontSize(titleFontSize),
+                                      fontWeight: FontWeight.w700,
                                     ),
                                   ),
-                                ],
-                              )
+                                ),
+                              ],
+                            )
                       : Align(
                           alignment: Alignment.topCenter,
                           child: InkWell(
