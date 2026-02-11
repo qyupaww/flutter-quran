@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter_quran/theme/theme.dart';
-import 'package:flutter_quran/extension/extensions.dart';
+import 'package:flutter_quran/core/components/molecules/card/vertical_icon_text_card.dart';
 
 class DailyPrayerCard extends StatelessWidget {
   final String text;
   final IconData icon;
+
   const DailyPrayerCard({
     super.key,
     required this.text,
@@ -14,35 +13,9 @@ class DailyPrayerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: context.isDark
-            ? MyTheme.color.white.withAlpha(15)
-            : MyTheme.color.white,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(icon,
-              color: context.isDark
-                  ? MyTheme.color.secondary
-                  : MyTheme.color.secondary,
-              size: 24),
-          Text(
-            text,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: MyTheme.style.subtitle.copyWith(
-              fontSize: 11,
-              fontWeight: FontWeight.bold,
-              color: context.blackWhiteColor,
-            ),
-          ),
-        ],
-      ),
+    return VerticalIconTextCard(
+      text: text,
+      icon: icon,
     );
   }
 }

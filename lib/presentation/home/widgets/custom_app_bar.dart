@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quran/theme/theme.dart';
+import 'package:flutter_quran/core/components/molecules/header/date_location_header.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quran/bloc/theme/theme_bloc.dart';
 import 'package:flutter_quran/extension/extensions.dart';
@@ -19,33 +20,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       title: BlocBuilder<PrayerTimeBloc, PrayerTimeState>(
         builder: (context, state) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                state.currentDateDisplay.isEmpty
-                    ? "-"
-                    : state.currentDateDisplay,
-                style: MyTheme.style.subtitle.copyWith(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 12,
-                  color: context.blackWhiteColor,
-                ),
-              ),
-              const SizedBox(height: 6),
-              Text(
-                state.locationName.isEmpty
-                    ? "Pilih wilayah terlebih dahulu"
-                    : state.locationName,
-                style: MyTheme.style.subtitle.copyWith(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                  color: context.isDark
-                      ? MyTheme.color.secondary
-                      : MyTheme.color.primary,
-                ),
-              ),
-            ],
+          return DateLocationHeader(
+            date: state.currentDateDisplay.isEmpty
+                ? "-"
+                : state.currentDateDisplay,
+            location: state.locationName.isEmpty
+                ? "Pilih wilayah terlebih dahulu"
+                : state.locationName,
           );
         },
       ),

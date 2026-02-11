@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quran/bloc/prayer_time/prayer_time_bloc.dart';
+import 'package:flutter_quran/core/components/atoms/time_box.dart';
+import 'package:flutter_quran/core/components/atoms/time_separator.dart';
 import 'package:flutter_quran/presentation/home/widgets/location_picker_dialog.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_quran/routing/route.gr.dart';
@@ -91,11 +93,11 @@ class PrayerTimeCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    _buildTimeBox(state.hoursLeft, "JAM"),
-                    _buildSeparator(),
-                    _buildTimeBox(state.minutesLeft, "MENIT"),
-                    _buildSeparator(),
-                    _buildTimeBox(state.secondsLeft, "DETIK"),
+                    TimeBox(value: state.hoursLeft, label: "JAM"),
+                    const TimeSeparator(),
+                    TimeBox(value: state.minutesLeft, label: "MENIT"),
+                    const TimeSeparator(),
+                    TimeBox(value: state.secondsLeft, label: "DETIK"),
                   ],
                 ),
 
@@ -130,64 +132,6 @@ class PrayerTimeCard extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-
-  Widget _buildTimeBox(String value, String label) {
-    return Column(
-      children: [
-        Container(
-          width: 70,
-          height: 70,
-          decoration: BoxDecoration(
-            color: MyTheme.color.secondary.withAlpha(10),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Center(
-            child: Text(
-              value,
-              style: MyTheme.style.subtitle.copyWith(
-                color: MyTheme.color.white,
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1.0,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          label,
-          style: MyTheme.style.text12.copyWith(
-            color: MyTheme.color.secondary,
-            fontSize: 10,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1.5,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSeparator() {
-    return Container(
-      height: 70,
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            ":",
-            style: MyTheme.style.text18.copyWith(
-              color: MyTheme.color.secondary,
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 18),
-        ],
-      ),
     );
   }
 }

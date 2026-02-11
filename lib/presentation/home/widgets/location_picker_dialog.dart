@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quran/bloc/prayer_time/prayer_time_bloc.dart';
+import 'package:flutter_quran/core/components/molecules/list_tile/arrow_list_tile.dart';
+import 'package:flutter_quran/core/components/textfield/primary_textfield.dart';
 import 'package:flutter_quran/infrastructure/location/region_repository.dart';
 import 'package:flutter_quran/theme/theme.dart';
 import 'package:geocoding/geocoding.dart';
@@ -278,21 +280,17 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
           // Search
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: TextField(
+            child: PrimaryTextfield(
+              title: "",
+              hintText: "Cari...",
               controller: _searchController,
-              decoration: InputDecoration(
-                hintText: "Cari...",
-                prefixIcon: Icon(Icons.search, color: MyTheme.color.secondary),
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
-                ),
-                filled: true,
-                fillColor:
-                    context.isDark ? Colors.white.withAlpha(10) : Colors.white,
-              ),
+              action: TextInputAction.search,
+              type: TextInputType.text,
+              backgroundColor:
+                  context.isDark ? Colors.white.withAlpha(10) : Colors.white,
+              prefixIcon: Icon(Icons.search, color: MyTheme.color.secondary),
+              radius: 12,
+              validator: (value) => null,
             ),
           ),
 
@@ -343,20 +341,8 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         itemBuilder: (context, index) {
                           final item = _filteredList[index];
-                          return ListTile(
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 24, vertical: 4),
-                            title: Text(
-                              item['name'],
-                              style: MyTheme.style.text14.copyWith(
-                                color: context.blackWhiteColor,
-                              ),
-                            ),
-                            trailing: Icon(
-                              Icons.chevron_right,
-                              size: 20,
-                              color: MyTheme.color.secondary, // Green arrow
-                            ),
+                          return ArrowListTile(
+                            title: item['name'],
                             onTap: () {
                               if (_step == 0) {
                                 _selectedProvince = item;
