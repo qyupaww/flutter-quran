@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quran/bloc/prayer_time/prayer_time_bloc.dart';
 import 'package:flutter_quran/core/components/atoms/time_box.dart';
 import 'package:flutter_quran/core/components/atoms/time_separator.dart';
-import 'package:flutter_quran/presentation/home/widgets/location_picker_dialog.dart';
+import 'package:flutter_quran/presentation/home/location_picker/location_picker_dialog.dart';
+import 'package:flutter_quran/presentation/home/location_picker/cubit/location_picker_cubit.dart';
+import 'package:flutter_quran/infrastructure/location/region_repository.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_quran/routing/route.gr.dart';
 import 'package:flutter_quran/theme/theme.dart';
@@ -43,8 +45,14 @@ class PrayerTimeCard extends StatelessWidget {
                             borderRadius:
                                 BorderRadius.vertical(top: Radius.circular(20)),
                           ),
-                          builder: (_) => BlocProvider.value(
-                            value: bloc,
+                          builder: (_) => MultiBlocProvider(
+                            providers: [
+                              BlocProvider.value(value: bloc),
+                              BlocProvider(
+                                create: (_) =>
+                                    LocationPickerCubit(RegionRepository()),
+                              ),
+                            ],
                             child: const LocationPickerDialog(),
                           ),
                         );

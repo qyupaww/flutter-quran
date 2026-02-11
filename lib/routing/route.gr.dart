@@ -16,9 +16,9 @@ import 'package:flutter_quran/presentation/calendar/calendar_screen.dart'
     as _i1;
 import 'package:flutter_quran/presentation/home/home_screen.dart' as _i2;
 import 'package:flutter_quran/presentation/home/home_tab_screen.dart' as _i3;
-import 'package:flutter_quran/presentation/maps/map_screen.dart' as _i4;
 import 'package:flutter_quran/presentation/home/widgets/prayer_time_screen.dart'
     as _i5;
+import 'package:flutter_quran/presentation/maps/map_screen.dart' as _i4;
 import 'package:flutter_quran/presentation/qibla/qibla_screen.dart' as _i6;
 import 'package:flutter_quran/presentation/quran/detail/surah_detail_screen.dart'
     as _i9;
