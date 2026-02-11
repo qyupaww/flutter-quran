@@ -152,8 +152,9 @@ class _PrimaryTextfieldState extends State<PrimaryTextfield> {
                 fontWeight: widget.fontWeight),
             decoration: InputDecoration(
               errorStyle: MyTheme.style.subtitle.copyWith(
-                fontSize: AppSetting.setFontSize((widget.fontSize! - 10)) -
-                    (AppSetting.isTablet(context) ? 4 : 0),
+                fontSize:
+                    AppSetting.setFontSize(((widget.fontSize ?? 36) - 10)) -
+                        (AppSetting.isTablet(context) ? 4 : 0),
                 color: MyTheme.color.danger,
               ),
               focusedErrorBorder: widget.enableOutline
@@ -200,8 +201,9 @@ class _PrimaryTextfieldState extends State<PrimaryTextfield> {
                   : (widget.backgroundColor ?? const Color(0xffEBF0FF)),
               counterText: "",
               hintStyle: MyTheme.style.subtitle.copyWith(
-                fontSize: AppSetting.setFontSize((widget.fontSize! - 5)) -
-                    (AppSetting.isTablet(context) ? 4 : 0),
+                fontSize:
+                    AppSetting.setFontSize(((widget.fontSize ?? 36) - 5)) -
+                        (AppSetting.isTablet(context) ? 4 : 0),
                 color: widget.hintTextColor ?? MyTheme.color.primary,
                 fontWeight: widget.fontWeight,
               ),
