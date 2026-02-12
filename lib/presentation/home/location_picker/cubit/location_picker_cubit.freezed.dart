@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 mixin _$LocationPickerState {
   bool get isLoading;
   String? get errorMessage;
-  int get step; // 0: Province, 1: City, 2: District
+  int get step;
   List<Map<String, dynamic>> get provinces;
   List<Map<String, dynamic>> get cities;
   List<Map<String, dynamic>> get districts;
@@ -397,9 +397,7 @@ class _LocationPickerState implements LocationPickerState {
   @override
   @JsonKey()
   final int step;
-// 0: Province, 1: City, 2: District
   final List<Map<String, dynamic>> _provinces;
-// 0: Province, 1: City, 2: District
   @override
   @JsonKey()
   List<Map<String, dynamic>> get provinces {
