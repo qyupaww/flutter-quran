@@ -12,6 +12,8 @@ abstract class PrayerTimeState with _$PrayerTimeState {
     @Default('') String nextPrayerTime,
     @Default('') String currentDateDisplay,
     @Default(false) bool isHijri,
+    @Default(0.0) double lat,
+    @Default(0.0) double long,
     @JsonKey(includeFromJson: false, includeToJson: false)
     dynamic prayerTimesData,
     @Default([]) List<Map<String, String>> dailyPrayers,

@@ -13,10 +13,16 @@ class QiblaCubit extends SafeCubit<QiblaState> {
 
   QiblaCubit() : super(const QiblaState());
 
-  Future<void> init() async {
+  Future<void> init({double? lat, double? long, String? name}) async {
     emit(state.copyWith(status: QiblaStatus.loading));
 
-    // 1. Load saved location
+    if (lat != null && long != null && name != null) {
+      updateLocation(lat, long, name);
+      _startCompass();
+      return;
+    }
+
+    // 1. Load saved location if not provided
     final managerStr = SharedManager<String>();
     final managerDouble = SharedManager<double>();
 
@@ -24,35 +30,40 @@ class QiblaCubit extends SafeCubit<QiblaState> {
     final savedLat = await managerDouble.read('location_lat');
     final savedLong = await managerDouble.read('location_long');
 
-    double lat;
-    double lon;
-    String locationName;
-
     if (savedLat != null && savedLong != null) {
-      lat = savedLat;
-      lon = savedLong;
-      locationName = savedName ?? "Lokasi Tersimpan";
+      updateLocation(savedLat, savedLong, savedName ?? "Lokasi Tersimpan");
     } else {
       // Default: Jakarta
-      lat = -6.2088;
-      lon = 106.8456;
-      locationName = "Jakarta, Indonesia";
+      updateLocation(-6.2088, 106.8456, "Jakarta, Indonesia");
     }
 
-    // 2. Calculate Qibla direction using Adhan
-    final coordinates = Coordinates(lat, lon);
+    // 2. Start compass stream
+    _startCompass();
+  }
+
+  void updateLocation(double lat, double long, String name) {
+    if (isClosed) return;
+
+    final coordinates = Coordinates(lat, long);
     final qiblaDirection = Qibla(coordinates).direction;
 
     emit(state.copyWith(
       qiblaDirection: qiblaDirection,
-      locationName: locationName,
+      locationName: name,
+      status: state.status == QiblaStatus.loading
+          ? QiblaStatus.ready
+          : state.status, // Keep current status if already ready/error
     ));
 
-    // 3. Start compass stream
-    _startCompass();
+    // Ensure status is ready if it was loading
+    if (state.status == QiblaStatus.loading) {
+      _startCompass();
+    }
   }
 
   void _startCompass() {
+    if (_compassSubscription != null) return; // Already started
+
     try {
       _compassSubscription = FlutterCompass.events?.listen(
         (CompassEvent event) {

@@ -43,11 +43,20 @@ class PrayerTimeBloc extends Bloc<PrayerTimeEvent, PrayerTimeState> {
     if (savedName != null && savedLat != null && savedLong != null) {
       emit(state.copyWith(locationName: savedName, isLoading: true));
       _currentCoordinates = Coordinates(savedLat, savedLong);
+      emit(state.copyWith(
+          locationName: savedName,
+          isLoading: true,
+          lat: savedLat,
+          long: savedLong));
       _calculatePrayerTimes(emit);
     } else {
       // Default: Jakarta (-6.2088, 106.8456)
       _currentCoordinates = Coordinates(-6.2088, 106.8456);
-      emit(state.copyWith(locationName: "Jakarta, Indonesia", isLoading: true));
+      emit(state.copyWith(
+          locationName: "Jakarta, Indonesia",
+          isLoading: true,
+          lat: -6.2088,
+          long: 106.8456));
       _calculatePrayerTimes(emit);
     }
   }
@@ -55,7 +64,12 @@ class PrayerTimeBloc extends Bloc<PrayerTimeEvent, PrayerTimeState> {
   void _onLocationChanged(
       _LocationChanged event, Emitter<PrayerTimeState> emit) async {
     final name = "${event.district}, ${event.city}";
-    emit(state.copyWith(locationName: name, isLoading: true));
+    emit(state.copyWith(
+      locationName: name,
+      isLoading: true,
+      lat: event.lat,
+      long: event.long,
+    ));
 
     _currentCoordinates = Coordinates(event.lat, event.long);
     _calculatePrayerTimes(emit);

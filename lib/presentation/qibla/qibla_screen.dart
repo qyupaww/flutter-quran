@@ -5,6 +5,7 @@ import 'package:flutter_quran/extension/app_color_extension.dart';
 import 'package:flutter_quran/presentation/qibla/cubit/qibla_cubit.dart';
 import 'package:flutter_quran/presentation/qibla/widgets/compass_painter.dart';
 import 'package:flutter_quran/theme/theme.dart';
+import 'package:flutter_quran/bloc/prayer_time/prayer_time_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 
 @RoutePage()
@@ -13,9 +14,32 @@ class QiblaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final prayerState = context.read<PrayerTimeBloc>().state;
+    final hasLocation = prayerState.lat != 0.0 && prayerState.long != 0.0;
+
     return BlocProvider(
-      create: (_) => QiblaCubit()..init(),
-      child: const _QiblaView(),
+      create: (_) => QiblaCubit()
+        ..init(
+          lat: hasLocation ? prayerState.lat : null,
+          long: hasLocation ? prayerState.long : null,
+          name: hasLocation ? prayerState.locationName : null,
+        ),
+      child: BlocListener<PrayerTimeBloc, PrayerTimeState>(
+        listenWhen: (previous, current) =>
+            previous.locationName != current.locationName ||
+            previous.lat != current.lat ||
+            previous.long != current.long,
+        listener: (context, state) {
+          if (state.lat != 0.0 && state.long != 0.0) {
+            context.read<QiblaCubit>().updateLocation(
+                  state.lat,
+                  state.long,
+                  state.locationName,
+                );
+          }
+        },
+        child: const _QiblaView(),
+      ),
     );
   }
 }

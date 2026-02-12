@@ -4,86 +4,93 @@ import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:flutter_quran/routing/route.gr.dart';
 import 'package:flutter_quran/theme/theme.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_quran/bloc/prayer_time/prayer_time_bloc.dart';
+
 @RoutePage()
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AutoTabsScaffold(
-      resizeToAvoidBottomInset: false,
-      routes: const [
-        HomeTabRoute(),
-        QuranRoute(),
-        MapRoute(),
-        QiblaRoute(),
-        CalendarRoute(),
-      ],
+    return BlocProvider(
+      create: (context) =>
+          PrayerTimeBloc()..add(const PrayerTimeEvent.started()),
+      child: AutoTabsScaffold(
+        resizeToAvoidBottomInset: false,
+        routes: const [
+          HomeTabRoute(),
+          QuranRoute(),
+          MapRoute(),
+          QiblaRoute(),
+          CalendarRoute(),
+        ],
 
-      // ================= FAB =================
-      floatingActionButton: Builder(
-        builder: (context) {
-          final tabsRouter = AutoTabsRouter.of(context);
+        // ================= FAB =================
+        floatingActionButton: Builder(
+          builder: (context) {
+            final tabsRouter = AutoTabsRouter.of(context);
 
-          return Transform.translate(
-            offset: const Offset(0, 12),
-            child: FloatingActionButton(
-              elevation: 0,
-              backgroundColor: MyTheme.color.primary,
-              shape: const CircleBorder(),
-              onPressed: () => tabsRouter.setActiveIndex(2),
-              child: const Icon(
-                Icons.mosque,
-                size: 24,
-                color: Colors.white,
+            return Transform.translate(
+              offset: const Offset(0, 12),
+              child: FloatingActionButton(
+                elevation: 0,
+                backgroundColor: MyTheme.color.primary,
+                shape: const CircleBorder(),
+                onPressed: () => tabsRouter.setActiveIndex(2),
+                child: const Icon(
+                  Icons.mosque,
+                  size: 24,
+                  color: Colors.white,
+                ),
+              ),
+            );
+          },
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
+        // ================= BOTTOM BAR =================
+        bottomNavigationBuilder: (_, tabsRouter) {
+          return BottomAppBar(
+            shape: const CircularNotchedRectangle(),
+            notchMargin: 2,
+            clipBehavior: Clip.antiAlias,
+            child: SizedBox(
+              height: 56,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _BottomNavItem(
+                    icon: FlutterIslamicIcons.islam,
+                    label: "Home",
+                    isActive: tabsRouter.activeIndex == 0,
+                    onTap: () => tabsRouter.setActiveIndex(0),
+                  ),
+                  _BottomNavItem(
+                    icon: FlutterIslamicIcons.quran2,
+                    label: "Quran",
+                    isActive: tabsRouter.activeIndex == 1,
+                    onTap: () => tabsRouter.setActiveIndex(1),
+                  ),
+                  const SizedBox(width: 16),
+                  _BottomNavItem(
+                    icon: FlutterIslamicIcons.qibla2,
+                    label: "Kiblat",
+                    isActive: tabsRouter.activeIndex == 3,
+                    onTap: () => tabsRouter.setActiveIndex(3),
+                  ),
+                  _BottomNavItem(
+                    icon: FlutterIslamicIcons.calendar,
+                    label: "Kalender",
+                    isActive: tabsRouter.activeIndex == 4,
+                    onTap: () => tabsRouter.setActiveIndex(4),
+                  ),
+                ],
               ),
             ),
           );
         },
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-
-      // ================= BOTTOM BAR =================
-      bottomNavigationBuilder: (_, tabsRouter) {
-        return BottomAppBar(
-          shape: const CircularNotchedRectangle(),
-          notchMargin: 2,
-          clipBehavior: Clip.antiAlias,
-          child: SizedBox(
-            height: 56,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _BottomNavItem(
-                  icon: FlutterIslamicIcons.islam,
-                  label: "Home",
-                  isActive: tabsRouter.activeIndex == 0,
-                  onTap: () => tabsRouter.setActiveIndex(0),
-                ),
-                _BottomNavItem(
-                  icon: FlutterIslamicIcons.quran2,
-                  label: "Quran",
-                  isActive: tabsRouter.activeIndex == 1,
-                  onTap: () => tabsRouter.setActiveIndex(1),
-                ),
-                const SizedBox(width: 16),
-                _BottomNavItem(
-                  icon: FlutterIslamicIcons.qibla2,
-                  label: "Kiblat",
-                  isActive: tabsRouter.activeIndex == 3,
-                  onTap: () => tabsRouter.setActiveIndex(3),
-                ),
-                _BottomNavItem(
-                  icon: FlutterIslamicIcons.calendar,
-                  label: "Kalender",
-                  isActive: tabsRouter.activeIndex == 4,
-                  onTap: () => tabsRouter.setActiveIndex(4),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 }

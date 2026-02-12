@@ -423,6 +423,8 @@ mixin _$PrayerTimeState {
   String get nextPrayerTime;
   String get currentDateDisplay;
   bool get isHijri;
+  double get lat;
+  double get long;
   @JsonKey(includeFromJson: false, includeToJson: false)
   dynamic get prayerTimesData;
   List<Map<String, String>> get dailyPrayers;
@@ -458,6 +460,8 @@ mixin _$PrayerTimeState {
             (identical(other.currentDateDisplay, currentDateDisplay) ||
                 other.currentDateDisplay == currentDateDisplay) &&
             (identical(other.isHijri, isHijri) || other.isHijri == isHijri) &&
+            (identical(other.lat, lat) || other.lat == lat) &&
+            (identical(other.long, long) || other.long == long) &&
             const DeepCollectionEquality()
                 .equals(other.prayerTimesData, prayerTimesData) &&
             const DeepCollectionEquality()
@@ -478,13 +482,15 @@ mixin _$PrayerTimeState {
       nextPrayerTime,
       currentDateDisplay,
       isHijri,
+      lat,
+      long,
       const DeepCollectionEquality().hash(prayerTimesData),
       const DeepCollectionEquality().hash(dailyPrayers),
       const DeepCollectionEquality().hash(monthlyPrayerTimes));
 
   @override
   String toString() {
-    return 'PrayerTimeState(isLoading: $isLoading, locationName: $locationName, hoursLeft: $hoursLeft, minutesLeft: $minutesLeft, secondsLeft: $secondsLeft, nextPrayerName: $nextPrayerName, nextPrayerTime: $nextPrayerTime, currentDateDisplay: $currentDateDisplay, isHijri: $isHijri, prayerTimesData: $prayerTimesData, dailyPrayers: $dailyPrayers, monthlyPrayerTimes: $monthlyPrayerTimes)';
+    return 'PrayerTimeState(isLoading: $isLoading, locationName: $locationName, hoursLeft: $hoursLeft, minutesLeft: $minutesLeft, secondsLeft: $secondsLeft, nextPrayerName: $nextPrayerName, nextPrayerTime: $nextPrayerTime, currentDateDisplay: $currentDateDisplay, isHijri: $isHijri, lat: $lat, long: $long, prayerTimesData: $prayerTimesData, dailyPrayers: $dailyPrayers, monthlyPrayerTimes: $monthlyPrayerTimes)';
   }
 }
 
@@ -504,6 +510,8 @@ abstract mixin class $PrayerTimeStateCopyWith<$Res> {
       String nextPrayerTime,
       String currentDateDisplay,
       bool isHijri,
+      double lat,
+      double long,
       @JsonKey(includeFromJson: false, includeToJson: false)
       dynamic prayerTimesData,
       List<Map<String, String>> dailyPrayers,
@@ -532,6 +540,8 @@ class _$PrayerTimeStateCopyWithImpl<$Res>
     Object? nextPrayerTime = null,
     Object? currentDateDisplay = null,
     Object? isHijri = null,
+    Object? lat = null,
+    Object? long = null,
     Object? prayerTimesData = freezed,
     Object? dailyPrayers = null,
     Object? monthlyPrayerTimes = null,
@@ -573,6 +583,14 @@ class _$PrayerTimeStateCopyWithImpl<$Res>
           ? _self.isHijri
           : isHijri // ignore: cast_nullable_to_non_nullable
               as bool,
+      lat: null == lat
+          ? _self.lat
+          : lat // ignore: cast_nullable_to_non_nullable
+              as double,
+      long: null == long
+          ? _self.long
+          : long // ignore: cast_nullable_to_non_nullable
+              as double,
       prayerTimesData: freezed == prayerTimesData
           ? _self.prayerTimesData
           : prayerTimesData // ignore: cast_nullable_to_non_nullable
@@ -692,6 +710,8 @@ extension PrayerTimeStatePatterns on PrayerTimeState {
             String nextPrayerTime,
             String currentDateDisplay,
             bool isHijri,
+            double lat,
+            double long,
             @JsonKey(includeFromJson: false, includeToJson: false)
             dynamic prayerTimesData,
             List<Map<String, String>> dailyPrayers,
@@ -712,6 +732,8 @@ extension PrayerTimeStatePatterns on PrayerTimeState {
             _that.nextPrayerTime,
             _that.currentDateDisplay,
             _that.isHijri,
+            _that.lat,
+            _that.long,
             _that.prayerTimesData,
             _that.dailyPrayers,
             _that.monthlyPrayerTimes);
@@ -745,6 +767,8 @@ extension PrayerTimeStatePatterns on PrayerTimeState {
             String nextPrayerTime,
             String currentDateDisplay,
             bool isHijri,
+            double lat,
+            double long,
             @JsonKey(includeFromJson: false, includeToJson: false)
             dynamic prayerTimesData,
             List<Map<String, String>> dailyPrayers,
@@ -764,6 +788,8 @@ extension PrayerTimeStatePatterns on PrayerTimeState {
             _that.nextPrayerTime,
             _that.currentDateDisplay,
             _that.isHijri,
+            _that.lat,
+            _that.long,
             _that.prayerTimesData,
             _that.dailyPrayers,
             _that.monthlyPrayerTimes);
@@ -796,6 +822,8 @@ extension PrayerTimeStatePatterns on PrayerTimeState {
             String nextPrayerTime,
             String currentDateDisplay,
             bool isHijri,
+            double lat,
+            double long,
             @JsonKey(includeFromJson: false, includeToJson: false)
             dynamic prayerTimesData,
             List<Map<String, String>> dailyPrayers,
@@ -815,6 +843,8 @@ extension PrayerTimeStatePatterns on PrayerTimeState {
             _that.nextPrayerTime,
             _that.currentDateDisplay,
             _that.isHijri,
+            _that.lat,
+            _that.long,
             _that.prayerTimesData,
             _that.dailyPrayers,
             _that.monthlyPrayerTimes);
@@ -837,6 +867,8 @@ class _PrayerTimeState implements PrayerTimeState {
       this.nextPrayerTime = '',
       this.currentDateDisplay = '',
       this.isHijri = false,
+      this.lat = 0.0,
+      this.long = 0.0,
       @JsonKey(includeFromJson: false, includeToJson: false)
       this.prayerTimesData,
       final List<Map<String, String>> dailyPrayers = const [],
@@ -871,6 +903,12 @@ class _PrayerTimeState implements PrayerTimeState {
   @override
   @JsonKey()
   final bool isHijri;
+  @override
+  @JsonKey()
+  final double lat;
+  @override
+  @JsonKey()
+  final double long;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   final dynamic prayerTimesData;
@@ -923,6 +961,8 @@ class _PrayerTimeState implements PrayerTimeState {
             (identical(other.currentDateDisplay, currentDateDisplay) ||
                 other.currentDateDisplay == currentDateDisplay) &&
             (identical(other.isHijri, isHijri) || other.isHijri == isHijri) &&
+            (identical(other.lat, lat) || other.lat == lat) &&
+            (identical(other.long, long) || other.long == long) &&
             const DeepCollectionEquality()
                 .equals(other.prayerTimesData, prayerTimesData) &&
             const DeepCollectionEquality()
@@ -943,13 +983,15 @@ class _PrayerTimeState implements PrayerTimeState {
       nextPrayerTime,
       currentDateDisplay,
       isHijri,
+      lat,
+      long,
       const DeepCollectionEquality().hash(prayerTimesData),
       const DeepCollectionEquality().hash(_dailyPrayers),
       const DeepCollectionEquality().hash(_monthlyPrayerTimes));
 
   @override
   String toString() {
-    return 'PrayerTimeState(isLoading: $isLoading, locationName: $locationName, hoursLeft: $hoursLeft, minutesLeft: $minutesLeft, secondsLeft: $secondsLeft, nextPrayerName: $nextPrayerName, nextPrayerTime: $nextPrayerTime, currentDateDisplay: $currentDateDisplay, isHijri: $isHijri, prayerTimesData: $prayerTimesData, dailyPrayers: $dailyPrayers, monthlyPrayerTimes: $monthlyPrayerTimes)';
+    return 'PrayerTimeState(isLoading: $isLoading, locationName: $locationName, hoursLeft: $hoursLeft, minutesLeft: $minutesLeft, secondsLeft: $secondsLeft, nextPrayerName: $nextPrayerName, nextPrayerTime: $nextPrayerTime, currentDateDisplay: $currentDateDisplay, isHijri: $isHijri, lat: $lat, long: $long, prayerTimesData: $prayerTimesData, dailyPrayers: $dailyPrayers, monthlyPrayerTimes: $monthlyPrayerTimes)';
   }
 }
 
@@ -971,6 +1013,8 @@ abstract mixin class _$PrayerTimeStateCopyWith<$Res>
       String nextPrayerTime,
       String currentDateDisplay,
       bool isHijri,
+      double lat,
+      double long,
       @JsonKey(includeFromJson: false, includeToJson: false)
       dynamic prayerTimesData,
       List<Map<String, String>> dailyPrayers,
@@ -999,6 +1043,8 @@ class __$PrayerTimeStateCopyWithImpl<$Res>
     Object? nextPrayerTime = null,
     Object? currentDateDisplay = null,
     Object? isHijri = null,
+    Object? lat = null,
+    Object? long = null,
     Object? prayerTimesData = freezed,
     Object? dailyPrayers = null,
     Object? monthlyPrayerTimes = null,
@@ -1040,6 +1086,14 @@ class __$PrayerTimeStateCopyWithImpl<$Res>
           ? _self.isHijri
           : isHijri // ignore: cast_nullable_to_non_nullable
               as bool,
+      lat: null == lat
+          ? _self.lat
+          : lat // ignore: cast_nullable_to_non_nullable
+              as double,
+      long: null == long
+          ? _self.long
+          : long // ignore: cast_nullable_to_non_nullable
+              as double,
       prayerTimesData: freezed == prayerTimesData
           ? _self.prayerTimesData
           : prayerTimesData // ignore: cast_nullable_to_non_nullable
